@@ -34,7 +34,7 @@
     "test": "start-test test:dev http://localhost:3000 test:only",
     "lint": "rm -rf dist .next && tsc --noEmit && next lint",
     "test:dev": "rm -rf dist && NEXT_PUBLIC_CYPRESS=1 next dev",
-    "dev": "HOSTNAME=0.0.0.0 next dev",
+    "dev": "pnpm i18n && HOSTNAME=0.0.0.0 next dev",
     "doc": "rm -rf temp docs && node scripts/doc",
     "build": "rm -rf dist && tsc -p tsconfig-build.json && node scripts/build",
     "start": "next start",
@@ -82,7 +82,7 @@
     "start-server-and-test": "2.x",
     "swc-plugin-coverage-instrument": "0.0.25",
     "ts-node": "10.x",
-    "typed-icu-message": "0.0.12",
+    "typed-icu-message": "0.0.17",
     "typescript": "5.x"
   },
   "nyc": {
@@ -103,5 +103,5 @@
       "lcov"
     ]
   },
-  "packageManager": "pnpm@10.4.1"
+  "packageManager": "pnpm@10.5.2"
 }

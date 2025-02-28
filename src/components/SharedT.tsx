@@ -4,6 +4,7 @@ export function SharedT() {
   const t = getI18nContext().t!;
   return (
     <div>
+      <h3>{t('name')}</h3>
       <div>
         t:{' '}
         {t('n', {
