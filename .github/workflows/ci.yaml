@@ -44,7 +44,9 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm cypress install
       - run: pnpm run test
         env:
           CYPRESS_RECORD_KEY: ${{vars.CYPRESS_RECORD_KEY}}
