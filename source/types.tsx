@@ -116,7 +116,7 @@ export interface I18nContext {}
  * request context
  * @public
  */
-export interface NextContext extends I18nContext {
+export interface NextContext {
   type: NextContextType;
   req: NextContextRequest;
   res: NextContextResponse;

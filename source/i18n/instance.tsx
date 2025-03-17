@@ -57,6 +57,8 @@ export function getI18nInstance(
   return instance;
 }
 
+export const I18nKey = '__next_i18n__';
+
 /**
  * i18n next-context middleware
  * @public
@@ -70,7 +72,7 @@ export function middleware(
 ) {
   return async (ctx: NextContext, next: NextFunction) => {
     const { messages, locale, cacheKey } = await init(ctx);
-    Object.assign(ctx, getI18nInstance(locale, messages, cacheKey));
+    (ctx as any)[I18nKey] = getI18nInstance(locale, messages, cacheKey);
     await next();
   };
 }
