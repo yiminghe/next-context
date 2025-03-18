@@ -34,7 +34,7 @@
     "test:only": "npm run pre:test && ts-node scripts/run-test.ts",
     "test": "start-test test:dev http://localhost:3000 test:only",
     "lint": "rm -rf dist .next && tsc --noEmit && next lint",
-    "test:dev": "rm -rf dist && NEXT_PUBLIC_CYPRESS=1 next dev",
+    "test:dev": "rm -rf dist && NEXT_PUBLIC_CYPRESS=1  pnpm dev",
     "dev": "pnpm i18n && HOSTNAME=0.0.0.0 next dev",
     "doc": "rm -rf temp docs && node scripts/doc",
     "build": "rm -rf dist && tsc -p tsconfig-build.json && node scripts/build",
@@ -81,7 +81,7 @@
     "react-dom": "19.x",
     "shelljs": "0.8.x",
     "start-server-and-test": "2.x",
-    "swc-plugin-coverage-instrument": "0.0.25",
+    "swc-plugin-coverage-instrument": "0.0.26",
     "ts-node": "10.x",
     "typed-icu-message": "0.0.18",
     "typescript": "5.x"

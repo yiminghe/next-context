@@ -121,8 +121,8 @@ importers:
         specifier: 2.x
         version: 2.0.4
       swc-plugin-coverage-instrument:
-        specifier: 0.0.25
-        version: 0.0.25
+        specifier: 0.0.26
+        version: 0.0.26
       ts-node:
         specifier: 10.x
         version: 10.9.2(@types/node@18.19.39)(typescript@5.5.2)
@@ -4305,8 +4305,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  swc-plugin-coverage-instrument@0.0.25:
-    resolution: {integrity: sha512-7watbzeySulr+7o3NbSaD2icOmEYBKf1uUQs2sBYv1cdWHEsUQETxI/CpXn+Q53vaBU0e3puWPO99OW3DVq34g==}
+  swc-plugin-coverage-instrument@0.0.26:
+    resolution: {integrity: sha512-fOJb6p6UXeyFG577sx5hhvbJw4THeOA9csV8C3IdVw9KmShaTqBvV2YPe5lnXbO5L4ZZfuAhYPmRisjm+aQOsA==}
 
   symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
@@ -9865,7 +9865,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  swc-plugin-coverage-instrument@0.0.25: {}
+  swc-plugin-coverage-instrument@0.0.26: {}
 
   symbol-tree@3.2.4: {}
 
