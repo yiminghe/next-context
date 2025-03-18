@@ -4,7 +4,7 @@
 
 'use client';
 
-import { I18nContext, NextContext, NextFunction } from '../types';
+import { I18nContext } from '../types';
 
 import React, { use, createContext } from 'react';
 import { getI18nInstance, Messages } from './instance';
