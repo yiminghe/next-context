@@ -1,7 +1,7 @@
 describe('dynamic spec', () => {
   it('passes', () => {
     cy.visit('/dynamic');
-    cy.get('body').contains('url: http://localhost:3000/dynamic');
+    cy.get('body').contains('url: http://localhost:3000/demo/dynamic');
     cy.get('body').contains('type: page');
     cy.get('body').contains('from: dynamic');
     cy.get('body').contains('get server user from');

@@ -1,6 +1,6 @@
 import { getNextContext } from 'next-context';
 import { getI18nContext } from 'next-context/i18n';
-import { createRoute } from '../../middlewares';
+import { createRoute } from '../../../middlewares';
 import { testTime } from '../services/getTime';
 
 function sleep(ms: number) {

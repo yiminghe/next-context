@@ -2,7 +2,7 @@
 
 import { observer } from 'mobx-react-lite';
 import { useState, useContext } from 'react';
-import { ClientContext } from '../../client-context/ClientContext';
+import { ClientContext } from '../../../client-context/ClientContext';
 import getUser from '../actions/getUser';
 import { runWithActionName } from '@/utils/utils';
 

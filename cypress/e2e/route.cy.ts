@@ -6,6 +6,7 @@ describe('route spec', () => {
       .should('have.property', 'x-from', 'next-compose');
     cy.request('/get').then((response) => {
       const data = response.body;
+      expect(data.name).to.equal('zh');
       expect(data.t1).to.equal(data.t2);
       expect(data.t2).to.equal(data.t3);
       expect(data.t3).to.equal(data.t4);

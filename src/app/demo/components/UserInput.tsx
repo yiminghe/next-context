@@ -2,7 +2,7 @@
 
 import { observer } from 'mobx-react-lite';
 import { useCallback, useContext } from 'react';
-import { ClientContext } from '../../client-context/ClientContext';
+import { ClientContext } from '../../../client-context/ClientContext';
 
 export const UserInput = observer(() => {
   const user = useContext(ClientContext);
