@@ -1,4 +1,5 @@
 import { getNextContext } from 'next-context';
+import { getI18nContext } from 'next-context/i18n';
 import { createRoute } from '../../middlewares';
 import { testTime } from '../services/getTime';
 
@@ -9,6 +10,7 @@ function sleep(ms: number) {
 export const GET = createRoute(async function Get(...args) {
   const context = getNextContext();
   const { user, res, type } = context;
+  const t = getI18nContext().t!;
   context.extraContent = {
     from: 'route',
   };
@@ -24,6 +26,7 @@ export const GET = createRoute(async function Get(...args) {
   res.set('x-from', 'next-compose');
   const times = await testTime();
   res.json({
+    name: t('name'),
     ...times,
     user,
     user2: getNextContext().user,

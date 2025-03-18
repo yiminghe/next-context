@@ -22,18 +22,17 @@ async function user(context: NextContext, next: NextFunction) {
   await next();
 }
 
-export const createPage = withPageMiddlewares([
-  user,
-  i18n(async (context) => {
-    const locale = (context.req.query.locale as any) || 'zh-CN';
-    const messages = locale === 'zh-CN' ? zh : en;
-    context.messages = messages;
-    return {
-      messages,
-      locale,
-    };
-  }),
-]);
+const i18nMiddleware = i18n(async (context) => {
+  const locale = (context.req.query.locale as any) || 'zh-CN';
+  const messages = locale === 'zh-CN' ? zh : en;
+  context.messages = messages;
+  return {
+    messages,
+    locale,
+  };
+});
+
+export const createPage = withPageMiddlewares([user, i18nMiddleware]);
 export const createLayout = withLayoutMiddlewares([user]);
 export const createAction = withActionMiddlewares([user]);
-export const createRoute = withRouteMiddlewares([user]);
+export const createRoute = withRouteMiddlewares([user, i18nMiddleware]);

@@ -71,7 +71,7 @@
     "mochawesome": "^7.1.3",
     "mochawesome-merge": "^4.3.0",
     "mochawesome-report-generator": "^6.2.0",
-    "next": "^15.1.7",
+    "next": "^15.2.3",
     "prettier": "2.x",
     "prettier-2": "npm:prettier@^2",
     "prettier-plugin-tailwindcss": "0.2.x",
@@ -82,7 +82,7 @@
     "start-server-and-test": "2.x",
     "swc-plugin-coverage-instrument": "0.0.25",
     "ts-node": "10.x",
-    "typed-icu-message": "0.0.17",
+    "typed-icu-message": "0.0.18",
     "typescript": "5.x"
   },
   "nyc": {
@@ -103,5 +103,5 @@
       "lcov"
     ]
   },
-  "packageManager": "pnpm@10.6.2"
+  "packageManager": "pnpm@10.6.4"
 }

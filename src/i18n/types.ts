@@ -2,23 +2,23 @@
 import React from 'react';
 
 /* eslint-disable */
-export interface I18nRes {
+export interface I18nMessages {
   name: {
-    returnType: 'zh' | 'en';
+    t: 'zh' | 'en';
 
-    valuesType: undefined;
+    v: undefined;
   };
   n: {
-    returnType: '{n}' | 'en: {n}';
+    t: '{n}' | 'en: {n}';
 
-    valuesType: {
+    v: {
       n: any;
     };
   };
   c: {
-    returnType: '<s>{c}</s>' | 'en: <s>{c}</s>';
+    t: '<s>{c}</s>' | 'en: <s>{c}</s>';
 
-    valuesType: {
+    v: {
       c: any;
 
       s: (chunks: React.ReactNode) => React.ReactNode;
@@ -26,13 +26,9 @@ export interface I18nRes {
   };
 }
 
-export type I18nResKeys = keyof I18nRes;
+export type I18nMessageKeys = keyof I18nMessages;
 
-export type I18nTranslate = <T extends I18nResKeys>(
+export type I18nTranslate = <T extends I18nMessageKeys>(
   key: T,
-  ...values: T extends I18nResKeys
-    ? I18nRes[T]['valuesType'] extends undefined
-      ? []
-      : [I18nRes[T]['valuesType']]
-    : []
-) => I18nRes[T]['returnType'];
+  ...values: I18nMessages[T]['v'] extends {} ? [I18nMessages[T]['v']] : []
+) => I18nMessages[T]['t'];
