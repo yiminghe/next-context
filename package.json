@@ -1,6 +1,7 @@
 {
   "name": "next-context",
-  "version": "0.3.2",
+  "version": "0.3.3",
+  "description": "Easily access request/response context between next middleware, components, action and route",
   "repository": {
     "type": "git",
     "url": "https://github.com/yiminghe/next-context"
