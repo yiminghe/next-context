@@ -10,14 +10,14 @@ export const middleware = createMiddleware([
   {
     header: async (context, next) => {
       context.foo = 'bar';
-      console.log('header middleware', Date.now(), context.req.url);
+      console.log('header middleware', Date.now(), context.nextRequest.url);
       await next();
     },
     response: async (context, next) => {
       console.log(
         'response middleware',
         Date.now(),
-        context.req.url,
+        context.nextRequest.url,
         context.foo,
       );
       await next();

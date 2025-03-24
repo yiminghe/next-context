@@ -13,9 +13,9 @@ export function createMiddleware(ms?: MiddlewareMiddleware[]): (req: NextRequest
 // @public
 export interface HeaderContext {
     // (undocumented)
-    headers: Headers;
+    nextHeaders: Headers;
     // (undocumented)
-    req: NextRequest;
+    nextRequest: NextRequest;
 }
 
 // @public
@@ -29,7 +29,7 @@ export interface MiddlewareMiddleware {
 // @public
 export interface ResponseContext extends HeaderContext {
     // (undocumented)
-    res: NextResponse;
+    nextResponse: NextResponse;
 }
 
 ```

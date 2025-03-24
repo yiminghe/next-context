@@ -15,8 +15,8 @@ import { compose } from './compose';
  * @public
  */
 export interface HeaderContext {
-  req: NextRequest;
-  headers: Headers;
+  nextRequest: NextRequest;
+  nextHeaders: Headers;
 }
 
 /**
@@ -24,7 +24,7 @@ export interface HeaderContext {
  * @public
  */
 export interface ResponseContext extends HeaderContext {
-  res: NextResponse;
+  nextResponse: NextResponse;
 }
 /**
  * middleware interface for next native middleware
@@ -52,8 +52,8 @@ export function createMiddleware(ms: MiddlewareMiddleware[] = []) {
       );
     }
     const context: HeaderContext = {
-      req,
-      headers: requestHeaders,
+      nextRequest: req,
+      nextHeaders: requestHeaders,
     };
     const headerMiddlewares = ms.map((m) => m.header).filter((m) => !!m);
     if (headerMiddlewares.length) {
@@ -61,17 +61,17 @@ export function createMiddleware(ms: MiddlewareMiddleware[] = []) {
     }
     const res = NextResponse.next({
       request: {
-        headers: context.headers,
+        headers: context.nextHeaders,
       },
     });
     const responseContext: ResponseContext = {
       ...context,
-      res,
+      nextResponse: res,
     };
     const responseMiddlewares = ms.map((m) => m.response).filter((m) => !!m);
     if (responseMiddlewares.length) {
       await compose(responseMiddlewares, responseContext);
     }
-    return responseContext.res;
+    return responseContext.nextResponse;
   };
 }

@@ -37,7 +37,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[headers](./next-context_middleware.headercontext.headers.md)
+[nextHeaders](./next-context_middleware.headercontext.nextheaders.md)
 
 
 </td><td>
@@ -54,7 +54,7 @@ Headers
 </td></tr>
 <tr><td>
 
-[req](./next-context_middleware.headercontext.req.md)
+[nextRequest](./next-context_middleware.headercontext.nextrequest.md)
 
 
 </td><td>

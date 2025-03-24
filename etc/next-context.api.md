@@ -43,7 +43,9 @@ export type LayoutRequest = {
 export type MiddlewareFunction = (context: NextContext, next: NextFunction) => Promise<any> | void;
 
 // @public
-export interface NextContext extends I18nContext {
+export interface NextContext {
+    // (undocumented)
+    i18n: I18nContext;
     // (undocumented)
     req: NextContextRequest;
     // (undocumented)

@@ -38,7 +38,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[res](./next-context_middleware.responsecontext.res.md)
+[nextResponse](./next-context_middleware.responsecontext.nextresponse.md)
 
 
 </td><td>

@@ -9,9 +9,8 @@ request context
 **Signature:**
 
 ```typescript
-export interface NextContext extends I18nContext 
+export interface NextContext 
 ```
-**Extends:** [I18nContext](./next-context.i18ncontext.md)
 
 ## Properties
 
@@ -37,6 +36,23 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
+
+[i18n](./next-context.nextcontext.i18n.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[I18nContext](./next-context.i18ncontext.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
 
 [req](./next-context.nextcontext.req.md)
 
