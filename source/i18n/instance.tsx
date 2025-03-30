@@ -23,7 +23,9 @@ const cache = new Map<string, Map<string, IntlMessageFormat>>();
 const instanceMap = new Map<any, I18nContext>();
 
 let onInit: ((instance: I18nContext, config: I18nConfig) => void) | undefined;
-let onConfig: ((instance: I18nConfig) => I18nConfig) | undefined;
+let onConfig:
+  | ((instance: I18nConfig, ctx: NextContext) => I18nConfig)
+  | undefined;
 
 export function onI18nContextInit(
   callback: (instance: I18nContext, config: I18nConfig) => void,
@@ -32,7 +34,7 @@ export function onI18nContextInit(
 }
 
 export function onI18nContextConfig(
-  callback: (config: I18nConfig) => I18nConfig,
+  callback: (config: I18nConfig, ctx: NextContext) => I18nConfig,
 ) {
   onConfig = callback;
 }
@@ -113,7 +115,7 @@ export function middleware(config: (ctx: NextContext) => Promise<I18nConfig>) {
     ctx.i18n = ctx.i18n || {};
     let ret = await config(ctx);
     if (onConfig) {
-      ret = onConfig(ret);
+      ret = onConfig(ret, ctx);
     }
     Object.assign(ctx.i18n, getI18nInstance(ret));
     (ctx.i18n as any)[KEY] = ret;
