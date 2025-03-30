@@ -96,6 +96,7 @@ export function getI18nInstance(config: I18nConfig): I18nContext {
     instance = {
       locale,
       timeZone,
+      messages,
       t(key: any, values: any) {
         const message = messages[key];
         let formatter = formatterCache.get(message);
