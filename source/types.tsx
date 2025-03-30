@@ -112,6 +112,13 @@ export type NextContextType = 'page' | 'route' | 'action';
  */
 export interface I18nContext {}
 
+export interface I18nConfig {
+  messages: Record<string, string>;
+  locale: string;
+  timeZone?: string;
+  cacheKey?: string;
+}
+
 /**
  * request context
  * @public

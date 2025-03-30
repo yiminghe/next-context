@@ -4,15 +4,14 @@
 
 'use client';
 
-import { I18nContext } from '../types';
+import { I18nContext, I18nConfig } from '../types';
 
 import React, { use, createContext } from 'react';
 import { getI18nInstance, Messages } from './instance';
 
-const I18nReactContext = createContext<{
-  t: any;
-  locale: string;
-}>(null as any);
+export { onI18nContextConfig, onI18nContextInit } from './instance';
+
+const I18nReactContext = createContext<I18nContext>(null as any);
 
 export { middleware } from './instance';
 
@@ -32,13 +31,20 @@ export function getI18nContext(): I18nContext {
  */
 export function I18nProvider({
   children,
-  locale,
+  config,
   messages,
 }: {
-  children: React.ReactNode;
-  locale: string;
-  messages: Messages;
+  children?: React.ReactNode;
+  config?: I18nConfig;
+  messages?: Messages;
 }) {
-  const value = getI18nInstance(locale, messages);
-  return <I18nReactContext value={value}>{children}</I18nReactContext>;
+  let newConfig: any = config;
+  if (messages) {
+    newConfig = {
+      ...config,
+      messages,
+    };
+  }
+  const instance = getI18nInstance(newConfig);
+  return <I18nReactContext value={instance}>{children}</I18nReactContext>;
 }

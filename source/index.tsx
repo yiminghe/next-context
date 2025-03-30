@@ -36,6 +36,7 @@ export type {
   NextFunction,
   CookieAttributes,
   I18nContext,
+  I18nConfig,
 } from './types';
 
 export {
