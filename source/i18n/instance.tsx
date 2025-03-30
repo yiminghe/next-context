@@ -58,7 +58,6 @@ export function getI18nInstance(config: I18nConfig): I18nContext {
 
   let instance: any = instanceMap.get(cacheKey);
   if (!instance) {
-    config = onConfig ? onConfig(config) : config;
     const { locale, messages, timeZone } = config;
     let formatterCache = cache.get(locale);
     if (!formatterCache) {
@@ -112,7 +111,10 @@ export function getI18nConfig(ctx: NextContext): I18nConfig {
 export function middleware(config: (ctx: NextContext) => Promise<I18nConfig>) {
   return async (ctx: NextContext, next: NextFunction) => {
     ctx.i18n = ctx.i18n || {};
-    const ret = await config(ctx);
+    let ret = await config(ctx);
+    if (onConfig) {
+      ret = onConfig(ret);
+    }
     Object.assign(ctx.i18n, getI18nInstance(ret));
     (ctx.i18n as any)[KEY] = ret;
     await next();
