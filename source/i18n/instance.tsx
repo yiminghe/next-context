@@ -18,9 +18,15 @@ const formatOptions = {
   },
 };
 
-const cache = new Map<string, Map<string, IntlMessageFormat>>();
+const g: any = typeof window !== 'undefined' ? window : globalThis;
 
-const instanceMap = new Map<any, I18nContext>();
+const formatterCaches: Map<any, any> =
+  g.__NEXT_CONTEXT_I18N_FORMAT_CACHE ||
+  (g.__NEXT_CONTEXT_I18N_FORMAT_CACHE = new Map<string, any>());
+
+const instanceCaches: Map<any, any> =
+  g.__NEXT_CONTEXT_I18N_INSTANCE_CACHE ||
+  (g.__NEXT_CONTEXT_I18N_INSTANCE_CACHE = new Map<string, any>());
 
 let onInit: ((instance: I18nContext, config: I18nConfig) => void) | undefined;
 let onConfig:
@@ -55,17 +61,31 @@ function setTimeZoneInOptions(
   );
 }
 
-export function getI18nInstance(config: I18nConfig): I18nContext {
-  const cacheKey = config.cacheKey || config.messages;
-
-  let instance: any = instanceMap.get(cacheKey);
-  if (!instance) {
-    const { locale, messages, timeZone } = config;
-    let formatterCache = cache.get(locale);
-    if (!formatterCache) {
-      formatterCache = new Map<string, IntlMessageFormat>();
-      cache.set(locale, formatterCache);
+function getCacheByPath(map: Map<any, any>, keys: any[]) {
+  let cache = map;
+  for (const key of keys) {
+    if (!cache.has(key)) {
+      cache.set(key, new Map());
     }
+    cache = cache.get(key);
+  }
+  return cache;
+}
+
+const instanceKey = '__instance';
+
+export function getI18nInstance(config: I18nConfig): I18nContext {
+  const { locale, messages, timeZone = '' } = config;
+  const c: any = config;
+  const cacheKeyPath = config.cacheKey
+    ? [config.cacheKey]
+    : Object.keys(c)
+        .filter((k) => typeof c[k] === 'string')
+        .map((k) => c[k]);
+  const instanceCache = getCacheByPath(instanceCaches, cacheKeyPath);
+  let instance: any = instanceCache.get(instanceKey);
+  if (!instance) {
+    let formatterCache = getCacheByPath(formatterCaches, [locale, timeZone]);
     const mfFormats = IntlMessageFormat.formats;
     const formats = timeZone
       ? {
@@ -94,7 +114,7 @@ export function getI18nInstance(config: I18nConfig): I18nContext {
     if (onInit) {
       onInit(instance, config);
     }
-    instanceMap.set(cacheKey, instance);
+    instanceCache.set(instanceKey, instance);
   }
 
   return instance;

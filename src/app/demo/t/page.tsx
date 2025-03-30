@@ -3,8 +3,6 @@ import { I18nProvider } from 'next-context/i18n';
 import { createPage } from '@/middlewares';
 import { SharedT } from '@/components/SharedT';
 
-import '../../../i18n/init';
-
 export default createPage(async function TPage() {
   return (
     <div>
