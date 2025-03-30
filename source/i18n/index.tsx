@@ -29,22 +29,12 @@ export function getI18nContext(): I18nContext {
  * i18n react provider
  * @public
  */
-export function I18nProvider({
-  children,
-  config,
-  messages,
-}: {
+export function I18nProvider(props: {
   children?: React.ReactNode;
-  config?: I18nConfig;
   messages?: Messages;
 }) {
-  let newConfig: any = config;
-  if (messages) {
-    newConfig = {
-      ...config,
-      messages,
-    };
-  }
+  let newConfig: any = { ...props };
+  delete newConfig.children;
   const instance = getI18nInstance(newConfig);
-  return <I18nReactContext value={instance}>{children}</I18nReactContext>;
+  return <I18nReactContext value={instance}>{props.children}</I18nReactContext>;
 }

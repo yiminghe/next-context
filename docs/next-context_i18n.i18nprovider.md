@@ -9,9 +9,8 @@ i18n react provider
 **Signature:**
 
 ```typescript
-export declare function I18nProvider({ children, config, messages, }: {
+export declare function I18nProvider(props: {
     children?: React.ReactNode;
-    config?: I18nConfig;
     messages?: Messages;
 }): React.JSX.Element;
 ```
@@ -36,12 +35,12 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-{ children, config, messages, }
+props
 
 
 </td><td>
 
-{ children?: React.ReactNode; config?: I18nConfig; messages?: Messages; }
+{ children?: React.ReactNode; messages?: Messages; }
 
 
 </td><td>

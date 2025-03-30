@@ -32,7 +32,7 @@ i18n context
 </td></tr>
 <tr><td>
 
-[I18nProvider({ children, config, messages, })](./next-context_i18n.i18nprovider.md)
+[I18nProvider(props)](./next-context_i18n.i18nprovider.md)
 
 
 </td><td>

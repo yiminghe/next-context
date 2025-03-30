@@ -21,8 +21,14 @@ export function I18nProvider({
   children: React.ReactNode;
   messages?: Messages;
 }) {
-  const config = getI18nConfig(getNextContext());
-  return React.createElement(I18nProvider2, { messages, config }, children);
+  let config = getI18nConfig(getNextContext());
+  if (messages) {
+    config = {
+      ...config,
+      messages,
+    };
+  }
+  return React.createElement(I18nProvider2, config, children);
 }
 
 export { middleware } from './instance';
