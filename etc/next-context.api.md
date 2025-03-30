@@ -26,6 +26,18 @@ export interface CookieAttributes {
 // @public
 export function getNextContext(): NextContext;
 
+// @public (undocumented)
+export interface I18nConfig {
+    // (undocumented)
+    cacheKey?: string;
+    // (undocumented)
+    locale: string;
+    // (undocumented)
+    messages: Record<string, string>;
+    // (undocumented)
+    timeZone?: string;
+}
+
 // @public
 export interface I18nContext {
 }

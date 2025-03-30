@@ -32,7 +32,7 @@ i18n context
 </td></tr>
 <tr><td>
 
-[I18nProvider({ children, locale, messages, })](./next-context_i18n.i18nprovider.md)
+[I18nProvider({ children, config, messages, })](./next-context_i18n.i18nprovider.md)
 
 
 </td><td>
@@ -43,12 +43,30 @@ i18n react provider
 </td></tr>
 <tr><td>
 
-[middleware(init)](./next-context_i18n.middleware.md)
+[middleware(config)](./next-context_i18n.middleware.md)
 
 
 </td><td>
 
 i18n next-context middleware
+
+
+</td></tr>
+<tr><td>
+
+[onI18nContextConfig(callback)](./next-context_i18n.oni18ncontextconfig.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[onI18nContextInit(callback)](./next-context_i18n.oni18ncontextinit.md)
+
+
+</td><td>
 
 
 </td></tr>

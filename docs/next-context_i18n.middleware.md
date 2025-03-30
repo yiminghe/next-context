@@ -9,11 +9,7 @@ i18n next-context middleware
 **Signature:**
 
 ```typescript
-export declare function middleware(init: (ctx: NextContext) => Promise<{
-    messages: Record<string, string>;
-    locale: string;
-    cacheKey?: string;
-}>): (ctx: NextContext, next: NextFunction) => Promise<void>;
+export declare function middleware(config: (ctx: NextContext) => Promise<I18nConfig>): (ctx: NextContext, next: NextFunction) => Promise<void>;
 ```
 
 ## Parameters
@@ -36,12 +32,12 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-init
+config
 
 
 </td><td>
 
-(ctx: NextContext) =&gt; Promise&lt;{ messages: Record&lt;string, string&gt;; locale: string; cacheKey?: string; }&gt;
+(ctx: NextContext) =&gt; Promise&lt;I18nConfig&gt;
 
 
 </td><td>

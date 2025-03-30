@@ -9,10 +9,10 @@ i18n react provider
 **Signature:**
 
 ```typescript
-export declare function I18nProvider({ children, locale, messages, }: {
-    children: React.ReactNode;
-    locale: string;
-    messages: Messages;
+export declare function I18nProvider({ children, config, messages, }: {
+    children?: React.ReactNode;
+    config?: I18nConfig;
+    messages?: Messages;
 }): React.JSX.Element;
 ```
 
@@ -36,12 +36,12 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-{ children, locale, messages, }
+{ children, config, messages, }
 
 
 </td><td>
 
-{ children: React.ReactNode; locale: string; messages: Messages; }
+{ children?: React.ReactNode; config?: I18nConfig; messages?: Messages; }
 
 
 </td><td>
