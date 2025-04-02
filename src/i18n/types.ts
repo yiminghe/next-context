@@ -16,7 +16,7 @@ export interface I18nMessages {
     };
   };
   c: {
-    t: '<s>{c}</s>' | 'en: <s>{c}</s>';
+    t: 'zh <s>{c}</s> <s>{c}</s>' | 'en: <s>{c}</s> <s>{c}</s>';
 
     v: {
       c: any;

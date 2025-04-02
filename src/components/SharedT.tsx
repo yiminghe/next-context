@@ -14,8 +14,7 @@ export function SharedT() {
       </div>
       <div>x: {x}</div>
       <div>
-        T:{' '}
-        {t('c', { c: '2', s: (chunks) => <strong key="1">{chunks}</strong> })}
+        T: {t('c', { c: '2', s: (chunks) => <strong>{chunks}</strong> })}
       </div>
     </div>
   );

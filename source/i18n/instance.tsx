@@ -2,20 +2,16 @@ import IntlMessageFormat from 'intl-messageformat';
 import { memoize } from '@formatjs/fast-memoize';
 import type { NextFunction, NextContext } from '../types';
 import { I18nContext, I18nConfig } from '../types';
-
+import React from 'react';
 export type Messages = Record<string, string>;
-const formatOptions = {
-  formatters: {
-    getNumberFormat: memoize(
-      (locale, opts) => new Intl.NumberFormat(locale, opts),
-    ),
-    getDateTimeFormat: memoize(
-      (locale, opts) => new Intl.DateTimeFormat(locale, opts),
-    ),
-    getPluralRules: memoize(
-      (locale, opts) => new Intl.PluralRules(locale, opts),
-    ),
-  },
+const formatters = {
+  getNumberFormat: memoize(
+    (locale, opts) => new Intl.NumberFormat(locale, opts),
+  ),
+  getDateTimeFormat: memoize(
+    (locale, opts) => new Intl.DateTimeFormat(locale, opts),
+  ),
+  getPluralRules: memoize((locale, opts) => new Intl.PluralRules(locale, opts)),
 };
 
 const g: any = typeof window !== 'undefined' ? window : globalThis;
@@ -61,6 +57,25 @@ function setTimeZoneInOptions(
   );
 }
 
+function fixKey(values: any) {
+  const ret: any = {};
+  for (const key of Object.keys(values)) {
+    const value = values[key];
+    let fixed = value;
+    if (typeof value === 'function') {
+      let index = 0;
+      fixed = (chunks: any) => {
+        const result = value(chunks);
+        return React.isValidElement(result)
+          ? React.cloneElement(result, { key: key + ++index })
+          : result;
+      };
+    }
+    ret[key] = fixed;
+  }
+  return ret;
+}
+
 function getCacheByPath(map: Map<any, any>, keys: any[]) {
   let cache = map;
   for (const key of keys) {
@@ -101,15 +116,20 @@ export function getI18nInstance(config: I18nConfig): I18nContext {
         const message = messages[key] || '';
         let formatter = formatterCache.get(message);
         if (!formatter) {
-          formatter = new IntlMessageFormat(
-            message,
-            locale,
-            formats,
-            formatOptions,
-          );
+          formatter = new IntlMessageFormat(message, locale, formats, {
+            formatters: {
+              ...formatters,
+              getDateTimeFormat(locales, options) {
+                return formatters.getDateTimeFormat(locales, {
+                  timeZone,
+                  ...options,
+                });
+              },
+            },
+          });
           formatterCache.set(message, formatter);
         }
-        return formatter.format(values);
+        return formatter.format(values ? fixKey(values) : values);
       },
     };
     if (onInit) {
