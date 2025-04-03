@@ -10,7 +10,7 @@ function sleep(ms: number) {
 export const GET = createRoute(async function Get(...args) {
   const context = getNextContext();
   const { user, res, type } = context;
-  const t = getI18nContext().t!;
+  const t = getI18nContext().t;
   context.extraContent = {
     from: 'route',
   };

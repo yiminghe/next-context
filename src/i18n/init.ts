@@ -14,5 +14,5 @@ onI18nContextInit((instance, config) => {
     typeof window === 'undefined' ? 'server' : 'client',
     config,
   );
-  instance.x = config.x! + '_instance';
+  instance.x = config.x + '_instance';
 });

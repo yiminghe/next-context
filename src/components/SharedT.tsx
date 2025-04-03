@@ -1,8 +1,7 @@
 import { getI18nContext } from 'next-context/i18n';
 
 export function SharedT() {
-  const t = getI18nContext().t!;
-  const x = getI18nContext().x!;
+  const { x, t } = getI18nContext();
   return (
     <div>
       <h3>{t('name')}</h3>

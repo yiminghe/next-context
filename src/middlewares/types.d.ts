@@ -3,8 +3,8 @@ import type { NextContext } from 'next-context';
 
 declare module 'next-context' {
   interface I18nContext {
-    t?: I18nTranslate;
-    x?: string;
+    t: I18nTranslate;
+    x: string;
   }
   interface I18nConfig {
     x?: string;
