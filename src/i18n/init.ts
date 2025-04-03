@@ -8,6 +8,11 @@ onI18nContextConfig((config) => {
 });
 
 onI18nContextInit((instance, config) => {
-  console.log('onI18nContextInit', Date.now(), typeof window, config);
+  console.log(
+    'onI18nContextInit',
+    Date.now(),
+    typeof window === 'undefined' ? 'server' : 'client',
+    config,
+  );
   instance.x = config.x! + '_instance';
 });

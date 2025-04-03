@@ -124,7 +124,6 @@ export interface I18nConfig {
  * @public
  */
 export interface NextContext {
-  i18n: I18nContext;
   type: NextContextType;
   req: NextContextRequest;
   res: NextContextResponse;

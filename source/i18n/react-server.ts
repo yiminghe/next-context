@@ -6,13 +6,11 @@ export { onI18nContextConfig, onI18nContextInit } from './instance';
 
 export function getI18nContext(): I18nContext {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  // @ts-ignore
-  // console.log('server getI18nContext()');
-  return getNextContext().i18n;
+  return getI18nFromContext(getNextContext());
 }
 
 import { I18nProvider as I18nProvider2 } from './index';
-import { getI18nConfig, Messages } from './instance';
+import { getI18nConfig, getI18nFromContext, Messages } from './instance';
 
 export function I18nProvider({
   children,

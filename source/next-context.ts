@@ -151,7 +151,6 @@ export function buildPageResponse() {
 
 export function createNextContextFromPage() {
   const context: NextContext = {
-    i18n: {},
     type: 'page',
     req: null as any,
     res: buildPageResponse(),
@@ -166,7 +165,6 @@ export function createNextContextFromPage() {
 export async function createNextContextFromAction() {
   const res = buildResponse();
   const context: NextContext = {
-    i18n: {},
     type: 'action',
     req: {
       ...(await buildRequest()),
@@ -179,7 +177,6 @@ export async function createNextContextFromAction() {
 
 export async function createNextContextFromRoute(req: NextRequest) {
   const context: NextContext = {
-    i18n: {},
     type: 'route',
     res: buildResponse(),
     req: {

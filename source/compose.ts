@@ -1,8 +1,8 @@
+const storeKey = '__next_context_store';
+
 export function compose(middleware: Function[], context: any, ...args: any[]) {
   // layout page share middleware
-  const store =
-    context.__next__compose__middleware__store__ ||
-    (context.__next__compose__middleware__store__ = new Map());
+  const store = context[storeKey] || (context[storeKey] = new Map());
   // last called middleware #
   let index = -1;
   return dispatch(0);

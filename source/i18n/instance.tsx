@@ -108,7 +108,9 @@ export function getI18nInstance(config: I18nConfig): I18nContext {
           time: setTimeZoneInOptions(mfFormats.time, timeZone),
         }
       : undefined;
+    const { cacheKey, ...validConfig } = config;
     instance = {
+      [I18nConfigKey]: validConfig,
       locale,
       timeZone,
       messages,
@@ -141,10 +143,20 @@ export function getI18nInstance(config: I18nConfig): I18nContext {
   return instance;
 }
 
-const KEY = '__config';
+const I18nConfigKey = '__next_context_i18n_config';
 
 export function getI18nConfig(ctx: NextContext): I18nConfig {
-  return (ctx.i18n as any)[KEY] as I18nConfig;
+  return getI18nFromContext(ctx)[I18nConfigKey] as I18nConfig;
+}
+
+const I18nContextKey = '__next_context_i18n';
+
+export function getI18nFromContext(ctx: NextContext): any {
+  return (ctx as any)[I18nContextKey];
+}
+
+export function setI18nToContext(ctx: NextContext, value: any): void {
+  (ctx as any)[I18nContextKey] = value;
 }
 
 /**
@@ -153,13 +165,12 @@ export function getI18nConfig(ctx: NextContext): I18nConfig {
  */
 export function middleware(config: (ctx: NextContext) => Promise<I18nConfig>) {
   return async (ctx: NextContext, next: NextFunction) => {
-    ctx.i18n = ctx.i18n || {};
     let ret = await config(ctx);
     if (onConfig) {
       ret = onConfig(ret, ctx);
     }
-    Object.assign(ctx.i18n, getI18nInstance(ret));
-    (ctx.i18n as any)[KEY] = ret;
+    const i18nContext: any = getI18nInstance(ret);
+    setI18nToContext(ctx, i18nContext);
     await next();
   };
 }
