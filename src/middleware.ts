@@ -1,7 +1,7 @@
 import { createMiddleware } from 'next-context/middleware';
 
 declare module 'next-context/middleware' {
-  export interface HeaderContext {
+  export interface ContextPayload {
     foo?: string;
   }
 }
@@ -9,16 +9,16 @@ declare module 'next-context/middleware' {
 export const middleware = createMiddleware([
   {
     header: async (context, next) => {
-      context.foo = 'bar';
-      console.log('header middleware', Date.now(), context.nextRequest.url);
+      context.payload.foo = 'bar';
+      console.log('header middleware', Date.now(), context.req.nextUrl.href);
       await next();
     },
     response: async (context, next) => {
       console.log(
         'response middleware',
         Date.now(),
-        context.nextRequest.url,
-        context.foo,
+        context.req.nextUrl.href,
+        context.payload.foo,
       );
       await next();
     },

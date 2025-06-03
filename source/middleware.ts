@@ -9,22 +9,45 @@ import {
   NEXT_URL_HEADER,
 } from './constants';
 import { compose } from './compose';
+import { CookieAttributes } from './types';
+import { NextURL } from 'next/dist/server/web/next-url';
 
+type ReadonlyKV = Readonly<Record<string, string | undefined>>;
 /**
  * header middleware context
  * @public
  */
 export interface HeaderContext {
-  nextRequest: NextRequest;
-  nextHeaders: Headers;
+  req: {
+    nextUrl: NextURL;
+    cookies: ReadonlyKV;
+    headers: ReadonlyKV;
+    header: (name: string, value: string) => void;
+  };
+  res: {
+    end: (response: NextResponse) => void;
+  };
+  payload: ContextPayload;
 }
+
+export interface ContextPayload {}
 
 /**
  * response middleware context
  * @public
  */
-export interface ResponseContext extends HeaderContext {
-  nextResponse: NextResponse;
+export interface ResponseContext {
+  req: {
+    nextUrl: NextURL;
+    cookies: ReadonlyKV;
+    headers: ReadonlyKV;
+  };
+  res: {
+    cookie: (name: string, value: string, options?: CookieAttributes) => void;
+    header: (name: string, value: string) => void;
+    end: (response: NextResponse) => void;
+  };
+  payload: ContextPayload;
 }
 /**
  * middleware interface for next native middleware
@@ -51,27 +74,74 @@ export function createMiddleware(ms: MiddlewareMiddleware[] = []) {
         nextUrl.basePath + nextUrl.pathname + nextUrl.search,
       );
     }
+    const cookies: any = {};
+    const headers: any = {};
+    requestHeaders.forEach((value, key) => {
+      headers[key] = value;
+    });
+    req.cookies.getAll().forEach((cookie) => {
+      cookies[cookie.name] = cookie.value;
+    });
+    let nextResponse: NextResponse | undefined;
+    const payload: any = {};
     const context: HeaderContext = {
-      nextRequest: req,
-      nextHeaders: requestHeaders,
+      req: {
+        nextUrl,
+        cookies,
+        headers,
+        header: (name: string, value: string) => {
+          requestHeaders.set(name, value);
+          headers[name] = value;
+        },
+      },
+      res: {
+        end(response) {
+          nextResponse = response;
+        },
+      },
+      payload,
     };
     const headerMiddlewares = ms.map((m) => m.header).filter((m) => !!m);
     if (headerMiddlewares.length) {
       await compose(headerMiddlewares, context);
     }
-    const res = NextResponse.next({
+    if (nextResponse) {
+      return nextResponse;
+    }
+    nextResponse = NextResponse.next({
       request: {
-        headers: context.nextHeaders,
+        headers: requestHeaders,
       },
     });
+
     const responseContext: ResponseContext = {
-      ...context,
-      nextResponse: res,
+      req: {
+        nextUrl,
+        cookies,
+        headers,
+      },
+      res: {
+        cookie: (name: string, value: string, options?: CookieAttributes) => {
+          if (options?.maxAge === 0) {
+            value = '';
+          }
+          nextResponse?.cookies.set(name, value, options);
+          cookies[name] = value;
+        },
+        header: (name: string, value: string) => {
+          nextResponse?.headers.set(name, value);
+          headers[name] = value;
+        },
+        end(response) {
+          nextResponse = response;
+        },
+      },
+      payload,
     };
     const responseMiddlewares = ms.map((m) => m.response).filter((m) => !!m);
     if (responseMiddlewares.length) {
       await compose(responseMiddlewares, responseContext);
     }
-    return responseContext.nextResponse;
+    return nextResponse;
   };
 }
