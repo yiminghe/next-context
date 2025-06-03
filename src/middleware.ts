@@ -9,7 +9,7 @@ declare module 'next-context/middleware' {
 export const middleware = createMiddleware([
   {
     header: async (context, next) => {
-      context.payload.foo = 'bar';
+      context.foo = 'bar';
       console.log('header middleware', Date.now(), context.req.nextUrl.href);
       await next();
     },
@@ -18,7 +18,7 @@ export const middleware = createMiddleware([
         'response middleware',
         Date.now(),
         context.req.nextUrl.href,
-        context.payload.foo,
+        context.foo,
       );
       await next();
     },

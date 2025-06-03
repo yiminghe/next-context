@@ -17,7 +17,7 @@ type ReadonlyKV = Readonly<Record<string, string | undefined>>;
  * header middleware context
  * @public
  */
-export interface HeaderContext {
+export interface HeaderContext extends ContextPayload {
   req: {
     nextUrl: NextURL;
     cookies: ReadonlyKV;
@@ -27,7 +27,6 @@ export interface HeaderContext {
   res: {
     end: (response: NextResponse) => void;
   };
-  payload: ContextPayload;
 }
 
 export interface ContextPayload {}
@@ -36,7 +35,7 @@ export interface ContextPayload {}
  * response middleware context
  * @public
  */
-export interface ResponseContext {
+export interface ResponseContext extends ContextPayload {
   req: {
     nextUrl: NextURL;
     cookies: ReadonlyKV;
@@ -47,7 +46,6 @@ export interface ResponseContext {
     header: (name: string, value: string) => void;
     end: (response: NextResponse) => void;
   };
-  payload: ContextPayload;
 }
 /**
  * middleware interface for next native middleware
@@ -99,7 +97,7 @@ export function createMiddleware(ms: MiddlewareMiddleware[] = []) {
           nextResponse = response;
         },
       },
-      payload,
+      ...payload,
     };
     const headerMiddlewares = ms.map((m) => m.header).filter((m) => !!m);
     if (headerMiddlewares.length) {
@@ -136,7 +134,7 @@ export function createMiddleware(ms: MiddlewareMiddleware[] = []) {
           nextResponse = response;
         },
       },
-      payload,
+      ...payload,
     };
     const responseMiddlewares = ms.map((m) => m.response).filter((m) => !!m);
     if (responseMiddlewares.length) {
