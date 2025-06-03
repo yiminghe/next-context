@@ -6,16 +6,28 @@
 
 import { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+import { NextURL } from 'next/dist/server/web/next-url';
+
+// @public (undocumented)
+export interface ContextPayload {
+}
 
 // @public
-export function createMiddleware(ms?: MiddlewareMiddleware[]): (req: NextRequest) => Promise<NextResponse<unknown>>;
+export function createMiddleware(ms?: MiddlewareMiddleware[]): (nextReq: NextRequest) => Promise<NextResponse<unknown>>;
 
 // @public
-export interface HeaderContext {
+export interface HeaderContext extends ContextPayload {
     // (undocumented)
-    nextHeaders: Headers;
+    req: {
+        nextUrl: NextURL;
+        cookies: ReadonlyKV;
+        headers: ReadonlyKV;
+        header: (name: string, value: string) => void;
+    };
     // (undocumented)
-    nextRequest: NextRequest;
+    res: {
+        end: (response: NextResponse) => void;
+    };
 }
 
 // @public
@@ -26,10 +38,27 @@ export interface MiddlewareMiddleware {
     response?: (arg: ResponseContext, next: () => Promise<void>) => Promise<void>;
 }
 
+// @public (undocumented)
+export type ReadonlyKV = Readonly<Record<string, string | undefined>>;
+
 // @public
-export interface ResponseContext extends HeaderContext {
+export interface ResponseContext extends ContextPayload {
     // (undocumented)
-    nextResponse: NextResponse;
+    req: {
+        nextUrl: NextURL;
+        cookies: ReadonlyKV;
+        headers: ReadonlyKV;
+    };
+    // (undocumented)
+    res: {
+        cookie: (name: string, value: string, options?: CookieAttributes) => void;
+        header: (name: string, value: string) => void;
+        end: (response: NextResponse) => void;
+    };
 }
+
+// Warnings were encountered during analysis:
+//
+// dist/dist/middleware.d.ts:36:9 - (ae-forgotten-export) The symbol "CookieAttributes" needs to be exported by the entry point middleware.d.ts
 
 ```

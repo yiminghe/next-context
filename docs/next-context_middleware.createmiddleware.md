@@ -9,7 +9,7 @@ nextjs middleware factory
 **Signature:**
 
 ```typescript
-export declare function createMiddleware(ms?: MiddlewareMiddleware[]): (req: NextRequest) => Promise<NextResponse<unknown>>;
+export declare function createMiddleware(ms?: MiddlewareMiddleware[]): (nextReq: NextRequest) => Promise<NextResponse<unknown>>;
 ```
 
 ## Parameters
@@ -49,5 +49,5 @@ _(Optional)_
 </tbody></table>
 **Returns:**
 
-(req: NextRequest) =&gt; Promise&lt;NextResponse&lt;unknown&gt;&gt;
+(nextReq: NextRequest) =&gt; Promise&lt;NextResponse&lt;unknown&gt;&gt;
 

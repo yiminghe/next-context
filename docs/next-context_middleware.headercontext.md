@@ -9,8 +9,9 @@ header middleware context
 **Signature:**
 
 ```typescript
-export interface HeaderContext 
+export interface HeaderContext extends ContextPayload 
 ```
+**Extends:** [ContextPayload](./next-context_middleware.contextpayload.md)
 
 ## Properties
 
@@ -37,7 +38,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[nextHeaders](./next-context_middleware.headercontext.nextheaders.md)
+[req](./next-context_middleware.headercontext.req.md)
 
 
 </td><td>
@@ -45,7 +46,7 @@ Description
 
 </td><td>
 
-Headers
+{ nextUrl: NextURL; cookies: [ReadonlyKV](./next-context_middleware.readonlykv.md)<!-- -->; headers: [ReadonlyKV](./next-context_middleware.readonlykv.md)<!-- -->; header: (name: string, value: string) =&gt; void; }
 
 
 </td><td>
@@ -54,7 +55,7 @@ Headers
 </td></tr>
 <tr><td>
 
-[nextRequest](./next-context_middleware.headercontext.nextrequest.md)
+[res](./next-context_middleware.headercontext.res.md)
 
 
 </td><td>
@@ -62,7 +63,7 @@ Headers
 
 </td><td>
 
-NextRequest
+{ end: (response: NextResponse) =&gt; void; }
 
 
 </td><td>

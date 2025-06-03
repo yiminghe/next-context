@@ -57,8 +57,6 @@ export type MiddlewareFunction = (context: NextContext, next: NextFunction) => P
 // @public
 export interface NextContext {
     // (undocumented)
-    i18n: I18nContext;
-    // (undocumented)
     req: NextContextRequest;
     // (undocumented)
     res: NextContextResponse;

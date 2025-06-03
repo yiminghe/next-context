@@ -47,6 +47,15 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[ContextPayload](./next-context_middleware.contextpayload.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [HeaderContext](./next-context_middleware.headercontext.md)
 
 
@@ -75,6 +84,30 @@ middleware interface for next native middleware
 </td><td>
 
 response middleware context
+
+
+</td></tr>
+</tbody></table>
+
+## Type Aliases
+
+<table><thead><tr><th>
+
+Type Alias
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[ReadonlyKV](./next-context_middleware.readonlykv.md)
+
+
+</td><td>
 
 
 </td></tr>

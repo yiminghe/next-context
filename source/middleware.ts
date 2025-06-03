@@ -12,7 +12,7 @@ import { compose } from './compose';
 import { CookieAttributes } from './types';
 import { NextURL } from 'next/dist/server/web/next-url';
 
-type ReadonlyKV = Readonly<Record<string, string | undefined>>;
+export type ReadonlyKV = Readonly<Record<string, string | undefined>>;
 /**
  * header middleware context
  * @public

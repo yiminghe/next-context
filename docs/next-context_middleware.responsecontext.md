@@ -9,9 +9,9 @@ response middleware context
 **Signature:**
 
 ```typescript
-export interface ResponseContext extends HeaderContext 
+export interface ResponseContext extends ContextPayload 
 ```
-**Extends:** [HeaderContext](./next-context_middleware.headercontext.md)
+**Extends:** [ContextPayload](./next-context_middleware.contextpayload.md)
 
 ## Properties
 
@@ -38,7 +38,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[nextResponse](./next-context_middleware.responsecontext.nextresponse.md)
+[req](./next-context_middleware.responsecontext.req.md)
 
 
 </td><td>
@@ -46,7 +46,24 @@ Description
 
 </td><td>
 
-NextResponse
+{ nextUrl: NextURL; cookies: [ReadonlyKV](./next-context_middleware.readonlykv.md)<!-- -->; headers: [ReadonlyKV](./next-context_middleware.readonlykv.md)<!-- -->; }
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[res](./next-context_middleware.responsecontext.res.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ cookie: (name: string, value: string, options?: CookieAttributes) =&gt; void; header: (name: string, value: string) =&gt; void; end: (response: NextResponse) =&gt; void; }
 
 
 </td><td>

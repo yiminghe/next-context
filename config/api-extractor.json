@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
-  "mainEntryPointFilePath": "<projectFolder>/dist/middleware.d.ts",
+  "mainEntryPointFilePath": "<projectFolder>/dist/dist/index.d.ts",
   "bundledPackages": [],
   "compiler": {
     "tsconfigFilePath": "<projectFolder>/tsconfig-build.json"
