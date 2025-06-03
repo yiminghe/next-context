@@ -61,12 +61,12 @@ export interface MiddlewareMiddleware {
  *@public
  */
 export function createMiddleware(ms: MiddlewareMiddleware[] = []) {
-  return async (req: NextRequest) => {
-    const { nextUrl } = req;
-    const requestHeaders = new Headers(req.headers);
+  return async (nextReq: NextRequest) => {
+    const { nextUrl } = nextReq;
+    const requestHeaders = new Headers(nextReq.headers);
     requestHeaders.set(NEXT_URL_HEADER, nextUrl.toString());
     requestHeaders.set(NEXT_BASE_PATH_HEADER, nextUrl.basePath);
-    if (!req.headers.get(FORWARDED_URI_HEADER)) {
+    if (!nextReq.headers.get(FORWARDED_URI_HEADER)) {
       requestHeaders.set(
         FORWARDED_URI_HEADER,
         nextUrl.basePath + nextUrl.pathname + nextUrl.search,
@@ -77,11 +77,10 @@ export function createMiddleware(ms: MiddlewareMiddleware[] = []) {
     requestHeaders.forEach((value, key) => {
       headers[key] = value;
     });
-    req.cookies.getAll().forEach((cookie) => {
+    nextReq.cookies.getAll().forEach((cookie) => {
       cookies[cookie.name] = cookie.value;
     });
     let nextResponse: NextResponse | undefined;
-    const payload: any = {};
     const context: HeaderContext = {
       req: {
         nextUrl,
@@ -97,7 +96,6 @@ export function createMiddleware(ms: MiddlewareMiddleware[] = []) {
           nextResponse = response;
         },
       },
-      ...payload,
     };
     const headerMiddlewares = ms.map((m) => m.header).filter((m) => !!m);
     if (headerMiddlewares.length) {
@@ -111,7 +109,7 @@ export function createMiddleware(ms: MiddlewareMiddleware[] = []) {
         headers: requestHeaders,
       },
     });
-
+    const { req, res, ...payload } = context;
     const responseContext: ResponseContext = {
       req: {
         nextUrl,
