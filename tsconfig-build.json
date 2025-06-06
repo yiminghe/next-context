@@ -1,6 +1,6 @@
 {
-  "exclude": ["./test", "./tap-snapshots", "source/**/__tests__/*"],
-  "include": ["source/**/*.ts", "source/**/*.tsx"],
+  "exclude": ["./test", "./tap-snapshots", "expo/source/**/__tests__/*"],
+  "include": ["expo/source/**/*.ts", "expo/source/**/*.tsx"],
   "compilerOptions": {
     "module": "esnext",
     "outDir": "dist/dist",

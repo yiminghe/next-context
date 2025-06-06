@@ -11,6 +11,10 @@ pkg.exports = {
     types: './dist/index.d.ts',
     default: './dist/index.js',
   },
+  './expo': {
+    types: './dist/expo.d.ts',
+    default: './dist/expo.js',
+  },
   './middleware': {
     types: './dist/middleware.d.ts',
     default: './dist/middleware.js',

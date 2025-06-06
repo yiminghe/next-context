@@ -5,9 +5,7 @@ import type {
   ClientCookieAttributes,
 } from './types';
 import type { NextRequest } from 'next/server';
-import { cookies as getCookies, headers as getHeaders } from 'next/headers';
 import {
-  NEXT_URL_HEADER,
   FORWARDED_URI_HEADER,
   FORWARDED_PROTO_HEADER,
   FORWARDED_HOST_HEADER,
@@ -15,25 +13,7 @@ import {
   NEXT_BASE_PATH_HEADER,
   INIT_TOKEN,
 } from './constants';
-import { NextURL } from 'next/dist/server/web/next-url';
-
-async function transformCookiesToObject(): Promise<any> {
-  const originals = (await getCookies()).getAll();
-  const cookies: any = {};
-  for (const h of originals) {
-    cookies[h.name] = h.value;
-  }
-  return cookies;
-}
-
-async function transformHeadersToObject(): Promise<any> {
-  const originals = await getHeaders();
-  const headers: any = {};
-  for (const h of Array.from(originals.keys())) {
-    headers[h] = originals.get(h);
-  }
-  return headers;
-}
+import globalThis from './globalThis';
 
 function buildResponse(): NextContextResponseInternal {
   const p: NextContextResponseInternal['_private'] = {
@@ -42,15 +22,8 @@ function buildResponse(): NextContextResponseInternal {
   };
   const res = {
     _private: p,
-    async clearCookie(name: string, options?: CookieAttributes) {
-      (await getCookies()).set(name, '', {
-        ...options,
-        maxAge: 0,
-      });
-    },
-    async cookie(name: string, value: string, options?: CookieAttributes) {
-      (await getCookies()).set(name, value, options);
-    },
+    clearCookie: globalThis.__next_context_clear_cookie,
+    cookie: globalThis.__next_context_cookie,
     append(k: string, v: string) {
       p.headers[k] = p.headers[k] ?? '';
       p.headers[k] += v;
@@ -80,12 +53,12 @@ function buildResponse(): NextContextResponseInternal {
 }
 
 async function buildRequest() {
-  const headers = await transformHeadersToObject();
+  const headers = await globalThis.__next_context_headers();
   function get(k: string) {
     return headers[k];
   }
   if (!headers[FORWARDED_URI_HEADER]) {
-    throw new Error('must setup middleware!');
+    console.warn('must setup middleware!');
   }
   const stringUrl = `${headers[FORWARDED_PROTO_HEADER]}://${headers[FORWARDED_HOST_HEADER]}${headers[FORWARDED_URI_HEADER]}`;
   const url = new URL(stringUrl);
@@ -94,13 +67,11 @@ async function buildRequest() {
     searchParams[k] = v;
   }
   const protocol = url.protocol.slice(0, -1);
-  const nextUrl = new NextURL(headers[NEXT_URL_HEADER]);
-  nextUrl.basePath = headers[NEXT_BASE_PATH_HEADER] || '';
-  nextUrl.pathname = nextUrl.pathname.slice(nextUrl.basePath.length);
   return {
     params: {},
+    basePath: headers[NEXT_BASE_PATH_HEADER] || '',
     method: 'GET',
-    cookies: await transformCookiesToObject(),
+    cookies: await globalThis.__next_context_cookies(),
     text: () =>
       new Promise<string>((r) => {
         r('');
@@ -112,7 +83,6 @@ async function buildRequest() {
     host: url.host,
     secure: protocol === 'https',
     url: url.toString(),
-    nextUrl,
     path: url.pathname,
     query: searchParams,
     protocol,

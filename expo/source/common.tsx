@@ -21,11 +21,11 @@ import {
   isPageContextInitialized,
   getPageContext,
 } from './set-context';
-import { redirect } from 'next/navigation';
-import { NextResponse } from 'next/server';
+
 import ClientCookies from './ClientCookies';
 import React, { Fragment } from 'react';
 import { INIT_TOKEN } from './constants';
+import globalThis from './globalThis';
 
 export type {
   NextContextResponse,
@@ -74,7 +74,7 @@ export type PageFunction = (
 function doRedirect(context: NextContext) {
   const { redirectUrl } = getPrivate(context);
   if (redirectUrl) {
-    redirect(redirectUrl);
+    globalThis.__next_context_redirect(redirectUrl);
     return 1;
   }
   return 0;
@@ -90,6 +90,7 @@ function getPrivate(context: NextContext) {
 export function withPageMiddlewares(fns: MiddlewareFunction[]) {
   return function (Page: PageFunction): PageFunction {
     const P = async (...args: any) => {
+      debugger;
       const r = args[0];
       let context: NextContext;
       if (isPageContextInitialized()) {
@@ -189,9 +190,12 @@ export function withRouteMiddlewares(fns: MiddlewareFunction[]) {
           return;
         }
         if (json) {
-          return NextResponse.json(json, {
-            status,
-            headers,
+          return new Response(JSON.stringify(json), {
+            status: status || 200,
+            headers: {
+              'Content-Type': 'application/json',
+              ...headers,
+            },
           });
         }
         return ret;

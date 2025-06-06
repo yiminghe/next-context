@@ -1,8 +1,8 @@
 import React from 'react';
 import { getNextContext } from 'next-context';
-import { createPage } from '../../middlewares';
+import { createPage } from '@/middlewares';
 import Link from 'next/link';
-import { ClientProvider } from '../../client-context/ClientContext';
+import { ClientProvider } from '@/client-context/ClientContext';
 import { UserInput } from './components/UserInput';
 import { UserName } from './components/UserName';
 import ServerInfo from './components/ServerInfo';
@@ -19,7 +19,8 @@ export default createPage(async function Index() {
       <ServerInfo />
       <UserInput />
       <UserName />
-      <Link href="/get">get</Link> &nbsp; <Link href="/dynamic">dynamic</Link>
+      <Link href="/demo/get">get</Link> &nbsp;{' '}
+      <Link href="/demo/dynamic">dynamic</Link>
     </ClientProvider>
   );
 });

@@ -73,7 +73,7 @@ export type NextContextRequest = {
   protocol: string;
   secure: boolean;
   url: string;
-  nextUrl: URL;
+  basePath: string;
   ip: string | undefined;
   get: (k: string) => string | undefined;
   header: (k: string) => string | undefined;
