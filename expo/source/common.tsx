@@ -90,7 +90,6 @@ function getPrivate(context: NextContext) {
 export function withPageMiddlewares(fns: MiddlewareFunction[]) {
   return function (Page: PageFunction): PageFunction {
     const P = async (...args: any) => {
-      debugger;
       const r = args[0];
       let context: NextContext;
       if (isPageContextInitialized()) {
