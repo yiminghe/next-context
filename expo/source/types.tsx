@@ -63,6 +63,22 @@ export type ClientCookies = {
     options: ClientCookieAttributes;
   };
 };
+export class NextUrl extends URL {
+  basePath: string;
+  constructor(url: string, basePath: string) {
+    super(url);
+    this.basePath = basePath || '';
+    this.pathname = this.pathname.slice(this.basePath.length);
+  }
+  toString() {
+    const url = new URL(super.toString());
+    if (this.basePath) {
+      url.pathname = this.basePath + url.pathname;
+    }
+    return url.toString();
+  }
+}
+
 /**
  * request
  * @public
@@ -73,7 +89,7 @@ export type NextContextRequest = {
   protocol: string;
   secure: boolean;
   url: string;
-  basePath: string;
+  nextUrl: NextUrl;
   ip: string | undefined;
   get: (k: string) => string | undefined;
   header: (k: string) => string | undefined;

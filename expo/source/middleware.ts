@@ -20,6 +20,7 @@ export type ReadonlyKV = Readonly<Record<string, string | undefined>>;
 export interface HeaderContext extends ContextPayload {
   req: {
     nextUrl: NextURL;
+    url: string;
     cookies: ReadonlyKV;
     headers: ReadonlyKV;
     header: (name: string, value: string) => void;
@@ -64,7 +65,8 @@ export function createMiddleware(ms: MiddlewareMiddleware[] = []) {
   return async (nextReq: NextRequest) => {
     const { nextUrl } = nextReq;
     const requestHeaders = new Headers(nextReq.headers);
-    requestHeaders.set(NEXT_URL_HEADER, nextUrl.toString());
+    const url = nextUrl.toString();
+    requestHeaders.set(NEXT_URL_HEADER, url);
     requestHeaders.set(NEXT_BASE_PATH_HEADER, nextUrl.basePath);
     if (!nextReq.headers.get(FORWARDED_URI_HEADER)) {
       requestHeaders.set(
@@ -84,6 +86,7 @@ export function createMiddleware(ms: MiddlewareMiddleware[] = []) {
     const context: HeaderContext = {
       req: {
         nextUrl,
+        url,
         cookies,
         headers,
         header: (name: string, value: string) => {

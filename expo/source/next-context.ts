@@ -1,8 +1,9 @@
-import type {
-  NextContext,
-  CookieAttributes,
-  NextContextResponseInternal,
-  ClientCookieAttributes,
+import {
+  type NextContext,
+  type CookieAttributes,
+  type NextContextResponseInternal,
+  type ClientCookieAttributes,
+  NextUrl,
 } from './types';
 import type { NextRequest } from 'next/server';
 import {
@@ -12,6 +13,7 @@ import {
   FORWARDED_FOR_HEADER,
   NEXT_BASE_PATH_HEADER,
   INIT_TOKEN,
+  NEXT_URL_HEADER,
 } from './constants';
 import globalThis from './globalThis';
 
@@ -67,9 +69,13 @@ async function buildRequest() {
     searchParams[k] = v;
   }
   const protocol = url.protocol.slice(0, -1);
+  const nextUrl = new NextUrl(
+    headers[NEXT_URL_HEADER],
+    headers[NEXT_BASE_PATH_HEADER],
+  );
   return {
     params: {},
-    basePath: headers[NEXT_BASE_PATH_HEADER] || '',
+    nextUrl,
     method: 'GET',
     cookies: await globalThis.__next_context_cookies(),
     text: () =>
