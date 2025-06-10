@@ -29,7 +29,7 @@ const config = {
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: [
-    'source/**/*.{js,jsx,ts,tsx}',
+    'expo/source/**/*.{js,jsx,ts,tsx}',
     '!**/__tests__/**',
     '!**/*.cy.*',
     '!**/*.d.ts',
