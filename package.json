@@ -92,7 +92,7 @@
   },
   "nyc": {
     "include": [
-      "source/**/*.{js,jsx,ts,tsx}"
+      "expo/source/**/*.{js,jsx,ts,tsx}"
     ],
     "excludeAfterRemap": true,
     "exclude": [

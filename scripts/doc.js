@@ -46,7 +46,7 @@ try {
       mainEntryPointFilePath: path.join(
         `<projectFolder>`,
         (pkg.exports[originalKey].types || pkg.exports[originalKey].default)
-          .replace('/source/', '/dist/dist/')
+          .replace('/expo/source/', '/dist/dist/')
           .replace(/(\.d)?\.tsx?$/, '.d.ts'),
       ),
     };
