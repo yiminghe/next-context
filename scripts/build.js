@@ -8,21 +8,25 @@ const pkg = require('../package.json');
 
 pkg.exports = {
   '.': {
-    types: './dist/index.d.ts',
-    default: './dist/index.js',
+    types: './esm/index.d.ts',
+    require: './cjs/index.js',
+    import: './esm/index.js',
   },
   './expo': {
-    types: './dist/expo.d.ts',
-    default: './dist/expo.js',
+    types: './esm/expo.d.ts',
+    require: './cjs/expo.js',
+    import: './esm/expo.js',
   },
   './middleware': {
-    types: './dist/middleware.d.ts',
-    default: './dist/middleware.js',
+    types: './esm/middleware.d.ts',
+    require: './cjs/middleware.js',
+    import: './esm/middleware.js',
   },
   './i18n': {
-    types: './dist/i18n/index.d.ts',
-    'react-server': './dist/i18n/react-server.js',
-    default: './dist/i18n/index.js',
+    types: './esm/i18n/index.d.ts',
+    require: './cjs/i18n/index.js',
+    'react-server': './esm/i18n/react-server.js',
+    import: './esm/i18n/index.js',
   },
 };
 

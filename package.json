@@ -14,17 +14,17 @@
   ],
   "exports": {
     ".": {
-      "default": "./expo/source/index.tsx"
+      "import": "./expo/source/index.tsx"
     },
     "./middleware": {
-      "default": "./expo/source/middleware.ts"
+      "import": "./expo/source/middleware.ts"
     },
     "./expo": {
-      "default": "./expo/source/expo.tsx"
+      "import": "./expo/source/expo.tsx"
     },
     "./i18n": {
       "react-server": "./expo/source/i18n/react-server.ts",
-      "default": "./expo/source/i18n/index.tsx"
+      "import": "./expo/source/i18n/index.tsx"
     }
   },
   "scripts": {
@@ -40,7 +40,7 @@
     "test:dev": "rm -rf dist && NEXT_PUBLIC_CYPRESS=1  pnpm dev",
     "dev": "pnpm i18n && HOSTNAME=0.0.0.0 next dev",
     "doc": "rm -rf temp docs && node scripts/doc",
-    "build": "rm -rf dist && tsc -p tsconfig-build.json && node scripts/build",
+    "build": "rm -rf dist && tsc -p tsconfig-build.json && tsc -p tsconfig-build-cjs.json && node scripts/build",
     "start": "next start",
     "prepare": "husky"
   },

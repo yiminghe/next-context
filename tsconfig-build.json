@@ -3,7 +3,7 @@
   "include": ["expo/source/**/*.ts", "expo/source/**/*.tsx"],
   "compilerOptions": {
     "module": "esnext",
-    "outDir": "dist/dist",
+    "outDir": "dist/esm",
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "declaration": true,
