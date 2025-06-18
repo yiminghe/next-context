@@ -1,35 +1,39 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
-function r(...p) {
-  return path.join(__dirname, ...p);
-}
-const pkg = require('../package.json');
+import fs from 'fs';
+import path from 'path';
 
-pkg.exports = {
-  '.': {
-    types: './esm/index.d.ts',
-    require: './cjs/index.js',
-    import: './esm/index.js',
-  },
-  './expo': {
-    types: './esm/expo.d.ts',
-    require: './cjs/expo.js',
-    import: './esm/expo.js',
-  },
-  './middleware': {
-    types: './esm/middleware.d.ts',
-    require: './cjs/middleware.js',
-    import: './esm/middleware.js',
-  },
-  './i18n': {
-    types: './esm/i18n/index.d.ts',
-    require: './cjs/i18n/index.js',
-    'react-server': './esm/i18n/react-server.js',
-    import: './esm/i18n/index.js',
-  },
+function r(...p) {
+  return path.join(import.meta.dirname, ...p);
+}
+
+function p(s, cjs = false) {
+  return s
+    ?.replace('expo/source', cjs ? 'cjs' : 'esm')
+    .replace(/\.tsx?$/, '.js');
+}
+const pkg = JSON.parse(fs.readFileSync(r('../package.json'), 'utf-8'));
+
+const exports = {};
+
+for (const key of Object.keys(pkg.exports)) {
+  let v = pkg.exports[key];
+  exports[key] = {
+    types: p(v.import).replace(/\.js$/, '.d.ts'),
+    require: p(v.import, true),
+    import: p(v.import),
+    'react-server': p(v['react-server']),
+  };
+}
+
+const pkg2 = {
+  name: pkg.name,
+  version: pkg.version,
+  description: pkg.description,
+  repository: pkg.repository,
+  exports,
+  publishConfig: pkg.publishConfig,
+  dependencies: pkg.dependencies,
 };
 
-fs.writeFileSync(r('../dist/package.json'), JSON.stringify(pkg, null, 2));
+fs.writeFileSync(r('../dist/package.json'), JSON.stringify(pkg2, null, 2));
 
 fs.copyFileSync(r('../README.md'), r('../dist/README.md'));
