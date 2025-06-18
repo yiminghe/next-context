@@ -16,11 +16,15 @@ const exports = {};
 
 for (const key of Object.keys(pkg.exports)) {
   let v = pkg.exports[key];
+  exports[key] = {};
+
+  for (const subKey of Object.keys(v)) {
+    exports[key][subKey] = p(v[subKey]);
+  }
   exports[key] = {
+    ...exports[key],
     types: p(v.import).replace(/\.js$/, '.d.ts'),
     require: p(v.import, true),
-    import: p(v.import),
-    'react-server': p(v['react-server']),
   };
 }
 
