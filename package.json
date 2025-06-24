@@ -1,7 +1,7 @@
 {
   "name": "next-context",
   "private": "true",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Easily access request/response context between next middleware, components, action and route",
   "repository": {
     "type": "git",
@@ -37,6 +37,7 @@
     "lint": "rm -rf dist .next && tsc --noEmit && next lint",
     "test:dev": "rm -rf dist && NEXT_PUBLIC_CYPRESS=1  pnpm dev",
     "dev": "pnpm i18n && HOSTNAME=0.0.0.0 next dev",
+    "turbo": "pnpm dev --turbopack",
     "doc": "rm -rf temp docs && node scripts/doc",
     "build": "rm -rf dist && tsc -p tsconfig-build.json && tsc -p tsconfig-build-cjs.json && node scripts/build",
     "start": "next start",

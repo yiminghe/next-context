@@ -14,7 +14,16 @@ const formatters = {
   getPluralRules: memoize((locale, opts) => new Intl.PluralRules(locale, opts)),
 };
 
-const g: any = typeof window !== 'undefined' ? window : globalThis;
+const g: {
+  __NEXT_CONTEXT_I18N_FORMAT_CACHE?: Map<string, any>;
+  __NEXT_CONTEXT_I18N_INSTANCE_CACHE?: Map<string, any>;
+  __NEXT_CONTEXT_I18N_INIT:
+    | ((instance: I18nContext, config: I18nConfig) => void)
+    | undefined;
+  __NEXT_CONTEXT_I18N_CONFIG:
+    | ((instance: I18nConfig, ctx: NextContext) => I18nConfig)
+    | undefined;
+} = (typeof window !== 'undefined' ? window : globalThis) as any;
 
 const formatterCaches: Map<any, any> =
   g.__NEXT_CONTEXT_I18N_FORMAT_CACHE ||
@@ -24,21 +33,16 @@ const instanceCaches: Map<any, any> =
   g.__NEXT_CONTEXT_I18N_INSTANCE_CACHE ||
   (g.__NEXT_CONTEXT_I18N_INSTANCE_CACHE = new Map<string, any>());
 
-let onInit: ((instance: I18nContext, config: I18nConfig) => void) | undefined;
-let onConfig:
-  | ((instance: I18nConfig, ctx: NextContext) => I18nConfig)
-  | undefined;
-
 export function onI18nContextInit(
   callback: (instance: I18nContext, config: I18nConfig) => void,
 ) {
-  onInit = callback;
+  g.__NEXT_CONTEXT_I18N_INIT = callback;
 }
 
 export function onI18nContextConfig(
   callback: (config: I18nConfig, ctx: NextContext) => I18nConfig,
 ) {
-  onConfig = callback;
+  g.__NEXT_CONTEXT_I18N_CONFIG = callback;
 }
 
 function setTimeZoneInOptions(
@@ -134,8 +138,8 @@ export function getI18nInstance(config: I18nConfig): I18nContext {
         return formatter.format(values ? fixKey(values) : values);
       },
     };
-    if (onInit) {
-      onInit(instance, config);
+    if (g.__NEXT_CONTEXT_I18N_INIT) {
+      g.__NEXT_CONTEXT_I18N_INIT(instance, config);
     }
     instanceCache.set(instanceKey, instance);
   }
@@ -166,8 +170,8 @@ export function setI18nToContext(ctx: NextContext, value: any): void {
 export function middleware(config: (ctx: NextContext) => Promise<I18nConfig>) {
   return async (ctx: NextContext, next: NextFunction) => {
     let ret = await config(ctx);
-    if (onConfig) {
-      ret = onConfig(ret, ctx);
+    if (g.__NEXT_CONTEXT_I18N_CONFIG) {
+      ret = g.__NEXT_CONTEXT_I18N_CONFIG(ret, ctx);
     }
     const i18nContext: any = getI18nInstance(ret);
     setI18nToContext(ctx, i18nContext);
