@@ -12,6 +12,10 @@ import { compose } from './compose';
 import { CookieAttributes } from './types';
 import { NextURL } from 'next/dist/server/web/next-url';
 
+/**
+ *
+ * @public
+ */
 export type ReadonlyKV = Readonly<Record<string, string | undefined>>;
 /**
  * header middleware context
@@ -30,6 +34,10 @@ export interface HeaderContext extends ContextPayload {
   };
 }
 
+/**
+ *
+ * @public
+ */
 export interface ContextPayload {}
 
 /**

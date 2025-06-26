@@ -45,8 +45,8 @@ try {
       ...apiConfig,
       mainEntryPointFilePath: path.join(
         `<projectFolder>`,
-        (pkg.exports[originalKey].types || pkg.exports[originalKey].default)
-          .replace('/expo/source/', '/dist/dist/')
+        (pkg.exports[originalKey].types || pkg.exports[originalKey].import)
+          .replace('/expo/source/', '/dist/esm/')
           .replace(/(\.d)?\.tsx?$/, '.d.ts'),
       ),
     };
@@ -54,8 +54,9 @@ try {
     updatePkg(localPkg);
     updateApiConfig(localApiConfig);
 
+    // --diagnostics
     execSync(
-      `pnpm api-extractor run --local --diagnostics &&\
+      `pnpm api-extractor run --local  &&\
 pnpm api-documenter markdown --input-folder=temp --output-folder=${docsPath}`,
       { stdio: 'inherit' },
     );

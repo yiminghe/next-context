@@ -20,6 +20,7 @@ export interface HeaderContext extends ContextPayload {
     // (undocumented)
     req: {
         nextUrl: NextURL;
+        url: string;
         cookies: ReadonlyKV;
         headers: ReadonlyKV;
         header: (name: string, value: string) => void;
@@ -59,6 +60,6 @@ export interface ResponseContext extends ContextPayload {
 
 // Warnings were encountered during analysis:
 //
-// dist/dist/middleware.d.ts:36:9 - (ae-forgotten-export) The symbol "CookieAttributes" needs to be exported by the entry point middleware.d.ts
+// dist/esm/middleware.d.ts:45:9 - (ae-forgotten-export) The symbol "CookieAttributes" needs to be exported by the entry point middleware.d.ts
 
 ```

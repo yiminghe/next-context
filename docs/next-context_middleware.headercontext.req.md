@@ -9,6 +9,7 @@
 ```typescript
 req: {
         nextUrl: NextURL;
+        url: string;
         cookies: ReadonlyKV;
         headers: ReadonlyKV;
         header: (name: string, value: string) => void;

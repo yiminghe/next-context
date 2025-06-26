@@ -33,12 +33,20 @@ const instanceCaches: Map<any, any> =
   g.__NEXT_CONTEXT_I18N_INSTANCE_CACHE ||
   (g.__NEXT_CONTEXT_I18N_INSTANCE_CACHE = new Map<string, any>());
 
+/**
+ *
+ * @public
+ */
 export function onI18nContextInit(
   callback: (instance: I18nContext, config: I18nConfig) => void,
 ) {
   g.__NEXT_CONTEXT_I18N_INIT = callback;
 }
 
+/**
+ *
+ * @public
+ */
 export function onI18nContextConfig(
   callback: (config: I18nConfig, ctx: NextContext) => I18nConfig,
 ) {
@@ -93,6 +101,10 @@ function getCacheByPath(map: Map<any, any>, keys: any[]) {
 
 const instanceKey = '__instance';
 
+/**
+ *
+ * @public
+ */
 export function getI18nInstance(config: I18nConfig): I18nContext {
   const { locale, messages, timeZone = '' } = config;
   const c: any = config;

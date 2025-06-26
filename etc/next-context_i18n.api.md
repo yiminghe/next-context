@@ -32,6 +32,6 @@ export function onI18nContextInit(callback: (instance: I18nContext, config: I18n
 
 // Warnings were encountered during analysis:
 //
-// dist/dist/i18n/index.d.ts:20:5 - (ae-forgotten-export) The symbol "Messages" needs to be exported by the entry point index.d.ts
+// dist/esm/i18n/index.d.ts:20:5 - (ae-forgotten-export) The symbol "Messages" needs to be exported by the entry point index.d.ts
 
 ```

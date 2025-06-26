@@ -46,7 +46,7 @@ Description
 
 </td><td>
 
-{ nextUrl: NextURL; cookies: [ReadonlyKV](./next-context_middleware.readonlykv.md)<!-- -->; headers: [ReadonlyKV](./next-context_middleware.readonlykv.md)<!-- -->; header: (name: string, value: string) =&gt; void; }
+{ nextUrl: NextURL; url: string; cookies: [ReadonlyKV](./next-context_middleware.readonlykv.md)<!-- -->; headers: [ReadonlyKV](./next-context_middleware.readonlykv.md)<!-- -->; header: (name: string, value: string) =&gt; void; }
 
 
 </td><td>

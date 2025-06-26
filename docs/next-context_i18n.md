@@ -60,6 +60,7 @@ i18n next-context middleware
 </td><td>
 
 
+
 </td></tr>
 <tr><td>
 
@@ -67,6 +68,7 @@ i18n next-context middleware
 
 
 </td><td>
+
 
 
 </td></tr>

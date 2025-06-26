@@ -4,6 +4,10 @@ import React from 'react';
 
 export { onI18nContextConfig, onI18nContextInit } from './instance';
 
+/**
+ *
+ * @public
+ */
 export function getI18nContext(): I18nContext {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return getI18nFromContext(getNextContext());
@@ -12,6 +16,10 @@ export function getI18nContext(): I18nContext {
 import { I18nProvider as I18nProvider2 } from './index';
 import { getI18nConfig, getI18nFromContext, Messages } from './instance';
 
+/**
+ *
+ * @public
+ */
 export function I18nProvider({
   children,
   messages,

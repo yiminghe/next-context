@@ -63,6 +63,10 @@ export type ClientCookies = {
     options: ClientCookieAttributes;
   };
 };
+/**
+ *
+ * @public
+ */
 export class NextUrl extends URL {
   basePath: string;
   constructor(url: string, basePath: string) {
@@ -128,6 +132,10 @@ export type NextContextType = 'page' | 'route' | 'action';
  */
 export interface I18nContext {}
 
+/**
+ *
+ * @public
+ */
 export interface I18nConfig {
   messages: Record<string, string>;
   locale: string;

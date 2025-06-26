@@ -24,7 +24,14 @@ Description
 
 </td><td>
 
-unified middleware and request context for nextjs
+
+</td></tr>
+<tr><td>
+
+[next-context/expo](./next-context_expo.md)
+
+
+</td><td>
 
 
 </td></tr>
