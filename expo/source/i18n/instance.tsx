@@ -130,6 +130,7 @@ export function getI18nInstance(config: I18nConfig): I18nContext {
       locale,
       timeZone,
       messages,
+      payload: config.payload,
       t(key: any, values: any) {
         const message = messages[key] || '';
         let formatter = formatterCache.get(message);
@@ -169,7 +170,9 @@ const I18nContextKey = '__next_context_i18n';
 
 export function getI18nFromContext(ctx: NextContext): any {
   // maybe called by route/action
-  (ctx as any)[I18nContextKey] = (ctx as any)[I18nContextKey] || {};
+  (ctx as any)[I18nContextKey] = (ctx as any)[I18nContextKey] || {
+    payload: {},
+  };
   return (ctx as any)[I18nContextKey];
 }
 
@@ -181,13 +184,19 @@ export function setI18nToContext(ctx: NextContext, value: any): void {
  * i18n next-context middleware
  * @public
  */
-export function middleware(config: (ctx: NextContext) => Promise<I18nConfig>) {
+export function middleware(
+  getConfig: (ctx: NextContext) => Promise<I18nConfig>,
+) {
   return async (ctx: NextContext, next: NextFunction) => {
-    let ret = await config(ctx);
+    let config = await getConfig(ctx);
+    config = {
+      payload: {},
+      ...config,
+    };
     if (g.__NEXT_CONTEXT_I18N_CONFIG) {
-      ret = g.__NEXT_CONTEXT_I18N_CONFIG(ret, ctx);
+      config = g.__NEXT_CONTEXT_I18N_CONFIG(config, ctx);
     }
-    const i18nContext: any = getI18nInstance(ret);
+    const i18nContext: any = getI18nInstance(config);
     setI18nToContext(ctx, i18nContext);
     await next();
   };

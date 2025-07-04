@@ -1,7 +1,7 @@
 {
   "name": "next-context",
   "private": "true",
-  "version": "0.5.4",
+  "version": "0.5.6",
   "description": "Easily access request/response context between next middleware, components, action and route",
   "repository": {
     "type": "git",
@@ -19,6 +19,10 @@
     },
     "./expo": {
       "import": "./expo/source/expo.tsx"
+    },
+    "./shared-context": {
+      "react-server": "./expo/source/shared-context/react-server.ts",
+      "import": "./expo/source/shared-context/index.tsx"
     },
     "./i18n": {
       "react-server": "./expo/source/i18n/react-server.ts",

@@ -1,7 +1,11 @@
 import { createLayout } from '@/middlewares';
 import { getNextContext } from 'next-context';
 import React from 'react';
+import { getI18nContext, I18nProvider } from 'next-context/i18n';
 
+function Title() {
+  return <h1>root layout</h1>;
+}
 export default createLayout(function DemoLayout({
   children,
 }: {
@@ -17,15 +21,17 @@ export default createLayout(function DemoLayout({
     expires: new Date(Date.now() + 1000 * 60 * 60),
   });
   return (
-    <html lang="en" data-user={user}>
-      <body>
-        <h1>root layout</h1>
-        <div>url: {req.url}</div>
-        <div>type: {type}</div>
-        <div>user: {user}</div>
-        <h1>children</h1>
-        {children}
-      </body>
-    </html>
+    <I18nProvider>
+      <html lang="en" data-user={user}>
+        <body>
+          <Title />
+          <div>url: {req.url}</div>
+          <div>type: {type}</div>
+          <div>user: {user}</div>
+          <h1>children</h1>
+          {children}
+        </body>
+      </html>
+    </I18nProvider>
   );
 });

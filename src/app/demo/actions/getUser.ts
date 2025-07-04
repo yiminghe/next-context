@@ -10,6 +10,7 @@ export default createAction(async (time: number) => {
   return {
     ...(await testTime()),
     i18nLength: Object.keys(context).length,
+    i18nPayload: context.payload,
     time,
     user: getNextContext().user,
     type: getNextContext().type,

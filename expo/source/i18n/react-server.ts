@@ -34,6 +34,7 @@ export function I18nProvider({
       messages,
     };
   }
+  console.log('config', config, JSON.stringify(config, null, 2));
   return React.createElement(I18nProvider2, config, children);
 }
 

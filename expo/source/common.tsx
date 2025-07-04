@@ -37,6 +37,8 @@ export type {
   CookieAttributes,
   I18nContext,
   I18nConfig,
+  I18nPayload,
+  SharedContext,
 } from './types';
 
 export {

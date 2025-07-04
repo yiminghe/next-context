@@ -5,6 +5,7 @@ import { useState, useContext } from 'react';
 import { ClientContext } from '../../../client-context/ClientContext';
 import getUser from '../actions/getUser';
 import { runWithActionName } from '@/utils/utils';
+import { getI18nContext } from 'next-context/i18n';
 
 export const UserName = observer(() => {
   const user = useContext(ClientContext);
@@ -31,6 +32,9 @@ export const UserName = observer(() => {
         {ret ? (
           <input id="action" readOnly value={JSON.stringify(ret)} />
         ) : null}
+      </div>
+      <div>
+        i18n payload: {JSON.stringify(getI18nContext().payload, null, 2)}
       </div>
     </div>
   );

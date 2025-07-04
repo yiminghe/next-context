@@ -126,11 +126,17 @@ export type NextContextResponse = {
  */
 export type NextContextType = 'page' | 'route' | 'action';
 
+export interface I18nPayload {}
+
 /**
  * i18n context
  * @public
  */
-export interface I18nContext {}
+export interface I18nContext {
+  readonly payload: I18nPayload;
+}
+
+export interface SharedContext {}
 
 /**
  *
@@ -141,6 +147,7 @@ export interface I18nConfig {
   locale: string;
   timeZone?: string;
   cacheKey?: string;
+  payload?: I18nPayload;
 }
 
 /**

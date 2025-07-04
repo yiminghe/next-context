@@ -34,4 +34,4 @@ const i18nMiddleware = i18n(async (context) => {
 export const createPage = withPageMiddlewares([user, i18nMiddleware]);
 export const createLayout = withLayoutMiddlewares([user, i18nMiddleware]);
 export const createAction = withActionMiddlewares([user]);
-export const createRoute = withRouteMiddlewares([user, i18nMiddleware]);
+export const createRouteWithI18n = withRouteMiddlewares([user, i18nMiddleware]);
