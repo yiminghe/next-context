@@ -20,7 +20,6 @@ export { middleware } from './instance';
  * @public
  */
 export function getI18nContext(): I18nContext {
-  // console.log('client getI18nContext()');
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return use(I18nReactContext);
 }
