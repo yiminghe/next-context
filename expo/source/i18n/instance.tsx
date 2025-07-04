@@ -168,6 +168,8 @@ export function getI18nConfig(ctx: NextContext): I18nConfig {
 const I18nContextKey = '__next_context_i18n';
 
 export function getI18nFromContext(ctx: NextContext): any {
+  // maybe called by route/action
+  (ctx as any)[I18nContextKey] = (ctx as any)[I18nContextKey] || {};
   return (ctx as any)[I18nContextKey];
 }
 
