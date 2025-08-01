@@ -13,7 +13,7 @@ export function getI18nContext(): I18nContext {
   return getI18nFromContext(getNextContext());
 }
 
-import { I18nProvider as I18nProvider2 } from './index';
+import { I18nProvider as I18nProviderClient } from './index';
 import { getI18nConfig, getI18nFromContext, Messages } from './instance';
 
 /**
@@ -34,7 +34,7 @@ export function I18nProvider({
       messages,
     };
   }
-  return React.createElement(I18nProvider2, config, children);
+  return React.createElement(I18nProviderClient, config, children);
 }
 
 export { middleware } from './instance';
