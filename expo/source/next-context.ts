@@ -62,7 +62,14 @@ async function buildRequest() {
   if (!headers[FORWARDED_URI_HEADER]) {
     console.warn('must setup middleware!');
   }
-  const stringUrl = `${headers[FORWARDED_PROTO_HEADER]}://${headers[FORWARDED_HOST_HEADER]}${headers[FORWARDED_URI_HEADER]}`;
+  let host = headers[FORWARDED_HOST_HEADER];
+  if (!host) {
+    throw new Error(`Missing ${FORWARDED_HOST_HEADER} header`);
+  }
+  if (host.includes(',')) {
+    host = host.split(',')[0].trim();
+  }
+  const stringUrl = `${headers[FORWARDED_PROTO_HEADER]}://${host}${headers[FORWARDED_URI_HEADER]}`;
   const url = new URL(stringUrl);
   const searchParams: Record<string, any> = {};
   for (const [k, v] of Array.from(url.searchParams.entries())) {
