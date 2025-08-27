@@ -38,6 +38,12 @@ function buildResponse(): NextContextResponseInternal {
       }
       Object.assign(p.headers, k);
     },
+    setHeader(k: string, v: any) {
+      p.headers[k] = v;
+    },
+    getHeader(k: string) {
+      return p.headers[k];
+    },
     get(k: string) {
       return p.headers[k];
     },
@@ -50,7 +56,20 @@ function buildResponse(): NextContextResponseInternal {
     redirect(r: string) {
       p.redirectUrl = r;
     },
+    end(e?: BodyInit) {
+      p.end = e || null;
+    },
+    statusCode: 200,
   };
+  delete (res as any).statusCode;
+  Object.defineProperty(res, 'statusCode', {
+    get() {
+      return p.status;
+    },
+    set(s) {
+      p.status = s;
+    },
+  });
   return res;
 }
 

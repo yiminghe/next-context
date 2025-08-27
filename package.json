@@ -1,7 +1,7 @@
 {
   "name": "next-context",
   "private": "true",
-  "version": "0.5.8",
+  "version": "0.6.0",
   "description": "Easily access request/response context between next middleware, components, action and route",
   "repository": {
     "type": "git",
@@ -16,6 +16,9 @@
     },
     "./middleware": {
       "import": "./expo/source/middleware.ts"
+    },
+    "./cors": {
+      "import": "./expo/source/cors/cors.ts"
     },
     "./expo": {
       "import": "./expo/source/expo.tsx"

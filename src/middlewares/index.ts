@@ -9,7 +9,7 @@ import {
   withRouteMiddlewares,
 } from 'next-context';
 import { middleware as i18n } from 'next-context/i18n';
-
+import { middleware as cors } from 'next-context/cors';
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -35,3 +35,11 @@ export const createPage = withPageMiddlewares([user, i18nMiddleware]);
 export const createLayout = withLayoutMiddlewares([user, i18nMiddleware]);
 export const createAction = withActionMiddlewares([user]);
 export const createRouteWithI18n = withRouteMiddlewares([user, i18nMiddleware]);
+export const createRouteWithCors = withRouteMiddlewares([
+  cors({
+    // origin(o){
+    //   return o?.endsWith('example.com');
+    // },
+    exposedHeaders: ['my'],
+  }),
+]);

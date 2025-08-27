@@ -108,8 +108,10 @@ export function withPageMiddlewares(fns: MiddlewareFunction[]) {
       if (doRedirect(context)) {
         return;
       }
-      const ret = Page.apply(null, args);
-      await ret;
+      const ret: any = Page.apply(null, args);
+      if (ret && ret.then) {
+        await ret;
+      }
       if (doRedirect(context)) {
         return;
       }
@@ -170,7 +172,7 @@ export type RouteFunction = (
  *@public
  */
 export function withRouteMiddlewares(fns: MiddlewareFunction[]) {
-  return function (Route: RouteFunction): RouteFunction {
+  return function (Route?: RouteFunction): RouteFunction {
     const R = async (...args: any) => {
       const r = args[0];
       const c = args[1];
@@ -184,9 +186,15 @@ export function withRouteMiddlewares(fns: MiddlewareFunction[]) {
         if (doRedirect(context)) {
           return;
         }
-        const ret = Route.apply(null, args);
-        await ret;
-        const { status, headers, json } = getPrivate(context);
+        let ret: any;
+        if (Route) {
+          ret = Route.apply(null, args);
+          if (ret && ret.then) {
+            await ret;
+          }
+        }
+        const { status, headers, json, end } = getPrivate(context);
+        debugger;
         if (doRedirect(context)) {
           return;
         }
@@ -198,11 +206,18 @@ export function withRouteMiddlewares(fns: MiddlewareFunction[]) {
               ...headers,
             },
           });
+        } else if (end !== undefined) {
+          return new Response(end, {
+            status: status || 200,
+            headers: {
+              ...headers,
+            },
+          });
         }
         return ret;
       });
     };
-    if (Route.name) {
+    if (Route?.name) {
       Object.defineProperty(R, 'name', {
         writable: true,
         value: Route.name,
@@ -227,7 +242,9 @@ export function withActionMiddlewares(fns: MiddlewareFunction[]) {
           return;
         }
         const ret = action.apply(null, args);
-        await ret;
+        if (ret && ret.then) {
+          await ret;
+        }
         if (doRedirect(context)) {
           return;
         }
