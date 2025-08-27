@@ -194,7 +194,6 @@ export function withRouteMiddlewares(fns: MiddlewareFunction[]) {
           }
         }
         const { status, headers, json, end } = getPrivate(context);
-        debugger;
         if (doRedirect(context)) {
           return;
         }
