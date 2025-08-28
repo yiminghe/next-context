@@ -43,7 +43,7 @@ i18n react provider
 </td></tr>
 <tr><td>
 
-[middleware(config)](./next-context_i18n.middleware.md)
+[middleware(getConfig)](./next-context_i18n.middleware.md)
 
 
 </td><td>

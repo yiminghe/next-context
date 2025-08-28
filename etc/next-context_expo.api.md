@@ -35,11 +35,19 @@ export interface I18nConfig {
     // (undocumented)
     messages: Record<string, string>;
     // (undocumented)
+    payload?: I18nPayload;
+    // (undocumented)
     timeZone?: string;
 }
 
 // @public
 export interface I18nContext {
+    // (undocumented)
+    readonly payload: I18nPayload;
+}
+
+// @public (undocumented)
+export interface I18nPayload {
 }
 
 // @public
@@ -90,10 +98,14 @@ export type NextContextResponse = {
     cookie: (name: string, value: string, options?: CookieAttributes) => void;
     append: (k: string, v: string) => void;
     set: (...args: [key: string, v: any] | [o: any]) => void;
+    setHeader: (k: string, v: any) => void;
     get: (key: string) => any;
+    getHeader: (key: string) => any;
     redirect: (r: string) => void;
     json: (j: any) => void;
     status: (s: number) => void;
+    end: () => void;
+    statusCode: number;
 };
 
 // @public
@@ -116,6 +128,10 @@ export type RouteFunction = (request: NextRequest, context: {
     params: AsyncParams;
 }) => any;
 
+// @public (undocumented)
+export interface SharedContext {
+}
+
 // @public
 export function withActionMiddlewares(fns: MiddlewareFunction[]): <T extends Function>(action: T) => T;
 
@@ -126,7 +142,7 @@ export const withLayoutMiddlewares: (fns: MiddlewareFunction[]) => (Layout: Layo
 export function withPageMiddlewares(fns: MiddlewareFunction[]): (Page: PageFunction) => PageFunction;
 
 // @public
-export function withRouteMiddlewares(fns: MiddlewareFunction[]): (Route: RouteFunction) => RouteFunction;
+export function withRouteMiddlewares(fns: MiddlewareFunction[]): (Route?: RouteFunction) => RouteFunction;
 
 // Warnings were encountered during analysis:
 //

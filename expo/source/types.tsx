@@ -130,6 +130,9 @@ export type NextContextResponse = {
  */
 export type NextContextType = 'page' | 'route' | 'action';
 
+/**
+ * @public
+ */
 export interface I18nPayload {}
 
 /**
@@ -140,6 +143,9 @@ export interface I18nContext {
   readonly payload: I18nPayload;
 }
 
+/**
+ * @public
+ */
 export interface SharedContext {}
 
 /**

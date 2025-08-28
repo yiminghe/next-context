@@ -89,6 +89,25 @@ Record&lt;string, string&gt;
 </td></tr>
 <tr><td>
 
+[payload?](./next-context_expo.i18nconfig.payload.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[I18nPayload](./next-context_expo.i18npayload.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
 [timeZone?](./next-context_expo.i18nconfig.timezone.md)
 
 

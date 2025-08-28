@@ -1,3 +1,7 @@
+/**
+ * @packageDocumentation cors support for route
+ */
+
 // https://github.com/expressjs/cors
 
 import {
@@ -31,6 +35,9 @@ interface InternalOptions extends Common {
 
 type MaybePromise<T> = T | Promise<T>;
 
+/**
+ * @public
+ */
 export interface CorsOptions extends Common {
   origin?:
     | InternalOptions['origin']
@@ -250,6 +257,9 @@ async function endOptionsRequest(
   }
 }
 
+/**
+ * @public
+ */
 export function middleware(
   o:
     | CorsOptions

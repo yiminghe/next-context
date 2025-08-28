@@ -9,7 +9,7 @@ i18n next-context middleware
 **Signature:**
 
 ```typescript
-export declare function middleware(config: (ctx: NextContext) => Promise<I18nConfig>): (ctx: NextContext, next: NextFunction) => Promise<void>;
+export declare function middleware(getConfig: (ctx: NextContext) => Promise<I18nConfig>): (ctx: NextContext, next: NextFunction) => Promise<void>;
 ```
 
 ## Parameters
@@ -32,7 +32,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-config
+getConfig
 
 
 </td><td>

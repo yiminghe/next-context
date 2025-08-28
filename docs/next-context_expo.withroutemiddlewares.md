@@ -9,7 +9,7 @@ create higher order route with middlewares
 **Signature:**
 
 ```typescript
-export declare function withRouteMiddlewares(fns: MiddlewareFunction[]): (Route: RouteFunction) => RouteFunction;
+export declare function withRouteMiddlewares(fns: MiddlewareFunction[]): (Route?: RouteFunction) => RouteFunction;
 ```
 
 ## Parameters
@@ -47,5 +47,5 @@ fns
 </tbody></table>
 **Returns:**
 
-(Route: [RouteFunction](./next-context_expo.routefunction.md)<!-- -->) =&gt; [RouteFunction](./next-context_expo.routefunction.md)
+(Route?: [RouteFunction](./next-context_expo.routefunction.md)<!-- -->) =&gt; [RouteFunction](./next-context_expo.routefunction.md)
 

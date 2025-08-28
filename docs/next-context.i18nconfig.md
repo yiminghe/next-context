@@ -89,6 +89,25 @@ Record&lt;string, string&gt;
 </td></tr>
 <tr><td>
 
+[payload?](./next-context.i18nconfig.payload.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[I18nPayload](./next-context.i18npayload.md)
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
 [timeZone?](./next-context.i18nconfig.timezone.md)
 
 

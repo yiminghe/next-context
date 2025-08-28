@@ -28,6 +28,17 @@ Description
 </td></tr>
 <tr><td>
 
+[next-context/cors](./next-context_cors.md)
+
+
+</td><td>
+
+cors support for route
+
+
+</td></tr>
+<tr><td>
+
 [next-context/expo](./next-context_expo.md)
 
 
@@ -54,6 +65,17 @@ i18n support for nextjs
 </td><td>
 
 enhanced next native middleware
+
+
+</td></tr>
+<tr><td>
+
+[next-context/shared-context](./next-context_shared-context.md)
+
+
+</td><td>
+
+context shared between client and server
 
 
 </td></tr>

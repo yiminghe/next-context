@@ -22,7 +22,7 @@ export function I18nProvider(props: {
 // Warning: (ae-forgotten-export) The symbol "NextFunction" needs to be exported by the entry point index.d.ts
 //
 // @public
-export function middleware(config: (ctx: NextContext) => Promise<I18nConfig>): (ctx: NextContext, next: NextFunction) => Promise<void>;
+export function middleware(getConfig: (ctx: NextContext) => Promise<I18nConfig>): (ctx: NextContext, next: NextFunction) => Promise<void>;
 
 // @public (undocumented)
 export function onI18nContextConfig(callback: (config: I18nConfig, ctx: NextContext) => I18nConfig): void;

@@ -14,10 +14,14 @@ export type NextContextResponse = {
     cookie: (name: string, value: string, options?: CookieAttributes) => void;
     append: (k: string, v: string) => void;
     set: (...args: [key: string, v: any] | [o: any]) => void;
+    setHeader: (k: string, v: any) => void;
     get: (key: string) => any;
+    getHeader: (key: string) => any;
     redirect: (r: string) => void;
     json: (j: any) => void;
     status: (s: number) => void;
+    end: () => void;
+    statusCode: number;
 };
 ```
 **References:** [CookieAttributes](./next-context_expo.cookieattributes.md)

@@ -132,12 +132,32 @@ i18n context
 </td></tr>
 <tr><td>
 
+[I18nPayload](./next-context.i18npayload.md)
+
+
+</td><td>
+
+
+
+</td></tr>
+<tr><td>
+
 [NextContext](./next-context.nextcontext.md)
 
 
 </td><td>
 
 request context
+
+
+</td></tr>
+<tr><td>
+
+[SharedContext](./next-context.sharedcontext.md)
+
+
+</td><td>
+
 
 
 </td></tr>
