@@ -24,6 +24,8 @@ Description
 
 </td><td>
 
+unified middleware and request context for next.js
+
 
 </td></tr>
 <tr><td>
@@ -43,6 +45,8 @@ cors support for route
 
 
 </td><td>
+
+unified middleware and request context for expo (experimental)
 
 
 </td></tr>

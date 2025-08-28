@@ -4,16 +4,40 @@
 
 ```ts
 
-// Warning: (ae-forgotten-export) The symbol "Common" needs to be exported by the entry point cors.d.ts
-//
 // @public (undocumented)
-export interface CorsOptions extends Common {
-    // Warning: (ae-forgotten-export) The symbol "InternalOptions" needs to be exported by the entry point cors.d.ts
-    // Warning: (ae-forgotten-export) The symbol "MaybePromise" needs to be exported by the entry point cors.d.ts
-    //
+export interface CommonCorsOptions {
     // (undocumented)
-    origin?: InternalOptions['origin'] | ((origin?: string) => MaybePromise<InternalOptions['origin']>);
+    allowedHeaders?: string | string[];
+    // (undocumented)
+    credentials?: boolean;
+    // (undocumented)
+    exposedHeaders?: string | string[];
+    // (undocumented)
+    headers?: string | string[];
+    // (undocumented)
+    maxAge?: number;
+    // (undocumented)
+    methods?: string | string[];
+    // (undocumented)
+    optionsSuccessStatus?: number;
+    // (undocumented)
+    preflightContinue?: boolean;
 }
+
+// @public (undocumented)
+export interface CorsOptions extends CommonCorsOptions {
+    // (undocumented)
+    origin?: InternalCorsOptions['origin'] | ((origin?: string) => MaybePromise<InternalCorsOptions['origin']>);
+}
+
+// @public (undocumented)
+export interface InternalCorsOptions extends CommonCorsOptions {
+    // (undocumented)
+    origin?: string | (string | RegExp)[] | boolean | RegExp;
+}
+
+// @public (undocumented)
+export type MaybePromise<T> = T | Promise<T>;
 
 // Warning: (ae-forgotten-export) The symbol "NextContextRequest" needs to be exported by the entry point cors.d.ts
 // Warning: (ae-forgotten-export) The symbol "NextContext" needs to be exported by the entry point cors.d.ts

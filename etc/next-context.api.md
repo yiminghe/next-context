@@ -73,40 +73,70 @@ export interface NextContext {
 }
 
 // @public
-export type NextContextRequest = {
-    params: Record<string, string | string[]>;
-    host: string;
-    protocol: string;
-    secure: boolean;
-    url: string;
-    nextUrl: NextUrl;
-    ip: string | undefined;
-    get: (k: string) => string | undefined;
-    header: (k: string) => string | undefined;
-    text: () => Promise<string>;
-    json: () => Promise<any>;
-    method: string;
-    path: string;
-    query: Record<string, string | undefined>;
+export interface NextContextRequest {
+    // (undocumented)
     cookies: Record<string, string | undefined>;
+    // (undocumented)
+    get: (k: string) => string | undefined;
+    // (undocumented)
+    header: (k: string) => string | undefined;
+    // (undocumented)
     headers: Record<string, string | undefined>;
-};
+    // (undocumented)
+    host: string;
+    // (undocumented)
+    ip: string | undefined;
+    // (undocumented)
+    json: () => Promise<any>;
+    // (undocumented)
+    method: string;
+    // Warning: (ae-forgotten-export) The symbol "NextUrl" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    nextUrl: NextUrl;
+    // (undocumented)
+    params: Record<string, string | string[]>;
+    // (undocumented)
+    path: string;
+    // (undocumented)
+    protocol: string;
+    // (undocumented)
+    query: Record<string, string | undefined>;
+    // (undocumented)
+    secure: boolean;
+    // (undocumented)
+    text: () => Promise<string>;
+    // (undocumented)
+    url: string;
+}
 
 // @public
-export type NextContextResponse = {
-    clearCookie: (name: string, options?: CookieAttributes) => void;
-    cookie: (name: string, value: string, options?: CookieAttributes) => void;
+export interface NextContextResponse {
+    // (undocumented)
     append: (k: string, v: string) => void;
-    set: (...args: [key: string, v: any] | [o: any]) => void;
-    setHeader: (k: string, v: any) => void;
-    get: (key: string) => any;
-    getHeader: (key: string) => any;
-    redirect: (r: string) => void;
-    json: (j: any) => void;
-    status: (s: number) => void;
+    // (undocumented)
+    clearCookie: (name: string, options?: CookieAttributes) => void;
+    // (undocumented)
+    cookie: (name: string, value: string, options?: CookieAttributes) => void;
+    // (undocumented)
     end: () => void;
+    // (undocumented)
+    get: (key: string) => any;
+    // (undocumented)
+    getHeader: (key: string) => any;
+    // (undocumented)
+    json: (j: any) => void;
+    // (undocumented)
+    redirect: (r: string) => void;
+    // (undocumented)
+    set: (...args: [key: string, v: any] | [o: any]) => void;
+    // (undocumented)
+    setHeader: (k: string, v: any) => void;
+    // (undocumented)
+    status: (s: number) => void;
+    // (undocumented)
     statusCode: number;
-};
+}
 
 // @public
 export type NextContextType = 'page' | 'route' | 'action';
@@ -143,11 +173,5 @@ export function withPageMiddlewares(fns: MiddlewareFunction[]): (Page: PageFunct
 
 // @public
 export function withRouteMiddlewares(fns: MiddlewareFunction[]): (Route?: RouteFunction) => RouteFunction;
-
-// Warnings were encountered during analysis:
-//
-// dist/esm/types.d.ts:74:5 - (ae-forgotten-export) The symbol "NextUrl" needs to be exported by the entry point index.d.ts
-
-// (No @packageDocumentation comment for this package)
 
 ```

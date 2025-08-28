@@ -8,9 +8,9 @@
 **Signature:**
 
 ```typescript
-export interface CorsOptions extends Common 
+export interface CorsOptions extends CommonCorsOptions 
 ```
-**Extends:** Common
+**Extends:** [CommonCorsOptions](./next-context_cors.commoncorsoptions.md)
 
 ## Properties
 
@@ -45,7 +45,7 @@ Description
 
 </td><td>
 
-InternalOptions\['origin'\] \| ((origin?: string) =&gt; MaybePromise&lt;InternalOptions\['origin'\]&gt;)
+[InternalCorsOptions](./next-context_cors.internalcorsoptions.md)<!-- -->\['origin'\] \| ((origin?: string) =&gt; [MaybePromise](./next-context_cors.maybepromise.md)<!-- -->&lt;[InternalCorsOptions](./next-context_cors.internalcorsoptions.md)<!-- -->\['origin'\]&gt;)
 
 
 </td><td>

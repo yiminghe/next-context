@@ -4,6 +4,8 @@
 
 ## next-context package
 
+unified middleware and request context for next.js
+
 ## Functions
 
 <table><thead><tr><th>
@@ -153,6 +155,28 @@ request context
 </td></tr>
 <tr><td>
 
+[NextContextRequest](./next-context.nextcontextrequest.md)
+
+
+</td><td>
+
+request
+
+
+</td></tr>
+<tr><td>
+
+[NextContextResponse](./next-context.nextcontextresponse.md)
+
+
+</td><td>
+
+response
+
+
+</td></tr>
+<tr><td>
+
 [SharedContext](./next-context.sharedcontext.md)
 
 
@@ -217,28 +241,6 @@ layout component params
 </td><td>
 
 middleware function
-
-
-</td></tr>
-<tr><td>
-
-[NextContextRequest](./next-context.nextcontextrequest.md)
-
-
-</td><td>
-
-request
-
-
-</td></tr>
-<tr><td>
-
-[NextContextResponse](./next-context.nextcontextresponse.md)
-
-
-</td><td>
-
-response
 
 
 </td></tr>

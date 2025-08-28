@@ -36,7 +36,7 @@ o
 
 </td><td>
 
-[CorsOptions](./next-context_cors.corsoptions.md) \| ((req: NextContextRequest) =&gt; MaybePromise&lt;[CorsOptions](./next-context_cors.corsoptions.md)<!-- -->&gt;)
+[CorsOptions](./next-context_cors.corsoptions.md) \| ((req: NextContextRequest) =&gt; [MaybePromise](./next-context_cors.maybepromise.md)<!-- -->&lt;[CorsOptions](./next-context_cors.corsoptions.md)<!-- -->&gt;)
 
 
 </td><td>

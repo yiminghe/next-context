@@ -2,29 +2,309 @@
 
 [Home](./index.md) &gt; [next-context](./next-context.md) &gt; [NextContextRequest](./next-context.nextcontextrequest.md)
 
-## NextContextRequest type
+## NextContextRequest interface
 
 request
 
 **Signature:**
 
 ```typescript
-export type NextContextRequest = {
-    params: Record<string, string | string[]>;
-    host: string;
-    protocol: string;
-    secure: boolean;
-    url: string;
-    nextUrl: NextUrl;
-    ip: string | undefined;
-    get: (k: string) => string | undefined;
-    header: (k: string) => string | undefined;
-    text: () => Promise<string>;
-    json: () => Promise<any>;
-    method: string;
-    path: string;
-    query: Record<string, string | undefined>;
-    cookies: Record<string, string | undefined>;
-    headers: Record<string, string | undefined>;
-};
+export interface NextContextRequest 
 ```
+
+## Properties
+
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[cookies](./next-context.nextcontextrequest.cookies.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, string \| undefined&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[get](./next-context.nextcontextrequest.get.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(k: string) =&gt; string \| undefined
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[header](./next-context.nextcontextrequest.header.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(k: string) =&gt; string \| undefined
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[headers](./next-context.nextcontextrequest.headers.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, string \| undefined&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[host](./next-context.nextcontextrequest.host.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ip](./next-context.nextcontextrequest.ip.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[json](./next-context.nextcontextrequest.json.md)
+
+
+</td><td>
+
+
+</td><td>
+
+() =&gt; Promise&lt;any&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[method](./next-context.nextcontextrequest.method.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[nextUrl](./next-context.nextcontextrequest.nexturl.md)
+
+
+</td><td>
+
+
+</td><td>
+
+NextUrl
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[params](./next-context.nextcontextrequest.params.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, string \| string\[\]&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[path](./next-context.nextcontextrequest.path.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[protocol](./next-context.nextcontextrequest.protocol.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[query](./next-context.nextcontextrequest.query.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, string \| undefined&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[secure](./next-context.nextcontextrequest.secure.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[text](./next-context.nextcontextrequest.text.md)
+
+
+</td><td>
+
+
+</td><td>
+
+() =&gt; Promise&lt;string&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[url](./next-context.nextcontextrequest.url.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

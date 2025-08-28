@@ -2,27 +2,241 @@
 
 [Home](./index.md) &gt; [next-context/expo](./next-context_expo.md) &gt; [NextContextResponse](./next-context_expo.nextcontextresponse.md)
 
-## NextContextResponse type
+## NextContextResponse interface
 
 response
 
 **Signature:**
 
 ```typescript
-export type NextContextResponse = {
-    clearCookie: (name: string, options?: CookieAttributes) => void;
-    cookie: (name: string, value: string, options?: CookieAttributes) => void;
-    append: (k: string, v: string) => void;
-    set: (...args: [key: string, v: any] | [o: any]) => void;
-    setHeader: (k: string, v: any) => void;
-    get: (key: string) => any;
-    getHeader: (key: string) => any;
-    redirect: (r: string) => void;
-    json: (j: any) => void;
-    status: (s: number) => void;
-    end: () => void;
-    statusCode: number;
-};
+export interface NextContextResponse 
 ```
-**References:** [CookieAttributes](./next-context_expo.cookieattributes.md)
 
+## Properties
+
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[append](./next-context_expo.nextcontextresponse.append.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(k: string, v: string) =&gt; void
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[clearCookie](./next-context_expo.nextcontextresponse.clearcookie.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(name: string, options?: [CookieAttributes](./next-context_expo.cookieattributes.md)<!-- -->) =&gt; void
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[cookie](./next-context_expo.nextcontextresponse.cookie.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(name: string, value: string, options?: [CookieAttributes](./next-context_expo.cookieattributes.md)<!-- -->) =&gt; void
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[end](./next-context_expo.nextcontextresponse.end.md)
+
+
+</td><td>
+
+
+</td><td>
+
+() =&gt; void
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[get](./next-context_expo.nextcontextresponse.get.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(key: string) =&gt; any
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[getHeader](./next-context_expo.nextcontextresponse.getheader.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(key: string) =&gt; any
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[json](./next-context_expo.nextcontextresponse.json.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(j: any) =&gt; void
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[redirect](./next-context_expo.nextcontextresponse.redirect.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(r: string) =&gt; void
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[set](./next-context_expo.nextcontextresponse.set.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(...args: \[key: string, v: any\] \| \[o: any\]) =&gt; void
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[setHeader](./next-context_expo.nextcontextresponse.setheader.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(k: string, v: any) =&gt; void
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[status](./next-context_expo.nextcontextresponse.status.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(s: number) =&gt; void
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[statusCode](./next-context_expo.nextcontextresponse.statuscode.md)
+
+
+</td><td>
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

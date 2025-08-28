@@ -7,5 +7,5 @@
 **Signature:**
 
 ```typescript
-origin?: InternalOptions['origin'] | ((origin?: string) => MaybePromise<InternalOptions['origin']>);
+origin?: InternalCorsOptions['origin'] | ((origin?: string) => MaybePromise<InternalCorsOptions['origin']>);
 ```

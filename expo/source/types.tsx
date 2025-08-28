@@ -57,12 +57,12 @@ export type ClientCookieAttributes = Omit<
 /**
  *@internal
  */
-export type ClientCookies = {
+export interface ClientCookies {
   [key: string]: {
     value: string;
     options: ClientCookieAttributes;
   };
-};
+}
 /**
  *
  * @public
@@ -87,7 +87,7 @@ export class NextUrl extends URL {
  * request
  * @public
  */
-export type NextContextRequest = {
+export interface NextContextRequest {
   params: Record<string, string | string[]>;
   host: string;
   protocol: string;
@@ -104,13 +104,13 @@ export type NextContextRequest = {
   query: Record<string, string | undefined>;
   cookies: Record<string, string | undefined>;
   headers: Record<string, string | undefined>;
-};
+}
 
 /**
  * response
  * @public
  */
-export type NextContextResponse = {
+export interface NextContextResponse {
   clearCookie: (name: string, options?: CookieAttributes) => void;
   cookie: (name: string, value: string, options?: CookieAttributes) => void;
   append: (k: string, v: string) => void;
@@ -123,7 +123,7 @@ export type NextContextResponse = {
   status: (s: number) => void;
   end: () => void;
   statusCode: number;
-};
+}
 /**
  * context type
  * @public
@@ -172,7 +172,7 @@ export interface NextContext {
 /**
  * @internal
  */
-export type NextContextResponseInternal = {
+export interface NextContextResponseInternal extends NextContextResponse {
   _private: {
     cookieSent?: boolean;
     cookies?: ClientCookies;
@@ -182,7 +182,7 @@ export type NextContextResponseInternal = {
     status?: number;
     end?: any;
   };
-} & NextContextResponse;
+}
 /**
  * @internal
  */

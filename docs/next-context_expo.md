@@ -4,6 +4,8 @@
 
 ## next-context/expo package
 
+unified middleware and request context for expo (experimental)
+
 ## Functions
 
 <table><thead><tr><th>
@@ -153,6 +155,28 @@ request context
 </td></tr>
 <tr><td>
 
+[NextContextRequest](./next-context_expo.nextcontextrequest.md)
+
+
+</td><td>
+
+request
+
+
+</td></tr>
+<tr><td>
+
+[NextContextResponse](./next-context_expo.nextcontextresponse.md)
+
+
+</td><td>
+
+response
+
+
+</td></tr>
+<tr><td>
+
 [SharedContext](./next-context_expo.sharedcontext.md)
 
 
@@ -217,28 +241,6 @@ layout component params
 </td><td>
 
 middleware function
-
-
-</td></tr>
-<tr><td>
-
-[NextContextRequest](./next-context_expo.nextcontextrequest.md)
-
-
-</td><td>
-
-request
-
-
-</td></tr>
-<tr><td>
-
-[NextContextResponse](./next-context_expo.nextcontextresponse.md)
-
-
-</td><td>
-
-response
 
 
 </td></tr>

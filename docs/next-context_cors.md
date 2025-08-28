@@ -46,7 +46,52 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[CommonCorsOptions](./next-context_cors.commoncorsoptions.md)
+
+
+</td><td>
+
+
+
+</td></tr>
+<tr><td>
+
 [CorsOptions](./next-context_cors.corsoptions.md)
+
+
+</td><td>
+
+
+
+</td></tr>
+<tr><td>
+
+[InternalCorsOptions](./next-context_cors.internalcorsoptions.md)
+
+
+</td><td>
+
+
+
+</td></tr>
+</tbody></table>
+
+## Type Aliases
+
+<table><thead><tr><th>
+
+Type Alias
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[MaybePromise](./next-context_cors.maybepromise.md)
 
 
 </td><td>

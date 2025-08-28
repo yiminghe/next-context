@@ -12,7 +12,10 @@ import {
 } from '../types';
 import { vary } from './vary';
 
-interface Common {
+/**
+ * @public
+ */
+export interface CommonCorsOptions {
   methods?: string | string[];
 
   credentials?: boolean;
@@ -29,22 +32,28 @@ interface Header {
   value?: any;
 }
 
-interface InternalOptions extends Common {
+/**
+ * @public
+ */
+export interface InternalCorsOptions extends CommonCorsOptions {
   origin?: string | (string | RegExp)[] | boolean | RegExp;
 }
-
-type MaybePromise<T> = T | Promise<T>;
 
 /**
  * @public
  */
-export interface CorsOptions extends Common {
+export type MaybePromise<T> = T | Promise<T>;
+
+/**
+ * @public
+ */
+export interface CorsOptions extends CommonCorsOptions {
   origin?:
-    | InternalOptions['origin']
-    | ((origin?: string) => MaybePromise<InternalOptions['origin']>);
+    | InternalCorsOptions['origin']
+    | ((origin?: string) => MaybePromise<InternalCorsOptions['origin']>);
 }
 
-const defaults: InternalOptions = {
+const defaults: InternalCorsOptions = {
   origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   preflightContinue: false,
@@ -57,7 +66,7 @@ function isString(s: any): s is string {
 
 function isOriginAllowed(
   origin: string,
-  allowedOrigin: InternalOptions['origin'],
+  allowedOrigin: InternalCorsOptions['origin'],
 ) {
   if (Array.isArray(allowedOrigin)) {
     for (let i = 0; i < allowedOrigin.length; ++i) {
@@ -75,7 +84,10 @@ function isOriginAllowed(
   }
 }
 
-function configureOrigin(options: InternalOptions, req: NextContextRequest) {
+function configureOrigin(
+  options: InternalCorsOptions,
+  req: NextContextRequest,
+) {
   const requestOrigin = req.headers.origin || '';
   const headers: Header[] = [];
   let isAllowed;
@@ -112,7 +124,7 @@ function configureOrigin(options: InternalOptions, req: NextContextRequest) {
   return headers;
 }
 
-function configureMethods(options: InternalOptions) {
+function configureMethods(options: InternalCorsOptions) {
   let methods = options.methods;
   if (Array.isArray(methods)) {
     methods = methods.join(','); // .methods is an array, so turn it into a string
@@ -123,7 +135,7 @@ function configureMethods(options: InternalOptions) {
   };
 }
 
-function configureCredentials(options: InternalOptions): Header | null {
+function configureCredentials(options: InternalCorsOptions): Header | null {
   if (options.credentials === true) {
     return {
       key: 'Access-Control-Allow-Credentials',
@@ -134,7 +146,7 @@ function configureCredentials(options: InternalOptions): Header | null {
 }
 
 function configureAllowedHeaders(
-  options: InternalOptions,
+  options: InternalCorsOptions,
   req: NextContextRequest,
 ) {
   let allowedHeaders = options.allowedHeaders || options.headers;
@@ -159,7 +171,7 @@ function configureAllowedHeaders(
   return headers;
 }
 
-function configureExposedHeaders(options: InternalOptions): Header | null {
+function configureExposedHeaders(options: InternalCorsOptions): Header | null {
   let headers = options.exposedHeaders;
   if (!headers) {
     return null;
@@ -175,7 +187,7 @@ function configureExposedHeaders(options: InternalOptions): Header | null {
   return null;
 }
 
-function configureMaxAge(options: InternalOptions): Header | null {
+function configureMaxAge(options: InternalCorsOptions): Header | null {
   const maxAge =
     (typeof options.maxAge === 'number' || options.maxAge) &&
     options.maxAge.toString();
@@ -199,7 +211,7 @@ function applyHeaders(headers: Header[], res: NextContextResponse) {
 }
 
 async function cors2(
-  options: InternalOptions,
+  options: InternalCorsOptions,
   req: NextContextRequest,
   res: NextContextResponse,
   next: NextFunction,
@@ -282,7 +294,7 @@ export function middleware(
       options = o;
     }
 
-    const corsOptions: InternalOptions = {
+    const corsOptions: InternalCorsOptions = {
       ...defaults,
       ...options,
       origin: undefined,

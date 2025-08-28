@@ -2,29 +2,309 @@
 
 [Home](./index.md) &gt; [next-context/expo](./next-context_expo.md) &gt; [NextContextRequest](./next-context_expo.nextcontextrequest.md)
 
-## NextContextRequest type
+## NextContextRequest interface
 
 request
 
 **Signature:**
 
 ```typescript
-export type NextContextRequest = {
-    params: Record<string, string | string[]>;
-    host: string;
-    protocol: string;
-    secure: boolean;
-    url: string;
-    nextUrl: NextUrl;
-    ip: string | undefined;
-    get: (k: string) => string | undefined;
-    header: (k: string) => string | undefined;
-    text: () => Promise<string>;
-    json: () => Promise<any>;
-    method: string;
-    path: string;
-    query: Record<string, string | undefined>;
-    cookies: Record<string, string | undefined>;
-    headers: Record<string, string | undefined>;
-};
+export interface NextContextRequest 
 ```
+
+## Properties
+
+<table><thead><tr><th>
+
+Property
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[cookies](./next-context_expo.nextcontextrequest.cookies.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, string \| undefined&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[get](./next-context_expo.nextcontextrequest.get.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(k: string) =&gt; string \| undefined
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[header](./next-context_expo.nextcontextrequest.header.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(k: string) =&gt; string \| undefined
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[headers](./next-context_expo.nextcontextrequest.headers.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, string \| undefined&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[host](./next-context_expo.nextcontextrequest.host.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ip](./next-context_expo.nextcontextrequest.ip.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| undefined
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[json](./next-context_expo.nextcontextrequest.json.md)
+
+
+</td><td>
+
+
+</td><td>
+
+() =&gt; Promise&lt;any&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[method](./next-context_expo.nextcontextrequest.method.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[nextUrl](./next-context_expo.nextcontextrequest.nexturl.md)
+
+
+</td><td>
+
+
+</td><td>
+
+NextUrl
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[params](./next-context_expo.nextcontextrequest.params.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, string \| string\[\]&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[path](./next-context_expo.nextcontextrequest.path.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[protocol](./next-context_expo.nextcontextrequest.protocol.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[query](./next-context_expo.nextcontextrequest.query.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Record&lt;string, string \| undefined&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[secure](./next-context_expo.nextcontextrequest.secure.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[text](./next-context_expo.nextcontextrequest.text.md)
+
+
+</td><td>
+
+
+</td><td>
+
+() =&gt; Promise&lt;string&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[url](./next-context_expo.nextcontextrequest.url.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
