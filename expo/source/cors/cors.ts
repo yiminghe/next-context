@@ -12,6 +12,7 @@ interface Common {
   methods?: string | string[];
 
   credentials?: boolean;
+  headers?: string | string[];
   allowedHeaders?: string | string[];
   exposedHeaders?: string | string[];
   maxAge?: number;
@@ -25,7 +26,7 @@ interface Header {
 }
 
 interface InternalOptions extends Common {
-  origin?: string | string[] | boolean | RegExp;
+  origin?: string | (string | RegExp)[] | boolean | RegExp;
 }
 
 type MaybePromise<T> = T | Promise<T>;
@@ -129,7 +130,7 @@ function configureAllowedHeaders(
   options: InternalOptions,
   req: NextContextRequest,
 ) {
-  let allowedHeaders = options.allowedHeaders;
+  let allowedHeaders = options.allowedHeaders || options.headers;
   const headers: Header[] = [];
 
   if (!allowedHeaders) {
