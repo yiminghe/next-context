@@ -10,6 +10,8 @@ import {
 } from 'next-context';
 import { middleware as i18n } from 'next-context/i18n';
 import { middleware as cors } from 'next-context/cors';
+import React from 'react';
+
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -43,3 +45,15 @@ export const createRouteWithCors = withRouteMiddlewares([
     exposedHeaders: ['my'],
   }),
 ]);
+async function intercept({ req, res }: NextContext, next: NextFunction) {
+  if (req.query.intercept) {
+    res.json({ intercepted: true });
+    res.jsx(<div>intercepted</div>);
+    //await next();
+  } else {
+    await next();
+  }
+}
+
+export const createRouteWithIntercept = withRouteMiddlewares([intercept]);
+export const createPageWithIntercept = withPageMiddlewares([intercept]);

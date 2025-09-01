@@ -1,7 +1,7 @@
 {
   "name": "next-context",
   "private": "true",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Easily access request/response context between next middleware, components, action and route",
   "repository": {
     "type": "git",

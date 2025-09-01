@@ -53,7 +53,10 @@ function buildResponse(): NextContextResponseInternal {
     json(j: any) {
       p.json = j;
     },
-    redirect(r: string) {
+    jsx(j?: React.ReactNode) {
+      p.jsx = j;
+    },
+    redirect(r?: string) {
       p.redirectUrl = r;
     },
     end(e?: BodyInit) {
@@ -129,9 +132,9 @@ export function buildPageResponse() {
   const res = buildResponse();
   function cookie(name: string, value: string, options_?: CookieAttributes) {
     const private_ = res._private;
-    if (private_.cookieSent) {
-      throw new Error('only can set cookie inside middleware and entry page!');
-    }
+    // if (private_.cookieSent) {
+    //   throw new Error('only can set cookie inside middleware and entry page!');
+    // }
     const { maxAge, expires, ...clientOptions_ } = options_ || {};
     let clientOptions: ClientCookieAttributes = clientOptions_;
     if (expires) {

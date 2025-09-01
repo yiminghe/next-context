@@ -120,6 +120,7 @@ export interface NextContextResponse {
   getHeader: (key: string) => any;
   redirect: (r: string) => void;
   json: (j: any) => void;
+  jsx: (j?: React.ReactNode) => void;
   status: (s: number) => void;
   end: () => void;
   statusCode: number;
@@ -174,6 +175,7 @@ export interface NextContext {
  */
 export interface NextContextResponseInternal extends NextContextResponse {
   _private: {
+    jsx?: React.ReactNode;
     cookieSent?: boolean;
     cookies?: ClientCookies;
     headers: any;

@@ -85,6 +85,35 @@ function doRedirect(context: NextContext) {
 function getPrivate(context: NextContext) {
   return (context.res as NextContextResponseInternal)._private;
 }
+
+function earlyReturnPage(context: NextContext) {
+  const { jsx } = getPrivate(context);
+  if (doRedirect(context)) {
+    return {
+      ok: true,
+      response: undefined,
+    };
+  }
+  if (jsx) {
+    return {
+      ok: true,
+      response: withCookiePage(context, jsx),
+    };
+  }
+}
+
+function withCookiePage(context: NextContext, ret?: any) {
+  const private_ = getPrivate(context);
+  const { cookies } = private_;
+  private_.cookieSent = true;
+  return (
+    <>
+      {cookies && <ClientCookies key="cookies" cookies={cookies} />}
+      <Fragment key="main">{ret}</Fragment>
+    </>
+  );
+}
+
 /**
  * create higher order page component with middlewares
  *@public
@@ -104,26 +133,32 @@ export function withPageMiddlewares(fns: MiddlewareFunction[]) {
       if (r?.params) {
         context.req.params = await r.params;
       }
-      await compose(fns, context, ...args);
-      if (doRedirect(context)) {
-        return;
-      }
-      const ret: any = Page.apply(null, args);
-      if (ret && ret.then) {
-        await ret;
-      }
-      if (doRedirect(context)) {
-        return;
-      }
-      const private_ = getPrivate(context);
-      const { cookies } = private_;
-      private_.cookieSent = true;
-      return (
-        <>
-          {cookies && <ClientCookies key="cookies" cookies={cookies} />}
-          <Fragment key="main">{ret as any}</Fragment>
-        </>
+      let skip = true;
+      await compose(
+        [
+          ...fns,
+          () => {
+            skip = false;
+          },
+        ],
+        context,
+        ...args,
       );
+      let early = skip && earlyReturnPage(context);
+      if (early && early.ok) return early.response;
+      let ret: any;
+      let final: any;
+      if (!skip) {
+        final = ret = Page.apply(null, args);
+        if (ret && ret.then) {
+          final = await ret;
+        }
+      }
+      if (final !== undefined) {
+        return withCookiePage(context, ret);
+      }
+      early = earlyReturnPage(context);
+      if (early && early.ok) return early.response;
     };
     if (Page.name) {
       Object.defineProperty(P, 'name', {
@@ -167,6 +202,37 @@ export type RouteFunction = (
   context: { params: AsyncParams },
 ) => any;
 
+function earlyReturnRoute(context: NextContext) {
+  const { status, headers, json, end } = getPrivate(context);
+  if (doRedirect(context)) {
+    return {
+      ok: true,
+      response: undefined,
+    };
+  }
+  if (json) {
+    return {
+      ok: true,
+      response: new Response(JSON.stringify(json), {
+        status: status || 200,
+        headers: {
+          'Content-Type': 'application/json',
+          ...headers,
+        },
+      }),
+    };
+  } else if (end !== undefined) {
+    return {
+      ok: true,
+      response: new Response(end, {
+        status: status || 200,
+        headers: {
+          ...headers,
+        },
+      }),
+    };
+  }
+}
 /**
  * create higher order route with middlewares
  *@public
@@ -182,38 +248,32 @@ export function withRouteMiddlewares(fns: MiddlewareFunction[]) {
       }
       return requestStorage().run(new Map(), async () => {
         setRouteContext(context);
-        await compose(fns, context, ...args);
-        if (doRedirect(context)) {
-          return;
-        }
+        let skip = true;
+        await compose(
+          [
+            ...fns,
+            () => {
+              skip = false;
+            },
+          ],
+          context,
+          ...args,
+        );
+        let early = skip && earlyReturnRoute(context);
+        if (early && early.ok) return early.response;
         let ret: any;
-        if (Route) {
-          ret = Route.apply(null, args);
+        let final: any;
+        if (Route && !skip) {
+          final = ret = Route.apply(null, args);
           if (ret && ret.then) {
-            await ret;
+            final = await ret;
           }
         }
-        const { status, headers, json, end } = getPrivate(context);
-        if (doRedirect(context)) {
-          return;
+        if (final !== undefined) {
+          return ret;
         }
-        if (json) {
-          return new Response(JSON.stringify(json), {
-            status: status || 200,
-            headers: {
-              'Content-Type': 'application/json',
-              ...headers,
-            },
-          });
-        } else if (end !== undefined) {
-          return new Response(end, {
-            status: status || 200,
-            headers: {
-              ...headers,
-            },
-          });
-        }
-        return ret;
+        early = earlyReturnRoute(context);
+        if (early && early.ok) return early.response;
       });
     };
     if (Route?.name) {
@@ -236,8 +296,18 @@ export function withActionMiddlewares(fns: MiddlewareFunction[]) {
       const context = await createNextContextFromAction();
       return requestStorage().run(new Map(), async () => {
         setRouteContext(context);
-        await compose(fns, context, ...args);
-        if (doRedirect(context)) {
+        let skip = true;
+        await compose(
+          [
+            ...fns,
+            () => {
+              skip = false;
+            },
+          ],
+          context,
+          ...args,
+        );
+        if (skip && doRedirect(context)) {
           return;
         }
         const ret = action.apply(null, args);
