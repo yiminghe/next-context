@@ -119,7 +119,7 @@ function withCookiePage(context: NextContext, ret?: any) {
  *@public
  */
 export function withPageMiddlewares(fns: MiddlewareFunction[]) {
-  return function (Page: PageFunction): PageFunction {
+  return function (Page?: PageFunction): PageFunction {
     const P = async (...args: any) => {
       const r = args[0];
       let context: NextContext;
@@ -133,34 +133,31 @@ export function withPageMiddlewares(fns: MiddlewareFunction[]) {
       if (r?.params) {
         context.req.params = await r.params;
       }
-      let skip = true;
+      let ret: any;
+      let final: any;
       await compose(
         [
           ...fns,
-          () => {
-            skip = false;
+          async () => {
+            if (Page) {
+              final = ret = Page.apply(null, args);
+              if (ret && ret.then) {
+                final = await ret;
+              }
+            }
           },
         ],
         context,
         ...args,
       );
-      let early = skip && earlyReturnPage(context);
-      if (early && early.ok) return early.response;
-      let ret: any;
-      let final: any;
-      if (!skip) {
-        final = ret = Page.apply(null, args);
-        if (ret && ret.then) {
-          final = await ret;
-        }
-      }
+
       if (final !== undefined) {
         return withCookiePage(context, ret);
       }
-      early = earlyReturnPage(context);
+      const early = earlyReturnPage(context);
       if (early && early.ok) return early.response;
     };
-    if (Page.name) {
+    if (Page?.name) {
       Object.defineProperty(P, 'name', {
         writable: true,
         value: Page.name,
@@ -248,31 +245,28 @@ export function withRouteMiddlewares(fns: MiddlewareFunction[]) {
       }
       return requestStorage().run(new Map(), async () => {
         setRouteContext(context);
-        let skip = true;
+        let ret: any;
+        let final: any;
         await compose(
           [
             ...fns,
-            () => {
-              skip = false;
+            async () => {
+              if (Route) {
+                final = ret = Route.apply(null, args);
+                if (ret && ret.then) {
+                  final = await ret;
+                }
+              }
             },
           ],
           context,
           ...args,
         );
-        let early = skip && earlyReturnRoute(context);
-        if (early && early.ok) return early.response;
-        let ret: any;
-        let final: any;
-        if (Route && !skip) {
-          final = ret = Route.apply(null, args);
-          if (ret && ret.then) {
-            final = await ret;
-          }
-        }
+
         if (final !== undefined) {
           return ret;
         }
-        early = earlyReturnRoute(context);
+        const early = earlyReturnRoute(context);
         if (early && early.ok) return early.response;
       });
     };
@@ -296,24 +290,20 @@ export function withActionMiddlewares(fns: MiddlewareFunction[]) {
       const context = await createNextContextFromAction();
       return requestStorage().run(new Map(), async () => {
         setRouteContext(context);
-        let skip = true;
+        let ret;
         await compose(
           [
             ...fns,
-            () => {
-              skip = false;
+            async () => {
+              ret = action.apply(null, args);
+              if (ret && ret.then) {
+                await ret;
+              }
             },
           ],
           context,
           ...args,
         );
-        if (skip && doRedirect(context)) {
-          return;
-        }
-        const ret = action.apply(null, args);
-        if (ret && ret.then) {
-          await ret;
-        }
         if (doRedirect(context)) {
           return;
         }
