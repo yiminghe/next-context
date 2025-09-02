@@ -16,7 +16,7 @@ export function compose(middleware: Function[], context: any, ...args: any[]) {
       let existingPromise = store.get(fn);
       if (existingPromise) {
         await existingPromise;
-        dispatch(i + 1);
+        return dispatch(i + 1);
       } else {
         existingPromise = Promise.resolve(
           fn(context, dispatch.bind(null, i + 1), ...args),
