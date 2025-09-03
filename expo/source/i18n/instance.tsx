@@ -107,6 +107,9 @@ const instanceKey = '__instance';
  */
 export function getI18nInstance(config: I18nConfig): I18nContext {
   const { locale, messages, timeZone = '' } = config;
+  if (!messages) {
+    throw new Error('i18n messages is required');
+  }
   const c: any = config;
   const cacheKeyPath = config.cacheKey
     ? [config.cacheKey]

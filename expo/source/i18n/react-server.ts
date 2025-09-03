@@ -13,28 +13,20 @@ export function getI18nContext(): I18nContext {
   return getI18nFromContext(getNextContext());
 }
 
-import { I18nProvider as I18nProviderClient } from './index';
-import { getI18nConfig, getI18nFromContext, Messages } from './instance';
+import {
+  I18nProvider as I18nProviderClient,
+  type I18nProviderProps,
+} from './index';
+import { getI18nConfig, getI18nFromContext } from './instance';
 
 /**
  *
  * @public
  */
-export function I18nProvider({
-  children,
-  messages,
-}: {
-  children: React.ReactNode;
-  messages?: Messages;
-}) {
-  let config = getI18nConfig(getNextContext());
-  if (messages) {
-    config = {
-      ...config,
-      messages,
-    };
-  }
-  return React.createElement(I18nProviderClient, config, children);
+export function I18nProvider(props: I18nProviderProps) {
+  const config = { ...getI18nConfig(getNextContext()), ...props };
+  delete config.children;
+  return React.createElement(I18nProviderClient, config, props.children);
 }
 
 export { middleware } from './instance';

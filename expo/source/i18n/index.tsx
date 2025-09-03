@@ -4,10 +4,10 @@
 
 'use client';
 
-import { I18nContext } from '../types';
+import { I18nConfig, I18nContext } from '../types';
 
 import React, { use, createContext } from 'react';
-import { getI18nInstance, Messages } from './instance';
+import { getI18nInstance } from './instance';
 
 export { onI18nContextConfig, onI18nContextInit } from './instance';
 
@@ -24,15 +24,16 @@ export function getI18nContext(): I18nContext {
   return use(I18nReactContext);
 }
 
+export type I18nProviderProps = {
+  children?: React.ReactNode;
+} & I18nConfig;
+
 /**
  * i18n react provider
  * @public
  */
-export function I18nProvider(props: {
-  children?: React.ReactNode;
-  messages?: Messages;
-}) {
-  let newConfig: any = { ...props };
+export function I18nProvider(props: I18nProviderProps) {
+  let newConfig = { ...props };
   delete newConfig.children;
   const instance = getI18nInstance(newConfig);
   return <I18nReactContext value={instance}>{props.children}</I18nReactContext>;

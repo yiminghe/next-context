@@ -154,8 +154,8 @@ export interface SharedContext {}
  * @public
  */
 export interface I18nConfig {
-  messages: Record<string, string>;
-  locale: string;
+  messages?: Record<string, string>;
+  locale?: string;
   timeZone?: string;
   cacheKey?: string;
   payload?: I18nPayload;
