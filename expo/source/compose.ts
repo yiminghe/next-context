@@ -31,7 +31,7 @@ export function compose(middleware: Function[], context: any, ...args: any[]) {
         record.promise = Promise.resolve(
           fn(
             context,
-            async () => {
+            () => {
               record.next = true;
               return dispatch(i + 1);
             },
