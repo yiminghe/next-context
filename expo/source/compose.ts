@@ -1,8 +1,15 @@
 const storeKey = '__next_context_store';
 
+interface MiddlewareRecord {
+  next?: boolean;
+  promise: Promise<any>;
+}
+
 export function compose(middleware: Function[], context: any, ...args: any[]) {
   // layout page share middleware
-  const store = context[storeKey] || (context[storeKey] = new Map());
+
+  const store: Map<Function, MiddlewareRecord> =
+    context[storeKey] || (context[storeKey] = new Map());
   // last called middleware #
   let index = -1;
   return dispatch(0);
@@ -13,16 +20,26 @@ export function compose(middleware: Function[], context: any, ...args: any[]) {
     let fn = middleware[i];
     if (!fn) return Promise.resolve();
     try {
-      let existingPromise = store.get(fn);
-      if (existingPromise) {
-        await existingPromise;
-        return dispatch(i + 1);
+      const existing = store.get(fn);
+      if (existing) {
+        await existing.promise;
+        if (existing.next) {
+          return dispatch(i + 1);
+        }
       } else {
-        existingPromise = Promise.resolve(
-          fn(context, dispatch.bind(null, i + 1), ...args),
+        const record: MiddlewareRecord = {} as any;
+        record.promise = Promise.resolve(
+          fn(
+            context,
+            async () => {
+              record.next = true;
+              return dispatch(i + 1);
+            },
+            ...args,
+          ),
         );
-        store.set(fn, existingPromise);
-        return existingPromise;
+        store.set(fn, record);
+        return record.promise;
       }
     } catch (err) {
       return Promise.reject(err);
