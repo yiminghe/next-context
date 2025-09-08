@@ -73,27 +73,12 @@ export type PageFunction = (
   r: PageRequest,
 ) => React.ReactNode | Promise<React.ReactNode>;
 
-function doRedirect(context: NextContext) {
-  const { redirectUrl } = getPrivate(context);
-  if (redirectUrl) {
-    globalThis.__next_context_redirect(redirectUrl);
-    return 1;
-  }
-  return 0;
-}
-
 function getPrivate(context: NextContext) {
   return (context.res as NextContextResponseInternal)._private;
 }
 
 function earlyReturnPage(context: NextContext) {
   const { jsx } = getPrivate(context);
-  if (doRedirect(context)) {
-    return {
-      ok: true,
-      response: undefined,
-    };
-  }
   if (jsx) {
     return {
       ok: true,
@@ -201,12 +186,6 @@ export type RouteFunction = (
 
 function earlyReturnRoute(context: NextContext) {
   const { status, headers, json, end } = getPrivate(context);
-  if (doRedirect(context)) {
-    return {
-      ok: true,
-      response: undefined,
-    };
-  }
   if (json) {
     return {
       ok: true,
@@ -304,9 +283,6 @@ export function withActionMiddlewares(fns: MiddlewareFunction[]) {
           context,
           ...args,
         );
-        if (doRedirect(context)) {
-          return;
-        }
         return ret;
       });
     };

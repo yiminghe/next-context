@@ -56,8 +56,8 @@ function buildResponse(): NextContextResponseInternal {
     jsx(j?: React.ReactNode) {
       p.jsx = j;
     },
-    redirect(r?: string) {
-      p.redirectUrl = r;
+    redirect(r: string) {
+      globalThis.__next_context_redirect(r);
     },
     end(e?: BodyInit) {
       p.end = e || null;

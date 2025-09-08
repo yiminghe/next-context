@@ -179,7 +179,6 @@ export interface NextContextResponseInternal extends NextContextResponse {
     cookieSent?: boolean;
     cookies?: ClientCookies;
     headers: any;
-    redirectUrl?: string;
     json?: any;
     status?: number;
     end?: any;
