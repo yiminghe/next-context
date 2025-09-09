@@ -9,7 +9,7 @@ create higher order page component with middlewares
 **Signature:**
 
 ```typescript
-export declare function withPageMiddlewares(fns: MiddlewareFunction[]): (Page: PageFunction) => PageFunction;
+export declare function withPageMiddlewares(fns: MiddlewareFunction[]): (Page?: PageFunction) => PageFunction;
 ```
 
 ## Parameters
@@ -47,5 +47,5 @@ fns
 </tbody></table>
 **Returns:**
 
-(Page: [PageFunction](./next-context_expo.pagefunction.md)<!-- -->) =&gt; [PageFunction](./next-context_expo.pagefunction.md)
+(Page?: [PageFunction](./next-context_expo.pagefunction.md)<!-- -->) =&gt; [PageFunction](./next-context_expo.pagefunction.md)
 

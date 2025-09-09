@@ -7,5 +7,5 @@
 **Signature:**
 
 ```typescript
-messages: Record<string, string>;
+messages?: Record<string, string>;
 ```

@@ -55,7 +55,7 @@ _(Optional)_
 </td></tr>
 <tr><td>
 
-[locale](./next-context_expo.i18nconfig.locale.md)
+[locale?](./next-context_expo.i18nconfig.locale.md)
 
 
 </td><td>
@@ -68,11 +68,13 @@ string
 
 </td><td>
 
+_(Optional)_
+
 
 </td></tr>
 <tr><td>
 
-[messages](./next-context_expo.i18nconfig.messages.md)
+[messages?](./next-context_expo.i18nconfig.messages.md)
 
 
 </td><td>
@@ -84,6 +86,8 @@ Record&lt;string, string&gt;
 
 
 </td><td>
+
+_(Optional)_
 
 
 </td></tr>

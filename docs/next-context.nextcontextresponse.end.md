@@ -7,5 +7,5 @@
 **Signature:**
 
 ```typescript
-end: () => void;
+end: (r?: BodyInit | NextResponse) => void;
 ```

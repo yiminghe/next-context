@@ -96,7 +96,7 @@ Description
 
 </td><td>
 
-() =&gt; void
+(r?: BodyInit \| NextResponse) =&gt; void
 
 
 </td><td>
@@ -148,6 +148,23 @@ Description
 </td><td>
 
 (j: any) =&gt; void
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[jsx](./next-context.nextcontextresponse.jsx.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(j?: React.ReactNode) =&gt; void
 
 
 </td><td>

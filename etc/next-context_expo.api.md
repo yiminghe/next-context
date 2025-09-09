@@ -5,6 +5,7 @@
 ```ts
 
 import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 import { default as React_2 } from 'react';
 
 // @public
@@ -17,6 +18,7 @@ export function cache<T extends Function>(fn: T): T;
 export interface CookieAttributes {
     domain?: string | undefined;
     expires?: Date | undefined;
+    httpOnly?: boolean;
     maxAge?: number;
     path?: string | undefined;
     sameSite?: 'strict' | 'lax' | 'none' | undefined;
@@ -31,9 +33,9 @@ export interface I18nConfig {
     // (undocumented)
     cacheKey?: string;
     // (undocumented)
-    locale: string;
+    locale?: string;
     // (undocumented)
-    messages: Record<string, string>;
+    messages?: Record<string, string>;
     // (undocumented)
     payload?: I18nPayload;
     // (undocumented)
@@ -79,7 +81,9 @@ export interface NextContextRequest {
     // (undocumented)
     get: (k: string) => string | undefined;
     // (undocumented)
-    header: (k: string) => string | undefined;
+    getHeader: (k: string) => string | undefined;
+    // (undocumented)
+    header: (k: string, v?: string) => string | undefined;
     // (undocumented)
     headers: Record<string, string | undefined>;
     // (undocumented)
@@ -105,6 +109,10 @@ export interface NextContextRequest {
     // (undocumented)
     secure: boolean;
     // (undocumented)
+    set: (k: string, v: string) => void;
+    // (undocumented)
+    setHeader: (k: string, v: string) => void;
+    // (undocumented)
     text: () => Promise<string>;
     // (undocumented)
     url: string;
@@ -119,13 +127,15 @@ export interface NextContextResponse {
     // (undocumented)
     cookie: (name: string, value: string, options?: CookieAttributes) => void;
     // (undocumented)
-    end: () => void;
+    end: (r?: BodyInit | NextResponse) => void;
     // (undocumented)
     get: (key: string) => any;
     // (undocumented)
     getHeader: (key: string) => any;
     // (undocumented)
     json: (j: any) => void;
+    // (undocumented)
+    jsx: (j?: React.ReactNode) => void;
     // (undocumented)
     redirect: (r: string) => void;
     // (undocumented)
@@ -169,7 +179,7 @@ export function withActionMiddlewares(fns: MiddlewareFunction[]): <T extends Fun
 export const withLayoutMiddlewares: (fns: MiddlewareFunction[]) => (Layout: LayoutFunction) => LayoutFunction;
 
 // @public
-export function withPageMiddlewares(fns: MiddlewareFunction[]): (Page: PageFunction) => PageFunction;
+export function withPageMiddlewares(fns: MiddlewareFunction[]): (Page?: PageFunction) => PageFunction;
 
 // @public
 export function withRouteMiddlewares(fns: MiddlewareFunction[]): (Route?: RouteFunction) => RouteFunction;

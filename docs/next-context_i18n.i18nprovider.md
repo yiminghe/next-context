@@ -9,10 +9,7 @@ i18n react provider
 **Signature:**
 
 ```typescript
-export declare function I18nProvider(props: {
-    children?: React.ReactNode;
-    messages?: Messages;
-}): React.JSX.Element;
+export declare function I18nProvider(props: I18nProviderProps): React.JSX.Element;
 ```
 
 ## Parameters
@@ -40,7 +37,7 @@ props
 
 </td><td>
 
-{ children?: React.ReactNode; messages?: Messages; }
+[I18nProviderProps](./next-context_i18n.i18nproviderprops.md)
 
 
 </td><td>

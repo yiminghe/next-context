@@ -75,6 +75,25 @@ _(Optional)_ Defines the exact date when the cookie will expire.
 </td></tr>
 <tr><td>
 
+[httpOnly?](./next-context.cookieattributes.httponly.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ Defines httpOnly
+
+
+</td></tr>
+<tr><td>
+
 [maxAge?](./next-context.cookieattributes.maxage.md)
 
 

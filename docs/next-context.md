@@ -32,6 +32,17 @@ cache function call on request level
 </td></tr>
 <tr><td>
 
+[createMiddleware(ms)](./next-context.createmiddleware.md)
+
+
+</td><td>
+
+nextjs middleware factory
+
+
+</td></tr>
+<tr><td>
+
 [getNextContext()](./next-context.getnextcontext.md)
 
 

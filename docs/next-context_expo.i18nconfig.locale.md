@@ -7,5 +7,5 @@
 **Signature:**
 
 ```typescript
-locale: string;
+locale?: string;
 ```

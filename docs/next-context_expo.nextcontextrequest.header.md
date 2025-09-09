@@ -7,5 +7,5 @@
 **Signature:**
 
 ```typescript
-header: (k: string) => string | undefined;
+header: (k: string, v?: string) => string | undefined;
 ```

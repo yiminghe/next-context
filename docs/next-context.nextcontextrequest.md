@@ -71,7 +71,7 @@ Record&lt;string, string \| undefined&gt;
 </td></tr>
 <tr><td>
 
-[header](./next-context.nextcontextrequest.header.md)
+[getHeader](./next-context.nextcontextrequest.getheader.md)
 
 
 </td><td>
@@ -80,6 +80,23 @@ Record&lt;string, string \| undefined&gt;
 </td><td>
 
 (k: string) =&gt; string \| undefined
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[header](./next-context.nextcontextrequest.header.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(k: string, v?: string) =&gt; string \| undefined
 
 
 </td><td>
@@ -267,6 +284,40 @@ Record&lt;string, string \| undefined&gt;
 </td><td>
 
 boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[set](./next-context.nextcontextrequest.set.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(k: string, v: string) =&gt; void
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[setHeader](./next-context.nextcontextrequest.setheader.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(k: string, v: string) =&gt; void
 
 
 </td><td>

@@ -4,6 +4,8 @@
 
 ```ts
 
+import { NextResponse } from 'next/server';
+
 // @public (undocumented)
 export interface CommonCorsOptions {
     // (undocumented)

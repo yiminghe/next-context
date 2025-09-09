@@ -63,17 +63,6 @@ i18n support for nextjs
 </td></tr>
 <tr><td>
 
-[next-context/middleware](./next-context_middleware.md)
-
-
-</td><td>
-
-enhanced next native middleware
-
-
-</td></tr>
-<tr><td>
-
 [next-context/shared-context](./next-context_shared-context.md)
 
 

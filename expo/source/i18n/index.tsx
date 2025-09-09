@@ -24,6 +24,10 @@ export function getI18nContext(): I18nContext {
   return use(I18nReactContext);
 }
 
+/**
+ * I18nProviderProps
+ * @public
+ */
 export type I18nProviderProps = {
   children?: React.ReactNode;
 } & I18nConfig;

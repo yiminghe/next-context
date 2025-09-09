@@ -73,3 +73,29 @@ i18n next-context middleware
 
 </td></tr>
 </tbody></table>
+
+## Type Aliases
+
+<table><thead><tr><th>
+
+Type Alias
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[I18nProviderProps](./next-context_i18n.i18nproviderprops.md)
+
+
+</td><td>
+
+I18nProviderProps
+
+
+</td></tr>
+</tbody></table>
