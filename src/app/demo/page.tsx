@@ -10,8 +10,14 @@ import ExtraContextInfo from './components/ExtraContextInfo';
 import { testTime } from './services/getTime';
 
 export default createPage(async function Index() {
-  const { user } = getNextContext();
+  const { user, req } = getNextContext();
   const times = await testTime();
+
+  console.log();
+  console.log('req headers', req.headers);
+  console.log('req cookies', req.cookies);
+  console.log();
+
   return (
     <ClientProvider name={user!}>
       <input id="times" defaultValue={JSON.stringify(times)} />

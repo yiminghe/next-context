@@ -5,3 +5,4 @@
 import './next-init';
 
 export * from './common';
+export { createMiddleware } from './middleware';

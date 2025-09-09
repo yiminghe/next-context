@@ -1,7 +1,6 @@
 // @ts-ignore
 import { cache } from 'react';
 import type { NextContext } from './types';
-import { AsyncLocalStorage } from 'async_hooks';
 
 const g: any = globalThis;
 

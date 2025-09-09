@@ -1,5 +1,7 @@
 /* c8 ignore start */
 
+import { NextResponse } from 'next/server';
+
 /**
  * middle next function
  *@public
@@ -11,6 +13,11 @@ export type NextFunction = () => Promise<any> | void;
  *@public
  */
 export interface CookieAttributes {
+  /**
+   * Defines httpOnly
+   */
+  httpOnly?: boolean;
+
   /**
    * Defines the exact date when the cookie will expire.
    */
@@ -96,7 +103,10 @@ export interface NextContextRequest {
   nextUrl: NextUrl;
   ip: string | undefined;
   get: (k: string) => string | undefined;
-  header: (k: string) => string | undefined;
+  getHeader: (k: string) => string | undefined;
+  set: (k: string, v: string) => void;
+  setHeader: (k: string, v: string) => void;
+  header: (k: string, v?: string) => string | undefined;
   text: () => Promise<string>;
   json: () => Promise<any>;
   method: string;
@@ -122,7 +132,7 @@ export interface NextContextResponse {
   json: (j: any) => void;
   jsx: (j?: React.ReactNode) => void;
   status: (s: number) => void;
-  end: () => void;
+  end: (r?: BodyInit | NextResponse) => void;
   statusCode: number;
 }
 /**
@@ -178,12 +188,18 @@ export interface NextContextResponseInternal extends NextContextResponse {
     jsx?: React.ReactNode;
     cookieSent?: boolean;
     cookies?: ClientCookies;
+    serverCookies?: ServerCookies;
     headers: any;
     json?: any;
     status?: number;
-    end?: any;
+    end?: null | BodyInit | NextResponse;
   };
 }
+
+export type ServerCookies = Record<
+  string,
+  { value: string; options?: CookieAttributes }
+>;
 /**
  * @internal
  */

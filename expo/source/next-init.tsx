@@ -2,7 +2,10 @@ import globalThis from './globalThis';
 import { redirect } from 'next/navigation';
 import { cookies as getCookies, headers as getHeaders } from 'next/headers';
 import type { CookieAttributes } from './types';
+import { NextResponse } from 'next/server';
 globalThis.__next_context_redirect = redirect;
+
+globalThis.__next_context_response = NextResponse;
 
 globalThis.__next_context_headers = async () => {
   const originals = await getHeaders();

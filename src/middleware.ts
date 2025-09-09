@@ -1,30 +1,20 @@
-import { createMiddleware } from 'next-context/middleware';
-
-declare module 'next-context/middleware' {
-  export interface ContextPayload {
-    foo?: string;
-  }
-}
+import { getNextContext, createMiddleware } from 'next-context';
 
 export const middleware = createMiddleware([
-  {
-    header: async (context, next) => {
-      context.foo = 'bar';
-      console.log('header middleware', Date.now(), context.req.nextUrl.href);
-      await next();
-    },
-    response: async (context, next) => {
-      console.log(
-        'response middleware',
-        Date.now(),
-        context.req.nextUrl.href,
-        context.foo,
-      );
-      await next();
-    },
+  async ({ req, res }, next) => {
+    req.set('x-request-id', '12345');
+    res.setHeader('x-response-id', '12345');
+    res.cookie('x-response-a', Date.now() + '', { maxAge: 60 });
+    await next();
+  },
+  async (__, next) => {
+    const { req } = getNextContext();
+    console.log('middleware headers', req.headers);
+    console.log('middleware cookies', req.cookies);
+    await next();
   },
 ]);
 
 export const config = {
-  matcher: '/((?!_next|__|favicon.ico|sitemap.xml|robots.txt).*)',
+  matcher: '/((?!_next|__|favicon.ico|sitemap.xml|robots.txt|.well-known).*)',
 };

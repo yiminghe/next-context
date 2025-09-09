@@ -13,6 +13,8 @@ import {
   createNextContextFromAction,
   createNextContextFromPage,
   createNextContextFromRoute,
+  earlyReturnRoute,
+  getPrivate,
 } from './next-context';
 import {
   setPageContext,
@@ -72,10 +74,6 @@ export type PageRequest = {
 export type PageFunction = (
   r: PageRequest,
 ) => React.ReactNode | Promise<React.ReactNode>;
-
-function getPrivate(context: NextContext) {
-  return (context.res as NextContextResponseInternal)._private;
-}
 
 function earlyReturnPage(context: NextContext) {
   const { jsx } = getPrivate(context);
@@ -184,31 +182,6 @@ export type RouteFunction = (
   context: { params: AsyncParams },
 ) => any;
 
-function earlyReturnRoute(context: NextContext) {
-  const { status, headers, json, end } = getPrivate(context);
-  if (json) {
-    return {
-      ok: true,
-      response: new Response(JSON.stringify(json), {
-        status: status || 200,
-        headers: {
-          'Content-Type': 'application/json',
-          ...headers,
-        },
-      }),
-    };
-  } else if (end !== undefined) {
-    return {
-      ok: true,
-      response: new Response(end, {
-        status: status || 200,
-        headers: {
-          ...headers,
-        },
-      }),
-    };
-  }
-}
 /**
  * create higher order route with middlewares
  *@public

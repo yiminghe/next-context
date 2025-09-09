@@ -4,8 +4,10 @@ import {
   type NextContextResponseInternal,
   type ClientCookieAttributes,
   NextUrl,
+  ServerCookies,
+  NextContextRequest,
 } from './types';
-import type { NextRequest } from 'next/server';
+import type { NextResponse, NextRequest } from 'next/server';
 import {
   FORWARDED_URI_HEADER,
   FORWARDED_PROTO_HEADER,
@@ -16,16 +18,35 @@ import {
   NEXT_URL_HEADER,
 } from './constants';
 import globalThis from './globalThis';
+import { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies';
 
-function buildResponse(): NextContextResponseInternal {
+function buildResponse(
+  req?: NextContextRequest,
+  redirectFn?: RedirectFn,
+): NextContextResponseInternal {
   const p: NextContextResponseInternal['_private'] = {
     status: 200,
     headers: {},
+    serverCookies: req ? {} : undefined,
   };
+  const serverCookies = p.serverCookies!;
   const res = {
     _private: p,
-    clearCookie: globalThis.__next_context_clear_cookie,
-    cookie: globalThis.__next_context_cookie,
+    clearCookie: req
+      ? (name: string, options?: CookieAttributes) => {
+          serverCookies[name] = {
+            value: '',
+            options: { ...options, maxAge: 0 },
+          };
+          req.cookies[name] = '';
+        }
+      : globalThis.__next_context_clear_cookie,
+    cookie: req
+      ? (name: string, value: string, options?: CookieAttributes) => {
+          serverCookies[name] = { value, options };
+          req.cookies[name] = value;
+        }
+      : globalThis.__next_context_cookie,
     append(k: string, v: string) {
       p.headers[k] = p.headers[k] ?? '';
       p.headers[k] += v;
@@ -57,9 +78,14 @@ function buildResponse(): NextContextResponseInternal {
       p.jsx = j;
     },
     redirect(r: string) {
-      globalThis.__next_context_redirect(r);
+      if (redirectFn) {
+        const res = redirectFn(r, p.status!);
+        p.end = res;
+      } else {
+        globalThis.__next_context_redirect(r);
+      }
     },
-    end(e?: BodyInit) {
+    end(e?: BodyInit | NextResponse) {
       p.end = e || null;
     },
     statusCode: 200,
@@ -76,13 +102,38 @@ function buildResponse(): NextContextResponseInternal {
   return res;
 }
 
-async function buildRequest() {
-  const headers = await globalThis.__next_context_headers();
+async function buildRequest(
+  requestHeaders?: Headers,
+  reqCookies?: RequestCookies,
+) {
+  let headers: Record<string, string> = {};
+  if (requestHeaders) {
+    requestHeaders.forEach((value, key) => {
+      headers[key] = value;
+    });
+  } else {
+    headers = await globalThis.__next_context_headers();
+  }
+
+  let cookies: Record<string, string> = {};
+  if (reqCookies) {
+    reqCookies.getAll().forEach((cookie) => {
+      cookies[cookie.name] = cookie.value;
+    });
+  } else {
+    cookies = await globalThis.__next_context_cookies();
+  }
+
   function get(k: string) {
     return headers[k];
   }
+  function set(k: string, v: string) {
+    headers[k] = v;
+    requestHeaders?.set(k, v);
+    return undefined;
+  }
   if (!headers[FORWARDED_URI_HEADER]) {
-    console.warn('must setup middleware!');
+    throw new Error('must setup middleware!');
   }
   let host = headers[FORWARDED_HOST_HEADER];
   if (!host) {
@@ -106,7 +157,7 @@ async function buildRequest() {
     params: {},
     nextUrl,
     method: 'GET',
-    cookies: await globalThis.__next_context_cookies(),
+    cookies,
     text: () =>
       new Promise<string>((r) => {
         r('');
@@ -123,8 +174,16 @@ async function buildRequest() {
     protocol,
     ip: headers[FORWARDED_FOR_HEADER],
     headers,
+    getHeader: get,
+    setHeader: set,
     get,
-    header: get,
+    set,
+    header(...args: [string, string?]) {
+      if (args.length === 1 || args[1] === undefined) {
+        return get(args[0]);
+      }
+      return set(args[0], args[1]);
+    },
   };
 }
 
@@ -192,4 +251,85 @@ export async function createNextContextFromRoute(req: NextRequest) {
     },
   };
   return context;
+}
+
+type RedirectFn = (url: string, statusCode: number) => NextResponse;
+
+export async function createNextContextFromMiddleware(
+  requestHeaders: Headers,
+  nextRequest: NextRequest,
+  redirectInMiddleware: RedirectFn,
+) {
+  const req = {
+    ...(await buildRequest(requestHeaders, nextRequest.cookies)),
+    text: () => nextRequest.text(),
+    json: () => nextRequest.json(),
+    method: nextRequest.method,
+  };
+  const context: NextContext = {
+    type: 'route',
+    res: buildResponse(req, redirectInMiddleware),
+    req,
+  };
+  return context;
+}
+
+export function getPrivate(context: NextContext) {
+  return (context.res as NextContextResponseInternal)._private;
+}
+
+function setHeadersToResponse(
+  res: NextResponse,
+  serverCookies?: ServerCookies,
+  headers?: Record<string, string>,
+) {
+  if (serverCookies) {
+    for (const key of Object.keys(serverCookies)) {
+      const { value, options } = serverCookies[key];
+      res.cookies.set(key, value, options);
+    }
+  }
+  if (headers) {
+    for (const key of Object.keys(headers)) {
+      res.headers.set(key, headers[key]);
+    }
+  }
+  return res;
+}
+
+export function earlyReturnRoute(context: NextContext) {
+  const {
+    status = 200,
+    headers,
+    json,
+    end,
+    serverCookies,
+  } = getPrivate(context);
+  const NextResponse = globalThis.__next_context_response;
+  if (json) {
+    const response = new NextResponse(JSON.stringify(json), {
+      status,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    setHeadersToResponse(response, serverCookies, headers);
+    return {
+      ok: true,
+      response,
+    };
+  } else if (end !== undefined) {
+    const response =
+      end instanceof NextResponse
+        ? end
+        : new NextResponse(end, {
+            status,
+          });
+    setHeadersToResponse(response, serverCookies, headers);
+    return {
+      ok: true,
+      response,
+    };
+  }
 }

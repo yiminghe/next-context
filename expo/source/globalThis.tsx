@@ -1,6 +1,8 @@
+import type { NextResponse } from 'next/server';
 import { CookieAttributes } from './types';
 
 declare const globalThis: {
+  __next_context_response: typeof NextResponse;
   __next_context_redirect: (url: string) => void;
   __next_context_headers: () => Promise<Record<string, string>>;
   __next_context_cookies: () => Promise<Record<string, string>>;
