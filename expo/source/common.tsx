@@ -27,7 +27,6 @@ import {
 import ClientCookies from './ClientCookies';
 import React, { Fragment } from 'react';
 import { INIT_TOKEN } from './constants';
-import globalThis from './globalThis';
 
 export type {
   NextContextResponse,

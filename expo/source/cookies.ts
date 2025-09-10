@@ -1,4 +1,5 @@
 import type { CookieAttributes } from './types';
+import * as cookie from 'cookie';
 
 const assign = Object.assign;
 
@@ -106,4 +107,14 @@ export function remove(name: string, attributes: CookieAttributes) {
       expires: -1,
     }),
   );
+}
+
+export function correctCookieString(
+  cookieString: string,
+  values: Record<string, string>,
+) {
+  const parsed = { ...cookie.parse(cookieString), ...values };
+  return Object.entries(parsed)
+    .map(([k, v]) => cookie.serialize(k, v || ''))
+    .join('; ');
 }

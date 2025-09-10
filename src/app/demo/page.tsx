@@ -8,6 +8,7 @@ import { UserName } from './components/UserName';
 import ServerInfo from './components/ServerInfo';
 import ExtraContextInfo from './components/ExtraContextInfo';
 import { testTime } from './services/getTime';
+import { headers } from 'next/headers';
 
 export default createPage(async function Index() {
   const { user, req } = getNextContext();
@@ -15,7 +16,10 @@ export default createPage(async function Index() {
 
   console.log();
   console.log('req headers', req.headers);
+  console.log('req headers cookie', req.headers.cookie);
   console.log('req cookies', req.cookies);
+  const rawCookie = (await headers()).get('cookie');
+  console.log('raw cookie', rawCookie);
   console.log();
 
   return (

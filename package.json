@@ -1,7 +1,7 @@
 {
   "name": "next-context",
   "private": "true",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Easily access request/response context between next middleware, components, action and route",
   "repository": {
     "type": "git",
@@ -48,8 +48,9 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@formatjs/fast-memoize": "^2.2.6",
-    "intl-messageformat": "^10.7.15"
+    "@formatjs/fast-memoize": "2.2.x",
+    "cookie": "1.0.x",
+    "intl-messageformat": "10.7.x"
   },
   "devDependencies": {
     "@cypress/code-coverage": "3.x",
@@ -64,7 +65,7 @@
     "@types/react": "~19.0.8",
     "@types/shelljs": "0.8.x",
     "cypress": "14.x",
-    "eslint": "^8",
+    "eslint": "^9",
     "eslint-config-next": "15.x",
     "expo-router": "^5.0.7",
     "fs-extra": "11.x",
@@ -79,7 +80,7 @@
     "mochawesome": "^7.1.3",
     "mochawesome-merge": "^4.3.0",
     "mochawesome-report-generator": "^6.2.0",
-    "next": "^15.3.3",
+    "next": "15.3.x",
     "prettier": "2.x",
     "prettier-2": "npm:prettier@^2",
     "prettier-plugin-tailwindcss": "0.2.x",

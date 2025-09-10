@@ -2,9 +2,10 @@ import { getNextContext, createMiddleware } from 'next-context';
 
 export const middleware = createMiddleware([
   async ({ req, res }, next) => {
-    req.set('x-request-id', '12345');
-    res.setHeader('x-response-id', '12345');
-    res.cookie('x-response-a', Date.now() + '', { maxAge: 60 });
+    let n = Date.now();
+    req.set('x-request-id', String(++n));
+    res.setHeader('x-response-id', String(++n));
+    res.cookie('x-response-a', String(++n), { maxAge: 600 });
     await next();
   },
   async (__, next) => {

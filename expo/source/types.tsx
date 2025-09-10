@@ -91,10 +91,22 @@ export class NextUrl extends URL {
 }
 
 /**
+ * header
+ * @public
+ */
+interface HeaderOperation {
+  get: (k: string) => string | undefined;
+  getHeader: (k: string) => string | undefined;
+  set: (k: string, v: string) => void;
+  setHeader: (k: string, v: string) => void;
+  header: (k: string, v?: string) => string | undefined;
+}
+
+/**
  * request
  * @public
  */
-export interface NextContextRequest {
+export interface NextContextRequest extends HeaderOperation {
   params: Record<string, string | string[]>;
   host: string;
   protocol: string;
@@ -102,11 +114,6 @@ export interface NextContextRequest {
   url: string;
   nextUrl: NextUrl;
   ip: string | undefined;
-  get: (k: string) => string | undefined;
-  getHeader: (k: string) => string | undefined;
-  set: (k: string, v: string) => void;
-  setHeader: (k: string, v: string) => void;
-  header: (k: string, v?: string) => string | undefined;
   text: () => Promise<string>;
   json: () => Promise<any>;
   method: string;
@@ -120,14 +127,10 @@ export interface NextContextRequest {
  * response
  * @public
  */
-export interface NextContextResponse {
+export interface NextContextResponse extends HeaderOperation {
   clearCookie: (name: string, options?: CookieAttributes) => void;
   cookie: (name: string, value: string, options?: CookieAttributes) => void;
   append: (k: string, v: string) => void;
-  set: (...args: [key: string, v: any] | [o: any]) => void;
-  setHeader: (k: string, v: any) => void;
-  get: (key: string) => any;
-  getHeader: (key: string) => any;
   redirect: (r: string) => void;
   json: (j: any) => void;
   jsx: (j?: React.ReactNode) => void;
@@ -139,7 +142,7 @@ export interface NextContextResponse {
  * context type
  * @public
  */
-export type NextContextType = 'page' | 'route' | 'action';
+export type NextContextType = 'page' | 'route' | 'action' | 'middleware';
 
 /**
  * @public

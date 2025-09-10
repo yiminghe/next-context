@@ -19,6 +19,8 @@ import {
 } from './constants';
 import globalThis from './globalThis';
 import { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies';
+import * as cookie from 'cookie';
+import { correctCookieString } from './cookies';
 
 function buildResponse(
   req?: NextContextRequest,
@@ -30,37 +32,51 @@ function buildResponse(
     serverCookies: req ? {} : undefined,
   };
   const serverCookies = p.serverCookies!;
+
   const res = {
     _private: p,
     clearCookie: req
       ? (name: string, options?: CookieAttributes) => {
-          serverCookies[name] = {
-            value: '',
-            options: { ...options, maxAge: 0 },
-          };
-          req.cookies[name] = '';
+          res.cookie(name, '', { ...options, maxAge: 0 });
         }
       : globalThis.__next_context_clear_cookie,
     cookie: req
       ? (name: string, value: string, options?: CookieAttributes) => {
           serverCookies[name] = { value, options };
           req.cookies[name] = value;
+          const originalCookies = req.get('cookie') || '';
+          req.set(
+            'cookie',
+            correctCookieString(originalCookies, { [name]: value }),
+          );
         }
       : globalThis.__next_context_cookie,
     append(k: string, v: string) {
       p.headers[k] = p.headers[k] ?? '';
-      p.headers[k] += v;
+      res.setHeader(k, p.headers[k] + v);
     },
     set(...args: any) {
       const [k, v] = args;
       if (typeof k === 'string') {
-        p.headers[k] = v;
+        res.setHeader(k, v);
         return;
       }
-      Object.assign(p.headers, k);
+      for (const [key, value] of Object.entries(k)) {
+        res.setHeader(key, value);
+      }
+    },
+    header(k: string, v?: string) {
+      if (v === undefined) {
+        return p.headers[k];
+      }
+      res.setHeader(k, v);
+      return undefined;
     },
     setHeader(k: string, v: any) {
       p.headers[k] = v;
+      if (req) {
+        req.set(k, v);
+      }
     },
     getHeader(k: string) {
       return p.headers[k];
@@ -221,7 +237,6 @@ export function createNextContextFromPage() {
   };
   (context as any)[INIT_TOKEN] = (async () => {
     context.req = await buildRequest();
-    delete (context as any)[INIT_TOKEN];
   })();
   return context;
 }
@@ -267,7 +282,7 @@ export async function createNextContextFromMiddleware(
     method: nextRequest.method,
   };
   const context: NextContext = {
-    type: 'route',
+    type: 'middleware',
     res: buildResponse(req, redirectInMiddleware),
     req,
   };
