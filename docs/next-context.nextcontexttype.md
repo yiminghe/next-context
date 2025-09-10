@@ -9,5 +9,5 @@ context type
 **Signature:**
 
 ```typescript
-export type NextContextType = 'page' | 'route' | 'action';
+export type NextContextType = 'page' | 'route' | 'action' | 'middleware';
 ```

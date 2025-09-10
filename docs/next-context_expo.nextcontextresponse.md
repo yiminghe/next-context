@@ -9,8 +9,9 @@ response
 **Signature:**
 
 ```typescript
-export interface NextContextResponse 
+export interface NextContextResponse extends HeaderOperation 
 ```
+**Extends:** HeaderOperation
 
 ## Properties
 
@@ -105,40 +106,6 @@ Description
 </td></tr>
 <tr><td>
 
-[get](./next-context_expo.nextcontextresponse.get.md)
-
-
-</td><td>
-
-
-</td><td>
-
-(key: string) =&gt; any
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[getHeader](./next-context_expo.nextcontextresponse.getheader.md)
-
-
-</td><td>
-
-
-</td><td>
-
-(key: string) =&gt; any
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
 [json](./next-context_expo.nextcontextresponse.json.md)
 
 
@@ -182,40 +149,6 @@ Description
 </td><td>
 
 (r: string) =&gt; void
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[set](./next-context_expo.nextcontextresponse.set.md)
-
-
-</td><td>
-
-
-</td><td>
-
-(...args: \[key: string, v: any\] \| \[o: any\]) =&gt; void
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[setHeader](./next-context_expo.nextcontextresponse.setheader.md)
-
-
-</td><td>
-
-
-</td><td>
-
-(k: string, v: any) =&gt; void
 
 
 </td><td>

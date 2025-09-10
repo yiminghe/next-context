@@ -9,8 +9,9 @@ request
 **Signature:**
 
 ```typescript
-export interface NextContextRequest 
+export interface NextContextRequest extends HeaderOperation 
 ```
+**Extends:** HeaderOperation
 
 ## Properties
 
@@ -46,57 +47,6 @@ Description
 </td><td>
 
 Record&lt;string, string \| undefined&gt;
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[get](./next-context_expo.nextcontextrequest.get.md)
-
-
-</td><td>
-
-
-</td><td>
-
-(k: string) =&gt; string \| undefined
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[getHeader](./next-context_expo.nextcontextrequest.getheader.md)
-
-
-</td><td>
-
-
-</td><td>
-
-(k: string) =&gt; string \| undefined
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[header](./next-context_expo.nextcontextrequest.header.md)
-
-
-</td><td>
-
-
-</td><td>
-
-(k: string, v?: string) =&gt; string \| undefined
 
 
 </td><td>
@@ -284,40 +234,6 @@ Record&lt;string, string \| undefined&gt;
 </td><td>
 
 boolean
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[set](./next-context_expo.nextcontextrequest.set.md)
-
-
-</td><td>
-
-
-</td><td>
-
-(k: string, v: string) =&gt; void
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[setHeader](./next-context_expo.nextcontextrequest.setheader.md)
-
-
-</td><td>
-
-
-</td><td>
-
-(k: string, v: string) =&gt; void
 
 
 </td><td>

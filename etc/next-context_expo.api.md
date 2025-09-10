@@ -74,16 +74,12 @@ export interface NextContext {
     type: NextContextType;
 }
 
+// Warning: (ae-forgotten-export) The symbol "HeaderOperation" needs to be exported by the entry point expo.d.ts
+//
 // @public
-export interface NextContextRequest {
+export interface NextContextRequest extends HeaderOperation {
     // (undocumented)
     cookies: Record<string, string | undefined>;
-    // (undocumented)
-    get: (k: string) => string | undefined;
-    // (undocumented)
-    getHeader: (k: string) => string | undefined;
-    // (undocumented)
-    header: (k: string, v?: string) => string | undefined;
     // (undocumented)
     headers: Record<string, string | undefined>;
     // (undocumented)
@@ -109,17 +105,13 @@ export interface NextContextRequest {
     // (undocumented)
     secure: boolean;
     // (undocumented)
-    set: (k: string, v: string) => void;
-    // (undocumented)
-    setHeader: (k: string, v: string) => void;
-    // (undocumented)
     text: () => Promise<string>;
     // (undocumented)
     url: string;
 }
 
 // @public
-export interface NextContextResponse {
+export interface NextContextResponse extends HeaderOperation {
     // (undocumented)
     append: (k: string, v: string) => void;
     // (undocumented)
@@ -129,19 +121,11 @@ export interface NextContextResponse {
     // (undocumented)
     end: (r?: BodyInit | NextResponse) => void;
     // (undocumented)
-    get: (key: string) => any;
-    // (undocumented)
-    getHeader: (key: string) => any;
-    // (undocumented)
     json: (j: any) => void;
     // (undocumented)
     jsx: (j?: React.ReactNode) => void;
     // (undocumented)
     redirect: (r: string) => void;
-    // (undocumented)
-    set: (...args: [key: string, v: any] | [o: any]) => void;
-    // (undocumented)
-    setHeader: (k: string, v: any) => void;
     // (undocumented)
     status: (s: number) => void;
     // (undocumented)
@@ -149,7 +133,7 @@ export interface NextContextResponse {
 }
 
 // @public
-export type NextContextType = 'page' | 'route' | 'action';
+export type NextContextType = 'page' | 'route' | 'action' | 'middleware';
 
 // @public
 export type NextFunction = () => Promise<any> | void;
