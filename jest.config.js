@@ -11,7 +11,7 @@ const createJestConfig = nextJest({
 });
 
 const config = {
-  prettierPath: require.resolve('prettier-2'),
+  prettierPath: require.resolve('prettier'),
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
