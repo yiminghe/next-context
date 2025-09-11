@@ -105,9 +105,6 @@ importers:
       prettier:
         specifier: 2.x
         version: 2.8.8
-      prettier-2:
-        specifier: npm:prettier@^2
-        version: prettier@2.8.8
       prettier-plugin-tailwindcss:
         specifier: 0.2.x
         version: 0.2.8(prettier@2.8.8)
@@ -12860,7 +12857,7 @@ snapshots:
   terser@5.39.0:
     dependencies:
       '@jridgewell/source-map': 0.3.6
-      acorn: 8.14.1
+      acorn: 8.15.0
       commander: 2.20.3
       source-map-support: 0.5.21
 
@@ -13186,7 +13183,7 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@webassemblyjs/wasm-edit': 1.14.1
       '@webassemblyjs/wasm-parser': 1.14.1
-      acorn: 8.14.1
+      acorn: 8.15.0
       browserslist: 4.24.4
       chrome-trace-event: 1.0.4
       enhanced-resolve: 5.18.1

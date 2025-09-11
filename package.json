@@ -82,7 +82,6 @@
     "mochawesome-report-generator": "^6.2.0",
     "next": "15.3.x",
     "prettier": "2.x",
-    "prettier-2": "npm:prettier@^2",
     "prettier-plugin-tailwindcss": "0.2.x",
     "pretty-quick": "3.x",
     "react": "19.x",
