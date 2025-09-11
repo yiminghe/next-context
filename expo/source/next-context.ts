@@ -19,7 +19,6 @@ import {
 } from './constants';
 import globalThis from './globalThis';
 import { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies';
-import * as cookie from 'cookie';
 import { correctCookieString } from './cookies';
 
 function buildResponse(

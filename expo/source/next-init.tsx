@@ -3,8 +3,8 @@ import { redirect } from 'next/navigation';
 import { cookies as getCookies, headers as getHeaders } from 'next/headers';
 import type { CookieAttributes } from './types';
 import { NextResponse } from 'next/server';
-import * as cookie from 'cookie';
-import { correctCookieString } from './cookies';
+// import * as cookie from 'cookie';
+// import { correctCookieString } from './cookies';
 
 globalThis.__next_context_redirect = redirect;
 
@@ -16,10 +16,11 @@ globalThis.__next_context_headers = async () => {
   originals.forEach((value, key) => {
     headers[key] = value;
   });
-  const originalCookies = originals.get('cookie') || '';
-  const realCookies = await globalThis.__next_context_cookies();
-  // ensure always up to date
-  headers['cookie'] = correctCookieString(originalCookies, realCookies);
+  // already sync in middleware
+  // const originalCookies = originals.get('cookie') || '';
+  // const realCookies = await globalThis.__next_context_cookies();
+  // // ensure always up to date
+  // headers['cookie'] = correctCookieString(originalCookies, realCookies);
   return headers;
 };
 
