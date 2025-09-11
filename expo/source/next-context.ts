@@ -42,12 +42,14 @@ function buildResponse(
     cookie: req
       ? (name: string, value: string, options?: CookieAttributes) => {
           serverCookies[name] = { value, options };
-          req.cookies[name] = value;
-          const originalCookies = req.get('cookie') || '';
-          req.set(
-            'cookie',
-            correctCookieString(originalCookies, { [name]: value }),
-          );
+          if (req.cookies[name] !== value) {
+            req.cookies[name] = value;
+            const originalCookies = req.get('cookie') || '';
+            req.set(
+              'cookie',
+              correctCookieString(originalCookies, { [name]: value }),
+            );
+          }
         }
       : globalThis.__next_context_cookie,
     append(k: string, v: string) {
