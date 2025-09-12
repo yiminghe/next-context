@@ -109,12 +109,17 @@ export function remove(name: string, attributes: CookieAttributes) {
   );
 }
 
+const cookieOptions = {
+  encode: converter.write,
+  decode: converter.read,
+};
+
 export function correctCookieString(
   cookieString: string,
   values: Record<string, string>,
 ) {
-  const parsed = { ...cookie.parse(cookieString), ...values };
+  const parsed = { ...cookie.parse(cookieString, cookieOptions), ...values };
   return Object.entries(parsed)
-    .map(([k, v]) => cookie.serialize(k, v || ''))
+    .map(([k, v]) => cookie.serialize(k, v || '', cookieOptions))
     .join('; ');
 }
