@@ -38,7 +38,7 @@ npm run dev
 `src/middleware.ts`
 
 ```js
-import { createMiddleware } from 'next-context/middleware';
+import { createMiddleware } from 'next-context';
 export const middleware = createMiddleware([async (_, next) => {
   const context = getNextContext(); // context === _
   context.res.cookie(context.req.cookies.xx, ...); // set response cookie
