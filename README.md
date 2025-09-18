@@ -39,7 +39,12 @@ npm run dev
 
 ```js
 import { createMiddleware } from 'next-context/middleware';
-export const middleware = createMiddleware();
+export const middleware = createMiddleware([async (_, next) => {
+  const context = getNextContext(); // context === _
+  context.res.cookie(context.req.cookies.xx, ...); // set response cookie
+  context.res.header(context.req.headers.xx, ...); // set response header
+  await next();
+}]);
 export const config = {
   matcher: '/((?!_next|favicon.ico|sitemap.xml|robots.txt).*)',
 };
