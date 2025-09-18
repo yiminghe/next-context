@@ -41,8 +41,8 @@ npm run dev
 import { createMiddleware } from 'next-context';
 export const middleware = createMiddleware([async (_, next) => {
   const context = getNextContext(); // context === _
-  context.res.cookie(context.req.cookies.xx, ...); // set response cookie
-  context.res.header(context.req.headers.xx, ...); // set response header
+  context.res.cookie('xx', context.req.cookies.xx); // set response cookie
+  context.res.header('xx', context.req.headers.xx); // set response header
   await next();
 }]);
 export const config = {
