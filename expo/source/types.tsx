@@ -1,6 +1,6 @@
 /* c8 ignore start */
 
-import { NextResponse } from 'next/server';
+import type { NextResponse } from 'next/server';
 
 /**
  * middle next function

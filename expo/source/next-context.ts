@@ -18,7 +18,7 @@ import {
   NEXT_URL_HEADER,
 } from './constants';
 import globalThis from './globalThis';
-import { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies';
+import type { RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies';
 import { correctCookieString } from './cookies';
 
 function buildResponse(
@@ -337,9 +337,9 @@ export function earlyReturnRoute(context: NextContext) {
     };
   } else if (end !== undefined) {
     const response =
-      end instanceof NextResponse
-        ? end
-        : new NextResponse(end, {
+      typeof (end as any)?.constructor?.next === 'function'
+        ? (end as NextResponse)
+        : new NextResponse(end as BodyInit | null, {
             status,
           });
     setHeadersToResponse(response, serverCookies, headers);

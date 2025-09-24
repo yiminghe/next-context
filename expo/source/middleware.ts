@@ -2,7 +2,7 @@
  * @packageDocumentation enhanced next native middleware
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import type { NextRequest, NextResponse } from 'next/server';
 import {
   FORWARDED_URI_HEADER,
   NEXT_BASE_PATH_HEADER,
@@ -16,11 +16,12 @@ import {
   getPrivate,
 } from './next-context';
 import { requestStorage, setRouteContext } from './set-context';
+import globalThis from './globalThis';
 
 // type ReadonlyKV = Readonly<Record<string, string | undefined>>;
 
 function redirectInMiddleware(url: string, statusCode: number) {
-  return NextResponse.redirect(
+  return globalThis.__next_context_response.redirect(
     url,
     statusCode >= 300 && statusCode < 400 ? statusCode : 307,
   );
@@ -75,7 +76,7 @@ export function createMiddleware(ms: MiddlewareFunction[] = []) {
 
       if (next) {
         context.res.end(
-          NextResponse.next({
+          globalThis.__next_context_response.next({
             request: {
               headers: requestHeaders,
             },
@@ -89,7 +90,9 @@ export function createMiddleware(ms: MiddlewareFunction[] = []) {
         }
       }
 
-      return new NextResponse('Empty Response', { status: 500 });
+      return new globalThis.__next_context_response('Empty Response', {
+        status: 500,
+      });
     });
   };
 }
