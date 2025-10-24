@@ -92,7 +92,7 @@
     "react-dom": "19.x",
     "shelljs": "0.8.x",
     "start-server-and-test": "2.x",
-    "swc-plugin-coverage-instrument": "0.0.26",
+    "swc-plugin-coverage-instrument": "0.0.31",
     "ts-node": "10.x",
     "typed-icu-message": "0.0.18",
     "typescript": "5.x"

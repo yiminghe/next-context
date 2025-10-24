@@ -1,6 +1,7 @@
 const withBundleAnalyzer =
   process.env.ANALYZE === 'true'
-    ? require('@next/bundle-analyzer')({
+    ? // eslint-disable-next-line @typescript-eslint/no-require-imports
+      require('@next/bundle-analyzer')({
         enabled: true,
       })
     : (a) => a;
@@ -10,9 +11,10 @@ const nextConfig = {
   reactStrictMode: false,
   pageExtensions: ['ts', 'tsx', 'js'],
   experimental: {
-    swcPlugins: process.env.NEXT_PUBLIC_CYPRESS
-      ? [[require.resolve('swc-plugin-coverage-instrument'), {}]]
-      : [],
+    swcPlugins:
+      process.env.NEXT_PUBLIC_CYPRESS && false
+        ? [[require.resolve('swc-plugin-coverage-instrument'), {}]]
+        : [],
   },
 };
 
