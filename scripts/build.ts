@@ -1,18 +1,18 @@
 import fs from 'fs';
 import path from 'path';
 
-function r(...p) {
-  return path.join(import.meta.dirname, ...p);
+function r(...p: string[]) {
+  return path.join(__dirname, ...p);
 }
 
-function p(s, cjs = false) {
+function p(s: string, cjs = false) {
   return s
     ?.replace('expo/source', cjs ? 'cjs' : 'esm')
     .replace(/\.tsx?$/, '.js');
 }
 const pkg = JSON.parse(fs.readFileSync(r('../package.json'), 'utf-8'));
 
-const exports = {};
+const exports: Record<string, any> = {};
 
 for (const key of Object.keys(pkg.exports)) {
   let v = pkg.exports[key];

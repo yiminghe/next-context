@@ -55,7 +55,7 @@ function getFnMap() {
  * @public
  */
 export function cache<T extends Function>(fn: T): T {
-  return function () {
+  return function (...args: any[]): any {
     const fnMap: WeakMap<any, CacheNode<T>> = getFnMap();
     const fnNode = fnMap.get(fn);
     let cacheNode: CacheNode<T>;
@@ -65,8 +65,8 @@ export function cache<T extends Function>(fn: T): T {
     } else {
       cacheNode = fnNode;
     }
-    for (let i = 0, l = arguments.length; i < l; i++) {
-      const arg = arguments[i];
+    for (let i = 0, l = args.length; i < l; i++) {
+      const arg = args[i];
       if (
         typeof arg === 'function' ||
         (typeof arg === 'object' && arg !== null)
@@ -106,7 +106,7 @@ export function cache<T extends Function>(fn: T): T {
     }
     try {
       // $FlowFixMe[incompatible-call]: We don't want to use rest arguments since we transpile the code.
-      const result = fn.apply(null, arguments);
+      const result = fn(...args);
       const terminatedNode: TerminatedCacheNode<any> = cacheNode as any;
       terminatedNode.s = TERMINATED;
       terminatedNode.v = result;

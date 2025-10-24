@@ -1,7 +1,7 @@
 import { getNextContext } from 'next-context';
 
 export default function ServerInfo() {
-  const { req, user, res } = getNextContext();
+  const { req, user } = getNextContext();
   //res.cookie('deeper-rsc-cookie', 'serverCookieValue');
   return (
     <>

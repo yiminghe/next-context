@@ -1,4 +1,5 @@
 import { I18nTranslate } from '@/i18n/types';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { NextContext } from 'next-context';
 
 declare module 'next-context' {

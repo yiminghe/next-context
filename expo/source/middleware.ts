@@ -2,18 +2,17 @@
  * @packageDocumentation enhanced next native middleware
  */
 
-import type { NextRequest, NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 import {
   FORWARDED_URI_HEADER,
   NEXT_BASE_PATH_HEADER,
   NEXT_URL_HEADER,
 } from './constants';
 import { compose } from './compose';
-import { MiddlewareFunction, NextContext } from './types';
+import { MiddlewareFunction } from './types';
 import {
   createNextContextFromMiddleware,
   earlyReturnRoute,
-  getPrivate,
 } from './next-context';
 import { requestStorage, setRouteContext } from './set-context';
 import globalThis from './globalThis';

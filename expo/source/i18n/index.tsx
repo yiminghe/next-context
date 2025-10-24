@@ -37,7 +37,7 @@ export type I18nProviderProps = {
  * @public
  */
 export function I18nProvider(props: I18nProviderProps) {
-  let newConfig = { ...props };
+  const newConfig = { ...props };
   delete newConfig.children;
   const instance = getI18nInstance(newConfig);
   return <I18nReactContext value={instance}>{props.children}</I18nReactContext>;

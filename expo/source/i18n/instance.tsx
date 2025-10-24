@@ -119,7 +119,7 @@ export function getI18nInstance(config: I18nConfig): I18nContext {
   const instanceCache = getCacheByPath(instanceCaches, cacheKeyPath);
   let instance: any = instanceCache.get(instanceKey);
   if (!instance) {
-    let formatterCache = getCacheByPath(formatterCaches, [locale, timeZone]);
+    const formatterCache = getCacheByPath(formatterCaches, [locale, timeZone]);
     const mfFormats = IntlMessageFormat.formats;
     const formats = timeZone
       ? {
@@ -127,6 +127,7 @@ export function getI18nInstance(config: I18nConfig): I18nContext {
           time: setTimeZoneInOptions(mfFormats.time, timeZone),
         }
       : undefined;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { cacheKey, ...validConfig } = config;
     instance = {
       [I18nConfigKey]: validConfig,

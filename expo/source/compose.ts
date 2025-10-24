@@ -17,7 +17,7 @@ export function compose(middleware: Function[], context: any, ...args: any[]) {
     if (i <= index)
       return Promise.reject(new Error('middleware called multiple times'));
     index = i;
-    let fn = middleware[i];
+    const fn = middleware[i];
     if (!fn) return Promise.resolve();
     try {
       const existing = store.get(fn);

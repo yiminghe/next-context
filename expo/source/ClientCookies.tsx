@@ -12,7 +12,7 @@ export default function ClientCookies({
   useLayoutEffect(() => {
     if (cookies) {
       for (const key of Object.keys(cookies)) {
-        let { value, options } = cookies[key]!;
+        const { value, options } = cookies[key]!;
         const { expires, ...clientOptions_ } = options || {};
         const clientOptions: CookieAttributes = clientOptions_;
         if (typeof expires === 'number') {

@@ -46,8 +46,8 @@ export function set(name: string, value: any, attributes_: CookieAttributes) {
     .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
     .replace(/[()]/g, escape);
 
-  var stringifiedAttributes = '';
-  for (var attributeName in attributes) {
+  let stringifiedAttributes = '';
+  for (const attributeName in attributes) {
     if (!attributes[attributeName]) {
       continue;
     }
@@ -79,14 +79,14 @@ export function get(name: string) {
 
   // To prevent the for loop in the first place assign an empty array
   // in case there are no cookies at all.
-  var cookies = document.cookie ? document.cookie.split('; ') : [];
-  var jar: any = {};
-  for (var i = 0; i < cookies.length; i++) {
-    var parts = cookies[i].split('=');
-    var value = parts.slice(1).join('=');
+  const cookies = document.cookie ? document.cookie.split('; ') : [];
+  const jar: any = {};
+  for (let i = 0; i < cookies.length; i++) {
+    const parts = cookies[i].split('=');
+    const value = parts.slice(1).join('=');
 
     try {
-      var found = decodeURIComponent(parts[0]);
+      const found = decodeURIComponent(parts[0]);
       if (!(found in jar)) jar[found] = converter.read(value);
       if (name === found) {
         break;

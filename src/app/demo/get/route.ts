@@ -7,7 +7,7 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export const GET = createRouteWithI18n(async function Get(...args) {
+export const GET = createRouteWithI18n(async function Get() {
   const context = getNextContext();
   const { user, res, type } = context;
 

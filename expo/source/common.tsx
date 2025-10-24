@@ -2,11 +2,7 @@
  * @packageDocumentation unified middleware and request context for nextjs
  */
 
-import type {
-  NextContext,
-  MiddlewareFunction,
-  NextContextResponseInternal,
-} from './types';
+import type { NextContext, MiddlewareFunction } from './types';
 import type { NextRequest } from 'next/server';
 import { compose } from './compose';
 import {
@@ -122,6 +118,7 @@ export function withPageMiddlewares(fns: MiddlewareFunction[]) {
           ...fns,
           async () => {
             if (Page) {
+              // eslint-disable-next-line prefer-spread
               final = ret = Page.apply(null, args);
               if (ret && ret.then) {
                 final = await ret;
@@ -203,6 +200,7 @@ export function withRouteMiddlewares(fns: MiddlewareFunction[]) {
             ...fns,
             async () => {
               if (Route) {
+                // eslint-disable-next-line prefer-spread
                 final = ret = Route.apply(null, args);
                 if (ret && ret.then) {
                   final = await ret;
@@ -246,6 +244,7 @@ export function withActionMiddlewares(fns: MiddlewareFunction[]) {
           [
             ...fns,
             async () => {
+              // eslint-disable-next-line prefer-spread
               ret = action.apply(null, args);
               if (ret && ret.then) {
                 await ret;

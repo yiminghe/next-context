@@ -1,4 +1,3 @@
-// @ts-ignore
 import { cache } from 'react';
 import type { NextContext } from './types';
 

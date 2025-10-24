@@ -1,7 +1,7 @@
 import { createLayout } from '@/middlewares';
 import { getNextContext } from 'next-context';
 import React from 'react';
-import { getI18nContext, I18nProvider } from 'next-context/i18n';
+import { I18nProvider } from 'next-context/i18n';
 
 function Title() {
   return <h1>root layout</h1>;

@@ -212,7 +212,7 @@ export function buildPageResponse() {
     //   throw new Error('only can set cookie inside middleware and entry page!');
     // }
     const { maxAge, expires, ...clientOptions_ } = options_ || {};
-    let clientOptions: ClientCookieAttributes = clientOptions_;
+    const clientOptions: ClientCookieAttributes = clientOptions_;
     if (expires) {
       clientOptions.expires = +expires;
     } else if (typeof maxAge === 'number') {
