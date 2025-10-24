@@ -38,7 +38,7 @@
     "pre:test": "rm -rf .nyc_output && rm -rf coverage",
     "test:only": "npm run pre:test && ts-node scripts/run-test.ts",
     "test": "start-test test:dev http://localhost:3000 test:only",
-    "lint": "rm -rf dist .next && tsc --noEmit && next lint",
+    "lint": "rm -rf dist .next && tsc --noEmit && eslint src expo/source",
     "test:dev": "rm -rf dist && NEXT_PUBLIC_CYPRESS=1  pnpm dev",
     "dev": "pnpm i18n && HOSTNAME=0.0.0.0 next dev",
     "turbo": "pnpm dev --turbopack",
@@ -53,7 +53,10 @@
     "intl-messageformat": "10.7.x"
   },
   "devDependencies": {
+    "@types/prettier": "2.x",
     "@cypress/code-coverage": "3.x",
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.38.0",
     "@jest/globals": "^29.7.0",
     "@microsoft/api-documenter": "^7.25.21",
     "@microsoft/api-extractor": "7.x",
