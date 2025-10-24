@@ -1,6 +1,8 @@
 import { FlatCompat } from '@eslint/eslintrc';
 import { defineConfig } from 'eslint/config';
 import js from '@eslint/js';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTypescript from 'eslint-config-next/typescript';
 
 const compat = new FlatCompat({
   baseDirectory: new URL('.', import.meta.url).pathname,
@@ -9,12 +11,10 @@ const compat = new FlatCompat({
 });
 
 export default defineConfig([
+  ...nextVitals,
+  ...nextTypescript,
   {
-    extends: compat.extends(
-      'next/core-web-vitals',
-      'prettier',
-      'next/typescript',
-    ),
+    extends: compat.extends('prettier'),
     linterOptions: {
       reportUnusedDisableDirectives: 'off',
     },

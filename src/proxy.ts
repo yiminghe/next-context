@@ -1,6 +1,6 @@
 import { getNextContext, createMiddleware } from 'next-context';
 
-export const middleware = createMiddleware([
+const middleware = createMiddleware([
   async ({ req, res }, next) => {
     let n = Date.now();
     req.set('x-request-id', String(++n));
@@ -15,6 +15,8 @@ export const middleware = createMiddleware([
     await next();
   },
 ]);
+
+export default middleware;
 
 export const config = {
   matcher: '/((?!_next|__|favicon.ico|sitemap.xml|robots.txt|.well-known).*)',
