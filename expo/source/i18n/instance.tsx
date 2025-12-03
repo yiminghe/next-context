@@ -115,7 +115,7 @@ export function getI18nInstance(config: I18nConfig): I18nContext {
     ? [config.cacheKey]
     : Object.keys(c)
         .filter((k) => typeof c[k] === 'string')
-        .map((k) => c[k]);
+        .map((k) => k + ':NEXT_CONTEXT:' + c[k]);
   const instanceCache = getCacheByPath(instanceCaches, cacheKeyPath);
   let instance: any = instanceCache.get(instanceKey);
   if (!instance) {
@@ -128,9 +128,8 @@ export function getI18nInstance(config: I18nConfig): I18nContext {
         }
       : undefined;
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { cacheKey, ...validConfig } = config;
     instance = {
-      [I18nConfigKey]: validConfig,
+      [I18nConfigKey]: { ...config },
       locale,
       timeZone,
       messages,

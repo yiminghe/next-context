@@ -1,7 +1,7 @@
 {
   "name": "next-context",
   "private": "true",
-  "version": "0.7.5",
+  "version": "0.7.6",
   "description": "Easily access request/response context between next middleware, components, action and route",
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
     }
   },
   "scripts": {
-    "pub": "cd dist && rm -rf dist-types tsdoc-metadata.json && npm publish",
+    "pub": "npm run build && cd dist && rm -rf dist-types tsdoc-metadata.json && npm publish",
     "i18n": "ts-node scripts/i18n.ts",
     "jest": "jest",
     "format": "prettier --config ./prettier.config.js --ignore-path ./.prettierignore ./ --write",
