@@ -19,19 +19,15 @@ import {
 } from './index';
 import { getI18nConfig, getI18nFromContext } from './instance';
 
-const clientKey = ':NEXT_CONTEXT_CLIENT:';
 /**
  *
  * @public
  */
 export function I18nProvider(props: I18nProviderProps) {
-  const serverConfig = { ...getI18nConfig(getNextContext()) };
-  if (serverConfig.cacheKey) {
-    serverConfig.cacheKey += clientKey;
-  } else {
-    (serverConfig as any)[clientKey] = clientKey;
-  }
-  const config = { ...serverConfig, ...props };
+  const config = {
+    ...getI18nConfig(getNextContext()),
+    ...props,
+  };
   delete config.children;
   return React.createElement(I18nProviderClient, config, props.children);
 }

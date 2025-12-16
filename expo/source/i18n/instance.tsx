@@ -129,11 +129,9 @@ export function getI18nInstance(config: I18nConfig): I18nContext {
       : undefined;
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     instance = {
-      [I18nConfigKey]: { ...config },
       locale,
       timeZone,
       messages,
-      payload: config.payload,
       t(key: any, values: any) {
         const message = messages[key] || '';
         let formatter = formatterCache.get(message);
@@ -160,7 +158,11 @@ export function getI18nInstance(config: I18nConfig): I18nContext {
     instanceCache.set(instanceKey, instance);
   }
 
-  return instance;
+  return {
+    ...instance,
+    [I18nConfigKey]: config,
+    payload: config.payload,
+  };
 }
 
 const I18nConfigKey = '__next_context_i18n_config';
@@ -193,8 +195,8 @@ export function middleware(
   return async (ctx: NextContext, next: NextFunction) => {
     let config = await getConfig(ctx);
     config = {
-      payload: {},
       ...config,
+      payload: { ...config.payload },
     };
     if (g.__NEXT_CONTEXT_I18N_CONFIG) {
       config = g.__NEXT_CONTEXT_I18N_CONFIG(config, ctx);
