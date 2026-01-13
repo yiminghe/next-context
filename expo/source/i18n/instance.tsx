@@ -1,6 +1,6 @@
 import IntlMessageFormat from 'intl-messageformat';
 import { memoize } from '@formatjs/fast-memoize';
-import type { NextFunction, NextContext } from '../types';
+import type { NextFunction, NextContext, MiddlewareFunction } from '../types';
 import { I18nContext, I18nConfig } from '../types';
 import React from 'react';
 export type Messages = Record<string, string>;
@@ -192,7 +192,10 @@ export function setI18nToContext(ctx: NextContext, value: any): void {
 export function middleware(
   getConfig: (ctx: NextContext) => Promise<I18nConfig>,
 ) {
-  return async (ctx: NextContext, next: NextFunction) => {
+  const i18nMiddleware: MiddlewareFunction = async (
+    ctx: NextContext,
+    next: NextFunction,
+  ) => {
     let config = await getConfig(ctx);
     config = {
       ...config,
@@ -205,4 +208,6 @@ export function middleware(
     setI18nToContext(ctx, i18nContext);
     await next();
   };
+  i18nMiddleware.middlewareName = 'i18nMiddleware';
+  return i18nMiddleware;
 }

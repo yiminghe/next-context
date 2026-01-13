@@ -214,8 +214,8 @@ export interface NextContextInternal extends NextContext {
  * middleware function
  *@public
  */
-export type MiddlewareFunction = (
+export type MiddlewareFunction = { middlewareName?: string } & ((
   context: NextContext,
   next: NextFunction,
-) => Promise<any> | void;
+) => Promise<any> | void);
 /* c8 ignore stop */

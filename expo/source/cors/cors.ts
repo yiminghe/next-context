@@ -5,6 +5,7 @@
 // https://github.com/expressjs/cors
 
 import {
+  MiddlewareFunction,
   NextContext,
   NextContextRequest,
   NextContextResponse,
@@ -277,10 +278,10 @@ export function middleware(
     | CorsOptions
     | ((req: NextContextRequest) => MaybePromise<CorsOptions>) = {},
 ) {
-  return async function corsMiddleware(
+  const corsMiddleware: MiddlewareFunction = async (
     { req, res }: NextContext,
     next: NextFunction,
-  ) {
+  ) => {
     let options: CorsOptions;
 
     if (typeof o === 'function') {
@@ -321,4 +322,6 @@ export function middleware(
       await next();
     }
   };
+  corsMiddleware.middlewareName = 'corsMiddleware';
+  return corsMiddleware;
 }
