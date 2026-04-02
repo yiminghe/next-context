@@ -150,7 +150,7 @@ async function buildRequest(
     return undefined;
   }
   if (!headers[FORWARDED_URI_HEADER]) {
-    throw new Error('must setup middleware!');
+    throw new Error('Must setup middleware in src/proxy.ts');
   }
   let host = headers[FORWARDED_HOST_HEADER];
   if (!host) {

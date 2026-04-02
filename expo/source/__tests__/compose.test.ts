@@ -2,7 +2,7 @@ import { compose } from '../compose';
 import { describe, expect, it } from '@jest/globals';
 
 describe('compose', () => {
-  it('works', () => {
+  it('works', async () => {
     const middleware = [
       async (context: any, next: Function) => {
         context.arr.push(1);
@@ -21,7 +21,7 @@ describe('compose', () => {
       },
     ];
     const context = { arr: [] };
-    compose(middleware, context).then(() => {
+    await compose(middleware, context).then(() => {
       expect(context.arr).toEqual([1, 2, 3, 4, 5, 6]);
     });
   });

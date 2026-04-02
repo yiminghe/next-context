@@ -8,6 +8,18 @@ const withBundleAnalyzer =
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages:
+    process.env.NODE_ENV === 'test'
+      ? [
+          'intl-messageformat',
+          '@formatjs/intl-localematcher',
+          '@formatjs/ecma402-abstract',
+          '@formatjs/fast-memoize',
+          '@formatjs/bigdecimal',
+          '@formatjs/icu-skeleton-parser',
+          '@formatjs/icu-messageformat-parser',
+        ]
+      : [],
   reactStrictMode: false,
   pageExtensions: ['ts', 'tsx', 'js'],
   experimental: {

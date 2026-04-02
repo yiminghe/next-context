@@ -44,7 +44,7 @@ export function set(name: string, value: any, attributes_: CookieAttributes) {
 
   name = encodeURIComponent(name)
     .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
-    .replace(/[()]/g, escape);
+    .replace(/[()]/g, encodeURIComponent);
 
   let stringifiedAttributes = '';
   for (const attributeName in attributes) {

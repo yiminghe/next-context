@@ -1,20 +1,13 @@
-import { FlatCompat } from '@eslint/eslintrc';
 import { defineConfig } from 'eslint/config';
-import js from '@eslint/js';
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTypescript from 'eslint-config-next/typescript';
-
-const compat = new FlatCompat({
-  baseDirectory: new URL('.', import.meta.url).pathname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
+import prettierConfig from 'eslint-config-prettier/flat';
 
 export default defineConfig([
   ...nextVitals,
   ...nextTypescript,
+  prettierConfig,
   {
-    extends: compat.extends('prettier'),
     linterOptions: {
       reportUnusedDisableDirectives: 'off',
     },

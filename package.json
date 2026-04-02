@@ -1,7 +1,7 @@
 {
   "name": "next-context",
-  "private": "true",
-  "version": "0.7.8",
+  "private": true,
+  "version": "0.8.0",
   "description": "Easily access request/response context between next middleware, components, action and route",
   "repository": {
     "type": "git",
@@ -48,15 +48,14 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@formatjs/fast-memoize": "2.2.x",
-    "cookie": "1.0.x",
-    "intl-messageformat": "10.7.x"
+    "@formatjs/fast-memoize": "3.x",
+    "cookie": "1.x",
+    "intl-messageformat": "11.x"
   },
   "devDependencies": {
     "@cypress/code-coverage": "3.x",
     "@eslint/eslintrc": "^3.3.1",
-    "@eslint/js": "^9.38.0",
-    "@jest/globals": "^29.7.0",
+    "@jest/globals": "30.x",
     "@microsoft/api-documenter": "^7.25.21",
     "@microsoft/api-extractor": "7.x",
     "@next/bundle-analyzer": "15.x",
@@ -73,18 +72,18 @@
     "eslint-config-prettier": "^10.1.8",
     "expo-router": "^5.0.7",
     "fs-extra": "11.x",
-    "glob": "^11.0.1",
+    "glob": "13.x",
     "husky": "9.x",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "jest-html-reporter": "^3.10.2",
+    "jest": "30.x",
+    "jest-environment-jsdom": "30.x",
+    "jest-html-reporter": "4.x",
     "json5": "^2.2.3",
     "mobx": "6.x",
     "mobx-react-lite": "4.x",
     "mochawesome": "^7.1.3",
     "mochawesome-merge": "^4.3.0",
     "mochawesome-report-generator": "^6.2.0",
-    "next": "16.x",
+    "next": "^16.2.x",
     "prettier": "2.x",
     "prettier-plugin-tailwindcss": "0.2.x",
     "pretty-quick": "3.x",
