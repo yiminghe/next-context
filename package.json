@@ -43,7 +43,7 @@
     "dev": "pnpm i18n && HOSTNAME=0.0.0.0 next dev",
     "turbo": "pnpm dev --turbopack",
     "doc": "rm -rf temp docs && node scripts/doc",
-    "build": "rm -rf dist && tsc -p tsconfig-build.json && tsc -p tsconfig-build-cjs.json && ts-node scripts/build.ts",
+    "build": "sh scripts/build.sh",
     "start": "next start",
     "prepare": "husky"
   },
