@@ -13,6 +13,7 @@
     "declaration": false,
     "jsx": "react-jsx",
     "incremental": true,
+    "ignoreDeprecations": "6.0",
     "plugins": [
       {
         "name": "next"
@@ -21,7 +22,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "strict": true
+    "strict": true,
+    "esModuleInterop": true
   },
   "ts-node": {
     "transpileOnly": true,

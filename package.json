@@ -53,7 +53,7 @@
     "intl-messageformat": "11.x"
   },
   "devDependencies": {
-    "@cypress/code-coverage": "3.x",
+    "@cypress/code-coverage": "4.x",
     "@eslint/eslintrc": "^3.3.1",
     "@jest/globals": "30.x",
     "@microsoft/api-documenter": "^7.25.21",
@@ -67,7 +67,7 @@
     "@types/react": "19.x",
     "@types/react-dom": "19.x",
     "@types/shelljs": "0.8.x",
-    "cypress": "14.x",
+    "cypress": "15.x",
     "eslint": "^9",
     "eslint-config-next": "16.x",
     "eslint-config-prettier": "^10.1.8",
