@@ -12,17 +12,17 @@ function p(s: string, cjs = false) {
 }
 const pkg = JSON.parse(fs.readFileSync(r('../package.json'), 'utf-8'));
 
-const exports: Record<string, any> = {};
+const pkgExports: Record<string, any> = {};
 
 for (const key of Object.keys(pkg.exports)) {
   let v = pkg.exports[key];
-  exports[key] = {};
+  pkgExports[key] = {};
 
   for (const subKey of Object.keys(v)) {
-    exports[key][subKey] = p(v[subKey]);
+    pkgExports[key][subKey] = p(v[subKey]);
   }
-  exports[key] = {
-    ...exports[key],
+  pkgExports[key] = {
+    ...pkgExports[key],
     types: p(v.import).replace(/\.js$/, '.d.ts'),
     require: p(v.import, true),
   };
@@ -33,7 +33,7 @@ const pkg2 = {
   version: pkg.version,
   description: pkg.description,
   repository: pkg.repository,
-  exports,
+  exports: pkgExports,
   publishConfig: pkg.publishConfig,
   dependencies: pkg.dependencies,
 };
