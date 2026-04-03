@@ -21,9 +21,8 @@ describe('compose', () => {
       },
     ];
     const context = { arr: [] };
-    await compose(middleware, context).then(() => {
-      expect(context.arr).toEqual([1, 2, 3, 4, 5, 6]);
-    });
+    await compose(middleware, context);
+    expect(context.arr).toEqual([1, 2, 3, 4, 5, 6]);
   });
 
   function sleep(ms: number) {
