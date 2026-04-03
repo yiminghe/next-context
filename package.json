@@ -64,7 +64,8 @@
     "@types/fs-extra": "^9.0.12",
     "@types/node": "18.x",
     "@types/prettier": "2.x",
-    "@types/react": "~19.0.8",
+    "@types/react": "19.x",
+    "@types/react-dom": "19.x",
     "@types/shelljs": "0.8.x",
     "cypress": "14.x",
     "eslint": "^9",
@@ -94,7 +95,7 @@
     "swc-plugin-coverage-instrument": "0.0.31",
     "ts-node": "10.x",
     "typed-icu-message": "0.0.18",
-    "typescript": "5.x"
+    "typescript": "6.x"
   },
   "nyc": {
     "include": [

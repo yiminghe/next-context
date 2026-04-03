@@ -78,6 +78,7 @@ function earlyReturnPage(context: NextContext) {
       response: withCookiePage(context, jsx),
     };
   }
+  return { ok: false };
 }
 
 function withCookiePage(context: NextContext, ret?: any) {
@@ -134,7 +135,8 @@ export function withPageMiddlewares(fns: MiddlewareFunction[]) {
         return withCookiePage(context, ret);
       }
       const early = earlyReturnPage(context);
-      if (early && early.ok) return early.response;
+      if (early.ok) return early.response;
+      return undefined;
     };
     if (Page?.name) {
       Object.defineProperty(P, 'name', {
@@ -216,7 +218,7 @@ export function withRouteMiddlewares(fns: MiddlewareFunction[]) {
           return ret;
         }
         const early = earlyReturnRoute(context);
-        if (early && early.ok) return early.response;
+        if (early.ok) return early.response;
       });
     };
     if (Route?.name) {

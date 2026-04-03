@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "rootDir": "./",
+    "target": "es2022",
+    "lib": ["dom", "dom.iterable", "es2022"],
     "allowJs": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "declaration": false,
     "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
@@ -25,6 +26,7 @@
   "ts-node": {
     "transpileOnly": true,
     "files": true,
+    "esm": false,
     "compilerOptions": {
       "module": "Node16",
       "moduleResolution": "Node16"

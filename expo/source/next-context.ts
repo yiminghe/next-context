@@ -348,4 +348,5 @@ export function earlyReturnRoute(context: NextContext) {
       response,
     };
   }
+  return { ok: false };
 }

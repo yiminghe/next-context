@@ -69,7 +69,7 @@ export function createMiddleware(ms: MiddlewareFunction[] = []) {
 
       let early = earlyReturnRoute(context);
 
-      if (early?.ok) {
+      if (early.ok) {
         return early.response;
       }
 
@@ -84,7 +84,7 @@ export function createMiddleware(ms: MiddlewareFunction[] = []) {
 
         early = earlyReturnRoute(context);
 
-        if (early?.ok) {
+        if (early.ok) {
           return early.response;
         }
       }
