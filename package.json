@@ -97,6 +97,13 @@
     "typescript": "6.x",
     "@typescript/native-preview": "beta"
   },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.x",
+      "onFail": "download"
+    }
+  },
   "nyc": {
     "include": [
       "expo/source/**/*.{js,jsx,ts,tsx}"

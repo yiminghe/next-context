@@ -1,1 +1,1 @@
-npm run format:staged
+pnpm run format:staged
