@@ -11,9 +11,7 @@ const apiConfigContent = fs.readFileSync(apiConfigPath, 'utf-8');
 const apiConfig = json5.parse(apiConfigContent);
 const docsPath = path.resolve(__dirname, '../docs');
 const execSync = require('child_process').execSync;
-function r(...p) {
-  return path.join(__dirname, ...p);
-}
+
 function updatePkg(pkg) {
   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
   fs.writeFileSync(pkgPath + '.working', JSON.stringify(pkg, null, 2));

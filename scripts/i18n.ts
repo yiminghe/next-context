@@ -1,15 +1,15 @@
 import { globSync } from 'glob';
 import path from 'path';
 import { getTsTypesFromRes } from 'typed-icu-message';
-import fs from 'fs';
+import fs from 'fs-extra';
 import prettier from 'prettier';
 import prettierConfig from '../prettier.config';
 (async () => {
-  const jsons = globSync('src/i18n/*.json');
+  const jsonFiles = globSync('src/i18n/*.json');
   const all: any = {};
-  for (const json of jsons) {
+  for (const json of jsonFiles) {
     const locale = path.basename(json).replace('.json', '');
-    all[locale] = JSON.parse(fs.readFileSync(path.resolve(json), 'utf-8'));
+    all[locale] = fs.readJsonSync(path.resolve(json));
   }
   const typedCode = getTsTypesFromRes(all);
   fs.writeFileSync(
