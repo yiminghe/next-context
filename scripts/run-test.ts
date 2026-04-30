@@ -6,7 +6,7 @@ const nyc_output = path.join(__dirname, '../.nyc_output');
 const coverage = path.join(__dirname, '../coverage');
 fs.ensureDir(nyc_output);
 
-let { code } = shell.exec('npm run jest');
+let { code } = shell.exec('pnpm run jest');
 code =
   code ||
   shell.exec(`mv ${coverage}/coverage-final.json ${nyc_output}/jest.json`).code;

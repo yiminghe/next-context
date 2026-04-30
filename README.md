@@ -25,7 +25,7 @@
 
 ```
 pnpm i
-npm run dev
+pnpm run dev
 ```
 
 ## docs
