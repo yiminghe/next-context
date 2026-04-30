@@ -1,0 +1,7 @@
+allowBuilds:
+  cypress: true
+  sharp: true
+  unrs-resolver: true
+publicHoistPattern:
+  - '*import-in-the-middle*'
+  - '*require-in-the-middle*'
