@@ -9,7 +9,7 @@ import prettierConfig from '../prettier.config';
   const all: any = {};
   for (const json of jsons) {
     const locale = path.basename(json).replace('.json', '');
-    all[locale] = require(path.resolve(json));
+    all[locale] = JSON.parse(fs.readFileSync(path.resolve(json), 'utf-8'));
   }
   const typedCode = getTsTypesFromRes(all);
   fs.writeFileSync(

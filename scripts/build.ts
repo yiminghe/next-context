@@ -15,7 +15,7 @@ const pkg = JSON.parse(fs.readFileSync(r('../package.json'), 'utf-8'));
 const pkgExports: Record<string, any> = {};
 
 for (const key of Object.keys(pkg.exports)) {
-  let v = pkg.exports[key];
+  const v = pkg.exports[key];
   pkgExports[key] = {};
 
   for (const subKey of Object.keys(v)) {

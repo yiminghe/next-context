@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const path = require('path');
 const pkgPath = path.resolve(__dirname, '../package.json');
 const apiConfigPath = path.resolve(__dirname, '../config/api-extractor.json');
