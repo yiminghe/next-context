@@ -11,7 +11,7 @@ code =
   code ||
   shell.exec(`mv ${coverage}/coverage-final.json ${nyc_output}/jest.json`).code;
 
-let cmd = ['cypress run --e2e'];
+const cmd = ['cypress run --e2e'];
 if (process.env.CYPRESS_RECORD_KEY) {
   cmd.push('--record --key', process.env.CYPRESS_RECORD_KEY);
 }
