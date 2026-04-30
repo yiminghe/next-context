@@ -30,7 +30,7 @@
     }
   },
   "scripts": {
-    "pub": "pnpm run build && cd dist && rm -rf dist-types tsdoc-metadata.json && pnpm publish",
+    "pub": "pnpm run build && cd dist && rm -rf dist-types tsdoc-metadata.json && npm publish",
     "i18n": "ts-node scripts/i18n.ts",
     "jest": "jest",
     "format": "prettier --config ./prettier.config.js --ignore-path ./.prettierignore ./ --write",
