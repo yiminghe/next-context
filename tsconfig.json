@@ -25,14 +25,6 @@
     "strict": true,
     "esModuleInterop": true
   },
-  "ts-node": {
-    "transpileOnly": true,
-    "files": true,
-    "compilerOptions": {
-      "module": "Node16",
-      "moduleResolution": "Node16"
-    }
-  },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
