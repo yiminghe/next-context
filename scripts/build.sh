@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 rm -rf dist
-tsgo -p tsconfig-build.json
-tsgo -p tsconfig-build-cjs.json
+tsc -p tsconfig-build.json
+tsc -p tsconfig-build-cjs.json
 ts-node scripts/build.ts
