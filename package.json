@@ -95,7 +95,7 @@
     "ts-node": "10.x",
     "typed-icu-message": "0.0.18",
     "typescript": "6.x",
-    "@typescript/native-preview": "beta"
+    "@typescript/native-preview": "latest"
   },
   "devEngines": {
     "packageManager": {

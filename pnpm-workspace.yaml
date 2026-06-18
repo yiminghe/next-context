@@ -5,3 +5,4 @@ allowBuilds:
 publicHoistPattern:
   - '*import-in-the-middle*'
   - '*require-in-the-middle*'
+minimumReleaseAge: 0
